@@ -37,6 +37,7 @@ class _CardPageState extends State<CardPage> {
         ),
         body: Consumer<OrdersViewModel>(
           builder: (context, orderViewModel, child) {
+            // ignore: unnecessary_null_comparison
             if (orderViewModel.userOrders != null) {
               
               return ListView.builder(

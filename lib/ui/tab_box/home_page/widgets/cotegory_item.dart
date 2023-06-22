@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_firbase_app/data/model/category_model.dart';
 
+// ignore: must_be_immutable
 class CategoryItem extends StatelessWidget {
   final CategoryModel data;
   final VoidCallback onCategoryTap;

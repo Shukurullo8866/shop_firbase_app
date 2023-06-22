@@ -2,8 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_firbase_app/data/model/category_model.dart';
-import 'package:shop_firbase_app/data/model/product_model.dart';
-import 'package:shop_firbase_app/ui/tab_box/home_page/widgets/all_product.dart';
 import 'package:shop_firbase_app/ui/tab_box/home_page/widgets/category_title.dart';
 import 'package:shop_firbase_app/ui/tab_box/home_page/widgets/cotegory_item.dart';
 import 'package:shop_firbase_app/ui/tab_box/home_page/widgets/products_grid_widget.dart';

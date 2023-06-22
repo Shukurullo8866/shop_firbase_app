@@ -2,13 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:shop_firbase_app/data/model/product_model.dart';
 
-import '../../../../data/model/order_model.dart';
-import '../../../../view_model/order_view_model.dart';
-import '../../../../view_model/product_view_model.dart';
 import '../info_page.dart';
 
 class ProductsScreen extends StatelessWidget {
