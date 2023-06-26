@@ -70,7 +70,7 @@ class _AllCategoryScreenState extends State<AllCategoryScreen> {
                             onPressed: () {
                               Provider.of<CategoriesViewModel>(context,
                                       listen: false)
-                                  .deleteCategory(category.categoryId.toString());
+                                  .deleteCategory(category.categoryId);
                             },
                             icon: const Icon(Icons.delete),
                           )

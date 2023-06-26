@@ -87,9 +87,16 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                     .addCategory(categoryModel);
               },
               icon: const Icon(Icons.add),
-            )
+            ),
           ],
         ),
+         floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        backgroundColor: Colors.lightBlue,
+        child: const Icon(Icons.navigation),
+      ),
       ),
     );
   }

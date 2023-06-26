@@ -23,15 +23,15 @@ class ProductsGridWidget extends StatelessWidget {
             ),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              childAspectRatio: 0.75,
-              mainAxisSpacing: 5,
+               childAspectRatio: 0.88,
+              mainAxisSpacing: 8.5,
               crossAxisSpacing: 5,
             ),
           );
         } else {
           return const SliverToBoxAdapter(child: Center(child: Text("error")));
         }
-        // return const SliverToBoxAdapter(child: SizedBox());
+        
       },
     );
   }

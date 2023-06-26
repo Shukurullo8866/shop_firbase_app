@@ -4,33 +4,63 @@ import 'package:flutter/cupertino.dart';
 import 'package:shop_firbase_app/data/model/order_model.dart';
 import 'package:shop_firbase_app/ui/auth/widgets/repositories/orders_repository.dart';
 
+
+import 'package:flutter/material.dart';
+
+import '../data/model/product_model.dart';
+
 class OrdersViewModel extends ChangeNotifier {
   final OrdersRepository ordersRepository;
 
-  OrdersViewModel({
-    required this.ordersRepository,
-  }) {
+  OrdersViewModel({required this.ordersRepository}) {
     listenOrders(FirebaseAuth.instance.currentUser!.uid);
   }
 
   late StreamSubscription subscription;
 
+  ProductModel? productModel;
+
   List<OrderModel> userOrders = [];
 
   listenOrders(String userId) async {
-    subscription = ordersRepository.getOrdersByUser(userId: userId).listen(
-      (orders) {
-        userOrders = orders;
-        notifyListeners();
-      },
-    );
+    subscription =
+        ordersRepository.getOrdersByUserId(userId: userId).listen((orders) {
+      userOrders = orders;
+      notifyListeners();
+    });
   }
 
   addOrder(OrderModel orderModel) =>
       ordersRepository.addOrder(orderModel: orderModel);
+
+  updateOrderIfExists({
+    required String productId,
+    required int count,
+  }) {
+    OrderModel orderModel =
+        userOrders.firstWhere((element) => element.productId == productId);
+
+    int currentCount = orderModel.count;
+
+    int price = orderModel.totalPrice ~/ orderModel.count;
+
+    ordersRepository.updateOrder(
+      orderModel: orderModel.copWith(
+        count: currentCount + count,
+        totalPrice: price * (currentCount + count),
+      ),
+    );
+  }
+
   updateOrder(OrderModel orderModel) =>
       ordersRepository.updateOrder(orderModel: orderModel);
-  deleteOrder(String docId) => ordersRepository.deleteOrdersById(docId: docId);
+
+  getSingleProduct(String docId) async {
+    productModel = await ordersRepository.getSingleProductById(docId: docId);
+    notifyListeners();
+  }
+
+  deleteOrder(String docId) => ordersRepository.deleteOrderById(docId: docId);
 
   @override
   void dispose() {

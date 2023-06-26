@@ -15,10 +15,16 @@ class ImageView extends StatelessWidget {
         shadowColor: Colors.transparent,
         backgroundColor:  const Color.fromARGB(255, 247, 246, 232),
         leading: IconButton(icon: const Icon(Icons.arrow_back_ios_new, color: Color.fromARGB(255, 221, 133, 2)), onPressed: () { Navigator.pop(context); },)),
-      body: PhotoView(
-        imageProvider: NetworkImage(imageUrl,),
-        backgroundDecoration: const BoxDecoration(
-          color: Color.fromARGB(255, 247, 246, 232)
+      body: Container(
+        height: double.infinity,
+        color: Colors.amber,
+        child: PhotoView(
+          minScale: PhotoViewComputedScale.contained,
+          maxScale: PhotoViewComputedScale.covered * 2.5,
+          imageProvider: NetworkImage(imageUrl,),
+          backgroundDecoration: const BoxDecoration(
+            color: Color.fromARGB(255, 247, 246, 232)
+          ),
         ),
       ),
     );

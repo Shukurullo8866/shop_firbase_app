@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:shop_firbase_app/data/repositories/profile_repository.dart';
 import 'package:shop_firbase_app/ui/auth/widgets/repositories/orders_repository.dart';
 import 'package:shop_firbase_app/ui/auth/widgets/repositories/product_repocitory.dart';
 import 'package:shop_firbase_app/ui/auth/auth_page.dart';
@@ -15,6 +14,7 @@ import 'package:shop_firbase_app/view_model/product_view_model.dart';
 import 'package:shop_firbase_app/view_model/profile_view_model.dart';
 import 'package:shop_firbase_app/view_model/tab_view_model.dart';
 import 'data/repositories/auth_repository.dart';
+import 'data/repositories/profile_repository.dart';
 import 'ui/auth/widgets/repositories/categories_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:flutter_acrylic/flutter_acrylic.dart';
@@ -38,7 +38,7 @@ void main() async {
           create: (context) => ProfileViewModel(firebaseAuth: FirebaseAuth.instance, profileRepository: ProfileRepository(firebaseFirestore: fireStore)
             
           ),
-        ),
+       ),
         ChangeNotifierProvider(
           create: (context) => OrdersViewModel(
             ordersRepository: OrdersRepository(

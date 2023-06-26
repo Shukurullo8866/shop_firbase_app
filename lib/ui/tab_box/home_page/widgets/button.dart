@@ -25,14 +25,14 @@ class ButtonWidget extends StatelessWidget {
             },
             child: Container(
               width: 150.h,
-              height: 60.w,
+              height: 50.w,
               decoration: BoxDecoration(
                 border: Border.all(
                     width: 0.8, color: Color.fromARGB(255, 238, 219, 161)),
                 borderRadius: const BorderRadius.all(
                   Radius.circular(10),
                 ),
-                color: Color.fromARGB(255, 243, 212, 111),
+                color: const Color.fromARGB(231, 228, 157, 76),
               ),
               child: const Center(
                 child: Text(
@@ -53,14 +53,14 @@ class ButtonWidget extends StatelessWidget {
             },
             child: Container(
               width: 150.h,
-              height: 60.w,
+              height: 50.w,
               decoration: BoxDecoration(
                 border: Border.all(
                     width: 0.8, color: Color.fromARGB(255, 238, 219, 161)),
                 borderRadius: const BorderRadius.all(
                   Radius.circular(10),
                 ),
-                color: Color.fromARGB(255, 243, 212, 111),
+                color: const Color.fromARGB(231, 228, 157, 76),
               ),
               child: const Center(
                 child: Text(

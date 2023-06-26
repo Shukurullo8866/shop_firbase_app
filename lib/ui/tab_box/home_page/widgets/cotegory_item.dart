@@ -29,20 +29,27 @@ class CategoryItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
+
           width: 70,
           height: 70,
           decoration: BoxDecoration(
             border: Border.all(
               width: 1.5,
-              color: const Color.fromARGB(255, 247, 233, 191),
+              color: const Color.fromARGB(231, 228, 157, 76),
             ),
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Center(
-            child: InkWell(
-              onTap: onCategoryTap,
-              child: Image.network(data.imageUrl)),
-          ),
+          child: InkWell(
+            
+            onTap: onCategoryTap,
+            child:  ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(9.5),
+                    ),
+                    child: Image.network(
+                      data.imageUrl,
+                      fit: BoxFit.fill,
+                    ),
+                  ), ),
         ),
         const SizedBox(height: 8),
         Text(
@@ -54,4 +61,5 @@ class CategoryItem extends StatelessWidget {
       ],
     );
   }
+  
 }

@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_firbase_app/data/model/order_model.dart';
 import 'package:shop_firbase_app/data/model/product_model.dart';
-import 'package:shop_firbase_app/data/model/user_model.dart';
+import 'package:shop_firbase_app/ui/tab_box/home_page/widgets/all_product.dart';
 import 'package:shop_firbase_app/ui/tab_box/home_page/widgets/button.dart';
 import 'package:shop_firbase_app/ui/tab_box/home_page/widgets/imageView.dart';
 import 'package:shop_firbase_app/utils/style.dart';
 import 'package:shop_firbase_app/view_model/order_view_model.dart';
+import 'package:shop_firbase_app/view_model/profile_view_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../utils/app_image.dart';
+import '../../../view_model/product_view_model.dart';
 
 class InfoPage extends StatefulWidget {
   const InfoPage({super.key, required this.getData});
@@ -21,9 +23,11 @@ class InfoPage extends StatefulWidget {
 
 class _InfoPageState extends State<InfoPage> {
   @override
-  
+  bool isOn = false;
+
   Widget build(BuildContext context) {
-  var userId = context.read<UserModel>().userId;
+    //var userId = context.read<UserModel>().userId;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white70,
@@ -34,21 +38,34 @@ class _InfoPageState extends State<InfoPage> {
         ),
         actions: [
           IconButton(
-              onPressed: () {
+            onPressed: () {
+              setState(() {});
+              if (isOn == false) {
+                isOn = true;
                 OrderModel orderModel = OrderModel(
                     orderId: widget.getData.categoryId,
                     productId: widget.getData.productId,
                     count: 1,
                     totalPrice: widget.getData.price,
                     createdAt: DateTime.now().toString(),
-                    userId: userId,
+                    userId:
+                        context.read<ProfileViewModel>().user!.uid.toString(),
                     orderStatus: widget.getData.price.toString(),
                     productName: widget.getData.productName);
 
                 Provider.of<OrdersViewModel>(context, listen: false)
                     .addOrder(orderModel);
-              },
-              icon: Icon(Icons.heart_broken))
+              } else if (isOn == true) {
+                isOn == false;
+                Provider.of<OrdersViewModel>(context, listen: false)
+                    .deleteOrder(widget.getData.categoryId);
+                print(widget.getData.categoryId);
+              }
+            },
+            icon: Icon(isOn == false
+                ? Icons.heart_broken_outlined
+                : Icons.heart_broken_outlined),
+          )
         ],
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
@@ -85,72 +102,89 @@ class _InfoPageState extends State<InfoPage> {
                 ),
               ),
             ),
-            Expanded(
-              child: Container(
-                height: double.infinity,
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(25),
-                        topRight: Radius.circular(25))),
+            Container(
+              height: double.infinity,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(25),
+                      topRight: Radius.circular(25))),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 20),
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 29),
+                  padding: const EdgeInsets.all(8.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      IconButton(
-                        onPressed: () async {
-                          // ignore: deprecated_member_use
-                          if (!await launch('sms:+998977588866')) {
-                            throw 'Could not launch message app';
-                          }
-                        },
-                        icon: Text(
-                          "Product Name: \t ${widget.getData.productName}",
-                          style: MyTextStyle.sfProMedium,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "  ${widget.getData.productName}:",
+                            style: const TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          Text(
+                            " ${widget.getData.price.toString()} ${widget.getData.currency}",
+                            style: const TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          )
+                        ],
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 15),
                       Text(
-                        "Full decription \n \n ${widget.getData.description}",
+                        " Full decription  ${widget.getData.description}",
+                        style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.grey),
                       ),
-                      const SizedBox(height: 13),
+                      const SizedBox(height: 16),
                       Container(
                         padding: const EdgeInsets.only(right: 30),
                         width: double.infinity,
                         child: Text(
                           " Product caunt: ${widget.getData.count.toString()}",
+                          style: const TextStyle(
+                              fontSize: 17, fontWeight: FontWeight.w500),
                         ),
                       ),
                       const SizedBox(height: 20),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(top: 50, left: 13, right: 50),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              "Total :",
-                              style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Text(
-                              " ${widget.getData.price.toString()} ${widget.getData.currency}",
-                              style: const TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
                       const Padding(
                         padding: EdgeInsets.all(10.0),
                         child: ButtonWidget(),
+                      ),
+                      Consumer<ProductViewModel>(
+                        builder: (context, productViewModel, child) {
+                          if (productViewModel.products.isNotEmpty) {
+                            return ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: productViewModel.products.length,
+                              itemBuilder:
+                                  (BuildContext context, int index) {
+                                var product =
+                                    productViewModel.products[index];
+                                if (product.categoryId ==
+                                    widget.getData.categoryId) {
+                                  return ProductsScreen(data: product);
+                                } else
+                                  const SizedBox();
+                              },
+                            );
+                          } else {
+                            return const SliverToBoxAdapter(
+                              child: Center(
+                                child: Text("error"),
+                              ),
+                            );
+                          }
+                        },
                       ),
                     ],
                   ),
@@ -163,3 +197,18 @@ class _InfoPageState extends State<InfoPage> {
     );
   }
 }
+/* SliverGrid(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                ProductModel product = productViewModel.products[index];
+                return ProductsScreen(data: product);
+              },
+              childCount: productViewModel.products.length,
+            ),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+               childAspectRatio: 0.88,
+              mainAxisSpacing: 8.5,
+              crossAxisSpacing: 5,
+            ),
+          );*/ 

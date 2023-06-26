@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:shop_firbase_app/data/model/product_model.dart';
+import 'package:shop_firbase_app/utils/style.dart';
 
 import '../info_page.dart';
 
@@ -19,20 +20,20 @@ class ProductsScreen extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (_) => InfoPage(
-              getData: data ,
+              getData: data,
             ),
           ),
         );
       },
       child: Container(
         height: 150,
-        width: 140,
-        margin: const EdgeInsets.only(left: 5, right: 5),
+        width: 100,
+        margin: const EdgeInsets.only(left: 8, right: 8),
         // padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border.all(
-              width: 0.8, color: const Color.fromARGB(255, 232, 220, 185)),
+              width: 0.8, color: const Color.fromARGB(231, 228, 157, 76)),
           borderRadius: const BorderRadius.all(
             Radius.circular(10),
           ),
@@ -41,13 +42,15 @@ class ProductsScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 5,),
+            SizedBox(
+              height: 5
+            ),
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: CachedNetworkImage(
                 imageUrl: '${data.productImages[0]}',
-                width: 120.w,
-                height: 100.h,
+                width: 125.w,
+                height: 105.h,
                 fit: BoxFit.cover,
                 placeholder: (context, url) {
                   return Shimmer.fromColors(
@@ -69,18 +72,27 @@ class ProductsScreen extends StatelessWidget {
               height: 10,
               width: 30,
             ),
-            Text(data.productName),
-
-            SizedBox(height: 5.h),
+            Text(
+              data.productName,
+              style: MyTextStyle.sfProMedium,
+            ),
+            const Divider(
+              height: 8.0,
+              thickness: 0.8,
+              color: Color.fromARGB(231, 228, 157, 76),
+              indent: 21.0,
+              endIndent: 21.0,
+            ),
+            SizedBox(height: 2.h),
             RichText(
               text: TextSpan(
                 children: [
                   TextSpan(
                     text: "Mavjud: ".tr(),
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge!
-                        .copyWith(color: Colors.green,fontSize: 14.sp, fontWeight: FontWeight.w600),
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: Colors.green,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w600),
                   ),
                   TextSpan(
                     text: "${data.count.toString()} kub",
@@ -113,7 +125,6 @@ class ProductsScreen extends StatelessWidget {
                 ],
               ),
             ),
-
           ],
         ),
       ),

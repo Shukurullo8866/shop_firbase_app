@@ -1,11 +1,27 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_firbase_app/view_model/profile_view_model.dart';
 
+import '../../../data/servise/file_uploder.dart';
 import '../../../utils/app_image.dart';
 import '../../admin/admin_screen.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+    final ImagePicker _picker = ImagePicker();
+
+  XFile? _image;
+
+  String imageUrl = "";
+
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,56 +56,116 @@ class ProfilePage extends StatelessWidget {
           color: Colors.orange,
         ),
       ),
-      body: StreamBuilder<ProfileViewModel>(
-        stream:
-            Provider.of<ProfileViewModel>(context, listen: false).listenUser(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+      body: SingleChildScrollView(
+        child: Consumer<ProfileViewModel>(
+        builder: (context, profileViewModel, child) {
+          return profileViewModel.user != null
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    TextButton(onPressed: (){
+                      FirebaseAuth.instance.signOut();
+                    }, child: Text("Log Out")),
+                    Text(profileViewModel.user!.email.toString()),
+                    Text(profileViewModel.user!.uid.toString()),
+                    Text(profileViewModel.user!.displayName.toString()),
+                    
+                    isLoading ? const CircularProgressIndicator() : SizedBox(),
+                    Container(
+                      decoration: BoxDecoration(shape: BoxShape.circle),
+                      width: 100,
+                      height: 100,
+                      child: profileViewModel.user!.photoURL == null
+                          ? Image.asset(
+                              AppImage.d_r,
+                              fit: BoxFit.cover,
+                            )
+                          : Image.network(
+                              profileViewModel.user!.photoURL!,
+                              fit: BoxFit.cover,
+                            ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        _showPicker(context);
+                      },
+                      child: Text("Select Image"),
+                    )
+                  ],
+                )
+              : Center(child: CircularProgressIndicator());
+        },
+      ),
+      ),
+    );
+  }
 
-          return Container(
-            alignment: Alignment.topCenter,
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              // ignore: prefer_const_literals_to_create_immutables
-              children: [
-                const SizedBox(
-                  height: 10,
-                ),
-                const CircleAvatar(
-                  radius: 70,
-                  backgroundImage: NetworkImage('https://i.pravatar.cc/277'),
-                ),
-                const SizedBox(height: 16),
-                const Text(
-                  'Ism: John Doe',
-                  style: TextStyle(fontSize: 18),
-                ),
-                const SizedBox(height: 8),
-                const Text(
-                  'Email: johndoe@example.com',
-                  style: TextStyle(fontSize: 18),
-                ),
-                const SizedBox(height: 8),
-                const Text(
-                  'Tug\'ilgan sana: 15.10.1990',
-                  style: TextStyle(fontSize: 18),
-                ),
-                const SizedBox(height: 8),
-                const Text(
-                  'Yoshi: 33',
-                  style: TextStyle(fontSize: 18),
+  void _showPicker(context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Wrap(
+              children: <Widget>[
+                ListTile(
+                    leading: const Icon(Icons.photo_library),
+                    title: const Text("Gallery"),
+                    onTap: () {
+                      _getFromGallery();
+                      Navigator.of(context).pop();
+                    }),
+                ListTile(
+                  leading: const Icon(Icons.photo_camera),
+                  title: const Text('Camera'),
+                  onTap: () {
+                    _getFromCamera();
+                    Navigator.of(context).pop();
+                  },
                 ),
               ],
             ),
           );
-        },
-      ),
+        });
+  }
+
+  _getFromGallery() async {
+    XFile? pickedFile = await _picker.pickImage(
+      maxWidth: 1000,
+      maxHeight: 1000,
+      source: ImageSource.gallery,
     );
+    if (pickedFile != null) {
+      if (!mounted) return;
+      setState(() {
+        isLoading = true;
+      });
+      if (!mounted) return;
+      imageUrl = await FileUploader.imageUploader(pickedFile);
+      if (!mounted) return;
+      Provider.of<ProfileViewModel>(context, listen: false)
+          .updatePhoto(imageUrl);
+      setState(() {
+        isLoading = false;
+        _image = pickedFile;
+      });
+    }
+  }
+
+  _getFromCamera() async {
+    XFile? pickedFile = await _picker.pickImage(
+      maxWidth: 1920,
+      maxHeight: 2000,
+      source: ImageSource.camera,
+    );
+    if (pickedFile != null) {
+      if (!mounted) return;
+      imageUrl = await FileUploader.imageUploader(pickedFile);
+      if (!mounted) return;
+      Provider.of<ProfileViewModel>(context, listen: false).updatePhoto(imageUrl);
+      setState(() {
+        _image = pickedFile;
+      });
+    }
   }
 }
 

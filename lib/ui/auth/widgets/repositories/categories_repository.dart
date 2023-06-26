@@ -12,12 +12,12 @@ class CategoryRepository {
 
   Future<void> addCategory({required CategoryModel categoryModel}) async {
     try {
-      var newCategory =
-          await _firestore.collection("categories").add(categoryModel.toJson());
-      _firestore.collection("cotegories").doc(newCategory.id).update({
-        "category_Id": newCategory.id,
+      DocumentReference newCategory =
+      await _firestore.collection("categories").add(categoryModel.toJson());
+      await _firestore.collection("categories").doc(newCategory.id).update({
+        "categoryId": newCategory.id,
       });
-      MyUtils.getMyToast(message: "Category Qoshish Muvaffaqiyatli Bajarildi");
+      MyUtils.getMyToast(message: "Kategorya muvaffaqiyatli qo'shildi!");
     } on FirebaseException catch (er) {
       MyUtils.getMyToast(message: er.message.toString());
     }
@@ -25,9 +25,8 @@ class CategoryRepository {
 
   Future<void> deleteCategory({required String docId}) async {
     try {
-      await _firestore.collection("cotegories").doc(docId).delete();
-
-      MyUtils.getMyToast(message: "Categories O'chirish  Muvaffaqiyatli Bajarildi");
+      await _firestore.collection("categories").doc(docId).delete();
+      MyUtils.getMyToast(message: "Kategorya muvaffaqiyatli o'chirildi!");
     } on FirebaseException catch (er) {
       MyUtils.getMyToast(message: er.message.toString());
     }
@@ -38,22 +37,18 @@ class CategoryRepository {
       await _firestore
           .collection("categories")
           .doc(categoryModel.categoryId)
-          .update(
-            categoryModel.toJson(),
-          );
+          .update(categoryModel.toJson());
 
-      MyUtils.getMyToast(message: "Yangilanish  Bajarildi");
+      MyUtils.getMyToast(message: "Kategorya muvaffaqiyatli yangilandi!");
     } on FirebaseException catch (er) {
       MyUtils.getMyToast(message: er.message.toString());
     }
   }
 
-  Stream<List<CategoryModel>> getCategory() => _firestore
-      .collection("categories")
-      .snapshots()
-      .map((querySnapshot) => querySnapshot.docs
-          .map((doc) => CategoryModel.fromJson(doc.data()))
-          .toList());
-
-  
+  Stream<List<CategoryModel>> getCategories() =>
+      _firestore.collection("categories").snapshots().map(
+            (event1) => event1.docs
+                .map((doc) => CategoryModel.fromJson(doc.data()))
+                .toList(),
+          );
 }
