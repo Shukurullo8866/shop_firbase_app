@@ -140,7 +140,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     productName: nameController.text,
                     description: descriptionController.text,
                     createdAt: createdAt,
-                    currency: selectedCurrency,
+                    currency: selectedCurrency, light: false,
                   );
 
                   Provider.of<ProductViewModel>(context, listen: false)
