@@ -45,33 +45,62 @@ class _InfoPageState extends State<InfoPage> {
               setState(() {});
               if (isOn == 0) {
                 setState(() {});
-                isOn += 1;
+                ProductModel productModel = ProductModel(
+                    count: widget.getData.count,
+                    price: widget.getData.price,
+                    productImages: widget.getData.productImages,
+                    categoryId: widget.getData.categoryId,
+                    productId: widget.getData.productId,
+                    productName: widget.getData.productName,
+                    description: widget.getData.description,
+                    createdAt: widget.getData.createdAt,
+                    currency: widget.getData.currency,
+                    light: true);
+                context.read<ProductViewModel>().updateProduct(productModel);
+                setState(() {});
                 OrderModel orderModel = OrderModel(
-                    orderId: "1",
+                    orderId: widget.getData.price.toString(),
                     productId: widget.getData.productId,
                     count: 1,
                     totalPrice: widget.getData.price,
                     createdAt: DateTime.now().toString(),
                     userId:
-                        context.read<ProfileViewModel>().user!.uid.toString(),
+                        context.read<ProfileViewModel>().user!.docId.toString(),
                     orderStatus: widget.getData.price.toString(),
                     productName: widget.getData.productName,
                     productImages: widget.getData.productImages);
-                print("addddddddddddddddddddddddddddddddddddddd");
-                print(widget.getData.productId.toString());
+
                 Provider.of<OrdersViewModel>(context, listen: false)
                     .addOrder(orderModel);
-              } else if (0 < isOn) {
+                isOn = 1;
                 setState(() {});
-                isOn == 0;
+              } else if (isOn == 1) {
+                setState(() {});
                 Provider.of<OrdersViewModel>(context, listen: false)
-                    .deleteOrder(docId: '1');
+                    .deleteOrder(docId: widget.getData.price.toString());
+                isOn = 0;
+                ProductModel productModel = ProductModel(
+                    count: widget.getData.count,
+                    price: widget.getData.price,
+                    productImages: widget.getData.productImages,
+                    categoryId: widget.getData.categoryId,
+                    productId: widget.getData.productId,
+                    productName: widget.getData.productName,
+                    description: widget.getData.description,
+                    createdAt: widget.getData.createdAt,
+                    currency: widget.getData.currency,
+                    light: false);
+                context.read<ProductViewModel>().updateProduct(productModel);
+                setState(() {});
+
                 print("deeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
                 print(widget.getData.productId.toString());
               }
             },
             icon: Icon(
-              isOn == 0 ? Icons.heart_broken_outlined : Icons.heart_broken,
+              widget.getData.light == false
+                  ? Icons.heart_broken_outlined
+                  : Icons.heart_broken,
               color: Colors.orange,
             ),
           )

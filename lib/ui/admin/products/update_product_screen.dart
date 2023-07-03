@@ -134,7 +134,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
                     productName: nameController.text,
                     description: descriptionController.text,
                     createdAt: widget.productModel.createdAt,
-                    currency: selectedCurrency,
+                    currency: selectedCurrency, light: false,
                   );
 
                   Provider.of<ProductViewModel>(context,listen: false).updateProduct(productModel);

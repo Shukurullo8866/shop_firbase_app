@@ -2,12 +2,12 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shop_firbase_app/data/model/order_model.dart';
-import 'package:shop_firbase_app/ui/auth/widgets/repositories/orders_repository.dart';
 
 
 import 'package:flutter/material.dart';
 
 import '../data/model/product_model.dart';
+import '../data/repositories/orders_repository.dart';
 class OrdersViewModel extends ChangeNotifier {
   final OrdersRepository ordersRepository;
 

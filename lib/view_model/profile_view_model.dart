@@ -17,13 +17,13 @@ class ProfileViewModel extends ChangeNotifier {
     listenUser();
   }
 
-  User? user;
+  UserModel? user;
 
-  Stream<User?> getCurrentUser() => _firebaseAuth.authStateChanges();
+  Future<UserCredential> getCurrentUser() => _firebaseAuth.getRedirectResult();
 
   listenUser() {
-    _firebaseAuth.authStateChanges().listen((updatedUser) {
-      user = updatedUser;
+    _firebaseAuth.authStateChanges().listen((userModel) {
+      user = userModel as UserModel?;
       notifyListeners();
     });
   }

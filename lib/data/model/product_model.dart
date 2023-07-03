@@ -8,6 +8,7 @@ class ProductModel {
   String description;
   String createdAt;
   String currency;
+  bool light = false;
 
   ProductModel({
     required this.count,
@@ -19,6 +20,7 @@ class ProductModel {
     required this.description,
     required this.createdAt,
     required this.currency,
+    required this.light,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> jsonData) {
@@ -32,6 +34,7 @@ class ProductModel {
       description: jsonData['description'] as String? ?? '',
       createdAt: jsonData['createdAt'] as String? ?? '',
       currency: jsonData['currency'] as String? ?? '',
+      light: jsonData['light'] as bool,
     );
   }
 
@@ -46,6 +49,7 @@ class ProductModel {
       'description': description,
       'createdAt': createdAt,
       'currency': currency,
+      'light': light
     };
   }
 
@@ -61,6 +65,7 @@ class ProductModel {
       description: $description,
       createdAt: $createdAt,
       currency: $currency
+      light: $light
       ''';
   }
 }

@@ -71,13 +71,13 @@ class _ProfilePageState extends State<ProfilePage> {
                         decoration: const BoxDecoration(shape: BoxShape.circle),
                         width: 100,
                         height: 100,
-                        child: profileViewModel.user!.photoURL == null
+                        child: profileViewModel.user == null
                             ? Image.asset(
                                 AppImage.d_r,
                                 fit: BoxFit.cover,
                               )
                             : Image.network(
-                                profileViewModel.user!.photoURL!,
+                                profileViewModel.user!.fullName,
                                 fit: BoxFit.cover,
                               ),
                       ),
@@ -87,9 +87,9 @@ class _ProfilePageState extends State<ProfilePage> {
                           },
                           child: const Text("Log Out")),
                       Text(profileViewModel.user!.email.toString()),
-                      Text(profileViewModel.user!.uid.toString()),
-                      Text(profileViewModel.user!.displayName.toString()),
-                      Text(profileViewModel.user!.phoneNumber.toString()),
+                      Text(profileViewModel.user!.age.toString()),
+                      Text(profileViewModel.user!.createdAt.toString()),
+                      Text(profileViewModel.user!.fullName.toString()),
                       
                       
                       isLoading
