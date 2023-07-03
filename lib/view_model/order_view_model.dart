@@ -8,7 +8,6 @@ import 'package:shop_firbase_app/ui/auth/widgets/repositories/orders_repository.
 import 'package:flutter/material.dart';
 
 import '../data/model/product_model.dart';
-
 class OrdersViewModel extends ChangeNotifier {
   final OrdersRepository ordersRepository;
 
@@ -24,14 +23,14 @@ class OrdersViewModel extends ChangeNotifier {
 
   listenOrders(String userId) async {
     subscription =
-        ordersRepository.getOrdersByUserId(userId: userId).listen((orders) {
+        ordersRepository.getOrdersByUserId(userId: userId).listen((List<OrderModel> orders) {
       userOrders = orders;
       notifyListeners();
     });
   }
 
-  addOrder(OrderModel orderModel) =>
-      ordersRepository.addOrder(orderModel: orderModel);
+  addOrder(OrderModel orderModel, ) =>
+      ordersRepository.addOrder( orderModel: orderModel, orderId: orderModel.orderId,);
 
   updateOrderIfExists({
     required String productId,
@@ -60,11 +59,11 @@ class OrdersViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  deleteOrder(String docId) => ordersRepository.deleteOrderById(docId: docId);
+  deleteOrder({required String docId}) => ordersRepository.deleteOrderById(docId: docId);
 
   @override
   void dispose() {
     subscription.cancel();
     super.dispose();
   }
-}
+  }

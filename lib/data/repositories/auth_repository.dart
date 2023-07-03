@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:shop_firbase_app/utils/my_utils.dart';
 
 class AuthRepository {

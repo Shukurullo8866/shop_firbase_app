@@ -22,7 +22,7 @@ class _TabBoxState extends State<TabBox> {
   void initState() {
     screens.add(const HomePage());
     screens.add(const CardPage());
-    screens.add(ProfilePage());
+    screens.add(const ProfilePage());
     super.initState();
   }
 
@@ -32,7 +32,7 @@ class _TabBoxState extends State<TabBox> {
     return Scaffold(
       backgroundColor: Colors.white70,
       body: screens[index],
-      bottomNavigationBar: BottomNavigationBar(fixedColor: Color.fromARGB(233, 238, 189, 44),backgroundColor: Colors.white70,
+      bottomNavigationBar: BottomNavigationBar(fixedColor: const Color.fromARGB(233, 238, 189, 44),backgroundColor: Colors.white70,
         onTap: (value) => Provider.of<TabViewModel>(context, listen: false)
             .changePageIndex(value),
         items: const [

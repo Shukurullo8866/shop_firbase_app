@@ -7,12 +7,12 @@ class OrdersRepository {
 
   OrdersRepository({required FirebaseFirestore firebaseFirestore})
       : _firestore = firebaseFirestore;
-  Future<void> addOrder({required OrderModel orderModel}) async {
+  Future<void> addOrder({required OrderModel orderModel,required String orderId}) async {
     try {
       DocumentReference newOrder =
           await _firestore.collection("orders").add(orderModel.toJson());
-      await _firestore.collection("orders").doc(newOrder.id).update({
-        "orderId": newOrder.id,
+      await _firestore.collection("orders").doc(orderId).update({
+        "orderId": orderId,
       });
 
       MyUtils.getMyToast(message: "Buyurtma muvaffaqiyatli qo'shildi!");

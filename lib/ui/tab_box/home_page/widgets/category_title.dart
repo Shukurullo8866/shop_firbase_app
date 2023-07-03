@@ -22,10 +22,10 @@ class CategoryTitleWidget extends SliverPersistentHeaderDelegate {
         children: [
           Text(
             title,
-            style: Theme.of(context)
-                .textTheme
-                .bodyMedium
-                ?.copyWith(fontWeight: FontWeight.w800, fontSize: 18.sp),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  fontWeight: FontWeight.w800,
+                  fontSize: 18.sp,
+                ),
           ),
         ],
       ),

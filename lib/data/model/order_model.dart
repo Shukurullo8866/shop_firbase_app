@@ -7,17 +7,18 @@ class OrderModel {
   String orderStatus;
   String createdAt;
   String productName;
+  List<dynamic> productImages;
 
-  OrderModel({
-    required this.count,
-    required this.totalPrice,
-    required this.orderId,
-    required this.productId,
-    required this.userId,
-    required this.orderStatus,
-    required this.createdAt,
-    required this.productName,
-  });
+  OrderModel(
+      {required this.count,
+      required this.totalPrice,
+      required this.orderId,
+      required this.productId,
+      required this.userId,
+      required this.orderStatus,
+      required this.createdAt,
+      required this.productName,
+      required this.productImages});
 
   OrderModel copWith({
     int? count,
@@ -28,6 +29,7 @@ class OrderModel {
     String? orderStatus,
     String? createdAt,
     String? productName,
+    List? productImages,
   }) =>
       OrderModel(
         count: count ?? this.count,
@@ -38,6 +40,7 @@ class OrderModel {
         userId: userId ?? this.userId,
         orderStatus: orderStatus ?? this.orderStatus,
         createdAt: createdAt ?? this.createdAt,
+        productImages: productImages ?? this.productImages,
       );
 
   factory OrderModel.fromJson(Map<String, dynamic> jsonData) {
@@ -50,6 +53,7 @@ class OrderModel {
       userId: jsonData['userId'] as String? ?? '',
       orderStatus: jsonData['orderStatus'] as String? ?? '',
       createdAt: jsonData['createdAt'] as String? ?? '',
+      productImages: (jsonData['productImages'] as List<dynamic>? ?? []),
     );
   }
 
@@ -63,6 +67,7 @@ class OrderModel {
       'orderStatus': orderStatus,
       'createdAt': createdAt,
       'productName': productName,
+      'productImages':productImages,
     };
   }
 
@@ -76,6 +81,7 @@ class OrderModel {
       userId: $userId,
       orderStatus: $orderStatus,
       createdAt: $createdAt,
+      productImages: $productImages,
       ''';
   }
 }

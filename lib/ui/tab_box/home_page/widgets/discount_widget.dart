@@ -9,6 +9,7 @@ import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 import '../../../../utils/const.dart';
 import '../../../../view_model/product_view_model.dart';
+
 class DiscountWidget extends SliverPersistentHeaderDelegate {
   final double screenHeight;
   DiscountWidget({required this.screenHeight});
@@ -177,7 +178,6 @@ class DiscountWidget extends SliverPersistentHeaderDelegate {
                 ),
               ),
             ),
-            //carouselController: buttonCarouselController,
             options: CarouselOptions(
               autoPlay: true,
               enlargeCenterPage: true,

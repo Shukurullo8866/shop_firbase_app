@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_firbase_app/data/model/category_model.dart';
 
 // ignore: must_be_immutable
@@ -6,22 +7,11 @@ class CategoryItem extends StatelessWidget {
   final CategoryModel data;
   final VoidCallback onCategoryTap;
 
-  CategoryItem({
+  const CategoryItem({
     Key? key,
     required this.data,
     required this.onCategoryTap,
   }) : super(key: key);
-
-  List<Color> categoryColor = const [
-    Color(0xffD3D5FE),
-    Color(0xffFFEFDA),
-    Color(0xffFFE4F1),
-    Color(0xffCFE5FC),
-    Color(0xffFFCECA),
-    Color(0xffDAFFD6),
-    Color(0xffD5BEFB),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,9 +19,8 @@ class CategoryItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
-
-          width: 70,
-          height: 70,
+          width: 70.w,
+          height: 70.h,
           decoration: BoxDecoration(
             border: Border.all(
               width: 1.5,
@@ -40,16 +29,17 @@ class CategoryItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           child: InkWell(
-            
             onTap: onCategoryTap,
-            child:  ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(9.5),
-                    ),
-                    child: Image.network(
-                      data.imageUrl,
-                      fit: BoxFit.fill,
-                    ),
-                  ), ),
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(
+                Radius.circular(9.5),
+              ),
+              child: Image.network(
+                data.imageUrl,
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
         ),
         const SizedBox(height: 8),
         Text(
@@ -61,5 +51,4 @@ class CategoryItem extends StatelessWidget {
       ],
     );
   }
-  
 }

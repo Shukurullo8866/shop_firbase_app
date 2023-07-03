@@ -1,10 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:shimmer/shimmer.dart';
 import 'package:shop_firbase_app/utils/app_image.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
@@ -24,8 +22,8 @@ class DiscountWidget extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     String productName = "Orzularingizni biz bilan quring! ";
-    return Container(
-      height: 200,
+    return SizedBox(
+      height: 200.h,
       width: width(context),
       child: CarouselSlider(
         items: List.generate(
@@ -109,7 +107,7 @@ class DiscountWidget extends SliverPersistentHeaderDelegate {
                         height: screenHeight * 0.034,
                         width: screenHeight * 0.18,
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 250, 245, 237),
+                          color: const Color.fromARGB(255, 250, 245, 237),
                           borderRadius: BorderRadius.circular(28),
                         ),
                         child: Center(

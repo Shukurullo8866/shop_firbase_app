@@ -32,7 +32,7 @@ class ButtonWidget extends StatelessWidget {
                 borderRadius: const BorderRadius.all(
                   Radius.circular(10),
                 ),
-                color: const Color.fromARGB(231, 228, 157, 76),
+                color: Color.fromARGB(231, 228, 157, 76),
               ),
               child: const Center(
                 child: Text(
@@ -56,11 +56,11 @@ class ButtonWidget extends StatelessWidget {
               height: 50.w,
               decoration: BoxDecoration(
                 border: Border.all(
-                    width: 0.8, color: Color.fromARGB(255, 238, 219, 161)),
+                    width: 0.8, color: const Color.fromARGB(255, 238, 219, 161)),
                 borderRadius: const BorderRadius.all(
                   Radius.circular(10),
                 ),
-                color: const Color.fromARGB(231, 228, 157, 76),
+                color: Color.fromARGB(231, 228, 157, 76),
               ),
               child: const Center(
                 child: Text(

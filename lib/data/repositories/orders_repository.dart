@@ -9,12 +9,12 @@ class OrdersRepository {
   OrdersRepository({required FirebaseFirestore firebaseFirestore})
       : _firestore = firebaseFirestore;
 
-  Future<void> addOrder({required OrderModel orderModel}) async {
+  Future<void> addOrder({required String orderId,required OrderModel orderModel}) async {
     try {
       DocumentReference newOrder =
           await _firestore.collection("orders").add(orderModel.toJson());
       await _firestore.collection("orders").doc(newOrder.id).update({
-        "orderId": newOrder.id,
+        "orderId": orderId,
       });
 
       MyUtils.getMyToast(message: "Buyurtma muvaffaqiyatli qo'shildi!");
@@ -46,18 +46,22 @@ class OrdersRepository {
   }
 
   Stream<List<OrderModel>> getOrders() =>
-      _firestore.collection("orders").snapshots().map((event1) =>
-          event1.docs.map((doc) => OrderModel.fromJson(doc.data())).toList());
+      _firestore.collection("orders").snapshots().map(
+            (event1) => event1.docs
+                .map((doc) => OrderModel.fromJson(doc.data()))
+                .toList(),
+          );
 
-  Stream<List<OrderModel>> getOrdersByUserId(
-          {required String userId}) =>
+  Stream<List<OrderModel>> getOrdersByUserId({required String userId}) =>
       _firestore
           .collection("orders")
           .where("userId", isEqualTo: userId)
           .snapshots()
-          .map((event1) => event1.docs
-              .map((doc) => OrderModel.fromJson(doc.data()))
-              .toList());
+          .map(
+            (event1) => event1.docs
+                .map((doc) => OrderModel.fromJson(doc.data()))
+                .toList(),
+          );
 
   Future<ProductModel> getSingleProductById({required String docId}) async {
     var data = await _firestore.collection("products").doc(docId).get();

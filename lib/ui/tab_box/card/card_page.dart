@@ -27,35 +27,30 @@ class _CardPageState extends State<CardPage> {
         ),
         leading: const Icon(
           Icons.arrow_back_ios,
-          color: Colors.orange,
+          color: Colors.transparent,
         ),
       ),
-      body: Consumer<OrdersViewModel>(
-        builder: (context, orderViewModel, child) {
-          return ListView(
-            children: List.generate(
-              orderViewModel.userOrders.length,
-              (index) {
-                var order = orderViewModel.userOrders[index];
-                return ListTile(
-                  title: Text(order.productName),
-                  onTap: () {
-                    orderViewModel.getSingleProduct(order.productId);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (builder) => CardInfo(
-                          orderModel: order,
-                        ),
-                      ),
-                    );
-                  },
-                  trailing: Text("Kub:${order.count}"),
-                );
+      body: Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: Consumer<OrdersViewModel>(
+          builder: (context, orderViewModel, child) {
+            return GridView.builder(
+              shrinkWrap: true,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, // Number of columns in the grid
+                mainAxisSpacing: 10.0, // Spacing between grid items vertically
+                crossAxisSpacing: 10.0, // Spacing between grid items horizontally
+                childAspectRatio: 1.0, // Aspect ratio of each grid item
+              ),
+              scrollDirection: Axis.vertical,
+              itemCount: orderViewModel.userOrders.length,
+              itemBuilder: (BuildContext context, int index) {
+                var data = orderViewModel.userOrders[index];
+                return OrderItemsScreen(data: data);
               },
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
