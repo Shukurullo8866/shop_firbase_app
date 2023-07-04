@@ -45,19 +45,7 @@ class _InfoPageState extends State<InfoPage> {
               setState(() {});
               if (isOn == 0) {
                 setState(() {});
-                ProductModel productModel = ProductModel(
-                    count: widget.getData.count,
-                    price: widget.getData.price,
-                    productImages: widget.getData.productImages,
-                    categoryId: widget.getData.categoryId,
-                    productId: widget.getData.productId,
-                    productName: widget.getData.productName,
-                    description: widget.getData.description,
-                    createdAt: widget.getData.createdAt,
-                    currency: widget.getData.currency,
-                    light: true);
-                context.read<ProductViewModel>().updateProduct(productModel);
-                setState(() {});
+                isOn += 1;
                 OrderModel orderModel = OrderModel(
                     orderId: widget.getData.price.toString(),
                     productId: widget.getData.productId,
