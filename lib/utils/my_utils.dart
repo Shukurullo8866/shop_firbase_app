@@ -58,24 +58,24 @@ class MyUtils {
 
 }
 
-InputDecoration getInputDecoration({required String label}) {
+InputDecoration getInputDecoration( {required String label}) {
   return InputDecoration(
     labelText: label,
     labelStyle: MyTextStyle.sfProRegular.copyWith(
       color: Colors.black,
       fontSize: 10,
     ),
-    border: const OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(4)),
+    border:  const OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(5)),
       borderSide: BorderSide(
-        width: 1,
+        width: 5,
       ),
     ),
     enabledBorder: const OutlineInputBorder(
-        borderSide: BorderSide(width: 1, color: Colors.black)),
+        borderSide: BorderSide(width: 0.5, color: Colors.black)),
     focusedBorder: const OutlineInputBorder(
-        borderSide: BorderSide(width: 1, color: Colors.black)),
+        borderSide: BorderSide(width: 0.5, color: Colors.black)),
     errorBorder: const OutlineInputBorder(
-        borderSide: BorderSide(width: 1, color: Colors.black)),
+        borderSide: BorderSide(width: 0.5, color: Colors.black)),
   );
 }

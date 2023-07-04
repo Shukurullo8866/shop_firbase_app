@@ -52,17 +52,20 @@ class _ProfilePageState extends State<ProfilePage> {
                 color: Colors.orange,
               ),
             ),
-          )
+          ),
         ],
-        leading: const Icon(
-          Icons.menu,
-          color: Colors.orange,
+        leading:  IconButton(
+          icon: const Icon(Icons.menu,
+          color: Colors.orange,),
+          onPressed: () {
+            context.read<ProfileViewModel>().fetchUser();
+          },
         ),
       ),
       body: SingleChildScrollView(
         child: Consumer<ProfileViewModel>(
           builder: (context, profileViewModel, child) {
-            return profileViewModel.user != null
+            return profileViewModel.userModel != null
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -71,29 +74,32 @@ class _ProfilePageState extends State<ProfilePage> {
                         decoration: const BoxDecoration(shape: BoxShape.circle),
                         width: 100,
                         height: 100,
-                        child: profileViewModel.user == null
+                        child: profileViewModel.userModel != null
                             ? Image.asset(
                                 AppImage.d_r,
                                 fit: BoxFit.cover,
                               )
                             : Image.network(
-                                profileViewModel.user!.fullName,
+                                profileViewModel.userModel!.fullName,
                                 fit: BoxFit.cover,
                               ),
                       ),
                       TextButton(
-                          onPressed: () {
-                            FirebaseAuth.instance.signOut();
-                          },
-                          child: const Text("Log Out")),
-                      Text(profileViewModel.user!.email.toString()),
-                      Text(profileViewModel.user!.age.toString()),
-                      Text(profileViewModel.user!.createdAt.toString()),
-                      Text(profileViewModel.user!.fullName.toString()),
-                      
-                      
+                        onPressed: () {
+                          FirebaseAuth.instance.signOut();
+                        },
+                        child: const Text("Log Out"),
+                      ),
+                      Text(profileViewModel.userModel!.age.toString()),
+                      Text(profileViewModel.userModel!.docId.toString()),
+                      Text(profileViewModel.userModel!.createdAt.toString()),
+                      Text(profileViewModel.userModel!.fullName.toString()),
                       isLoading
-                          ? const CircularProgressIndicator()
+                          ? Container(
+                              color: Colors.red,
+                              height: 100,
+                              width: 100,
+                            )
                           : const SizedBox(),
                       ElevatedButton(
                         onPressed: () {
@@ -103,7 +109,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       )
                     ],
                   )
-                : const Center(child: CircularProgressIndicator());
+                : const Center(
+                    child: CircularProgressIndicator(),
+                  );
           },
         ),
       ),
@@ -112,30 +120,31 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void _showPicker(context) {
     showModalBottomSheet(
-        context: context,
-        builder: (BuildContext bc) {
-          return SafeArea(
-            child: Wrap(
-              children: <Widget>[
-                ListTile(
-                    leading: const Icon(Icons.photo_library),
-                    title: const Text("Gallery"),
-                    onTap: () {
-                      _getFromGallery();
-                      Navigator.of(context).pop();
-                    }),
-                ListTile(
-                  leading: const Icon(Icons.photo_camera),
-                  title: const Text('Camera'),
+      context: context,
+      builder: (BuildContext bc) {
+        return SafeArea(
+          child: Wrap(
+            children: <Widget>[
+              ListTile(
+                  leading: const Icon(Icons.photo_library),
+                  title: const Text("Gallery"),
                   onTap: () {
-                    _getFromCamera();
+                    _getFromGallery();
                     Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ),
-          );
-        });
+                  }),
+              ListTile(
+                leading: const Icon(Icons.photo_camera),
+                title: const Text('Camera'),
+                onTap: () {
+                  _getFromCamera();
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   _getFromGallery() async {
@@ -154,10 +163,12 @@ class _ProfilePageState extends State<ProfilePage> {
       if (!mounted) return;
       Provider.of<ProfileViewModel>(context, listen: false)
           .updatePhoto(imageUrl);
-      setState(() {
-        isLoading = false;
-        _image = pickedFile;
-      });
+      setState(
+        () {
+          isLoading = false;
+          _image = pickedFile;
+        },
+      );
     }
   }
 
@@ -173,9 +184,11 @@ class _ProfilePageState extends State<ProfilePage> {
       if (!mounted) return;
       Provider.of<ProfileViewModel>(context, listen: false)
           .updatePhoto(imageUrl);
-      setState(() {
-        _image = pickedFile;
-      });
+      setState(
+        () {
+          _image = pickedFile;
+        },
+      );
     }
   }
 }

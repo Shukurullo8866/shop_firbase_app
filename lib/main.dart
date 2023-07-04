@@ -20,7 +20,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:flutter_acrylic/flutter_acrylic.dart';
 
 void main() async {
-    WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   var fireStore = FirebaseFirestore.instance;
   runApp(
@@ -35,10 +35,11 @@ void main() async {
           ),
         ),
         ChangeNotifierProvider(
-          create: (context) => ProfileViewModel(firebaseAuth: FirebaseAuth.instance, profileRepository: ProfileRepository(firebaseFirestore: fireStore)
-            
+          create: (context) => ProfileViewModel(
+            firebaseAuth: FirebaseAuth.instance,
+            profileRepository: ProfileRepository(firebaseFirestore: fireStore),
           ),
-       ),
+        ),
         ChangeNotifierProvider(
           create: (context) => OrdersViewModel(
             ordersRepository: OrdersRepository(

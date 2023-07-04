@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_firbase_app/utils/app_image.dart';
 import '../../utils/color.dart';
 import '../../utils/my_utils.dart';
 import '../../utils/style.dart';
@@ -22,36 +24,55 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.backgroundColor,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("Login"),
+        backgroundColor: MyColors.white,
+        leading: const Icon(
+          Icons.arrow_back_ios_new,
+          color: MyColors.C_4C5661,
+        ),
+        flexibleSpace: Container(color: MyColors.white),
+        elevation: 0, // Pastki soyaning kordikligini 0 ga o'zgartiramiz
       ),
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(height: 20),
+            SizedBox(height: 10.h),
+            SizedBox(
+                height: 250,
+                width: double.infinity,
+                child: Padding(
+                    padding:
+                        const EdgeInsets.only(right: 20, left: 20, bottom: 20),
+                    child: Image.asset(
+                      AppImage.d_r,
+                      fit: BoxFit.cover,
+                      height: 250,
+                    ))),
+            const SizedBox(height: 20),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 29),
               child: TextFormField(
                 controller: emailController,
                 textInputAction: TextInputAction.next,
+          
                 style: MyTextStyle.sfProRegular.copyWith(
-                  color: MyColors.white,
+                  color: MyColors.black,
                   fontSize: 17,
                 ),
-                decoration: getInputDecoration(label: "Email"),
+                decoration: getInputDecoration(label: "Email",),
               ),
             ),
             const SizedBox(height: 20),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 29),
               child: TextFormField(
                 controller: passwordController,
                 obscureText: true,
                 textInputAction: TextInputAction.done,
                 style: MyTextStyle.sfProRegular.copyWith(
-                  color: MyColors.white,
+                  color: MyColors.black,
                   fontSize: 17,
                 ),
                 decoration: getInputDecoration(label: "Password"),
