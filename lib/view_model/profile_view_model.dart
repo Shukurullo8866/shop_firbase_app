@@ -1,9 +1,8 @@
-// ignore_for_file: unused_import
+// ignore_for_file: unused_catch_clause
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
-import 'package:shop_firbase_app/data/model/user_model.dart';
-import 'package:shop_firbase_app/data/repositories/profile_repository.dart';
+import '../data/model/user_model.dart';
+import '../data/repositories/profile_repository.dart';
 
 class ProfileViewModel extends ChangeNotifier {
   final FirebaseAuth _firebaseAuth;
@@ -15,15 +14,22 @@ class ProfileViewModel extends ChangeNotifier {
       : _firebaseAuth = firebaseAuth,
         _profileRepository = profileRepository {
     listenUser();
+    fetchUser();
   }
 
-  UserModel? user;
+  User? user;
+  UserModel? userModel;
 
-  Future<UserCredential> getCurrentUser() => _firebaseAuth.getRedirectResult();
+  fetchUser() async {
+    userModel = await _profileRepository.getSingleUser(
+        userId: FirebaseAuth.instance.currentUser!.uid);
+  }
+
+  Stream<User?> getCurrentUser() => _firebaseAuth.authStateChanges();
 
   listenUser() {
-    _firebaseAuth.authStateChanges().listen((userModel) {
-      user = userModel as UserModel?;
+    _firebaseAuth.authStateChanges().listen((updatedUser) {
+      user = updatedUser;
       notifyListeners();
     });
   }
@@ -35,8 +41,12 @@ class ProfileViewModel extends ChangeNotifier {
     try {
       _firebaseAuth.currentUser!.updateDisplayName(userName);
     // ignore: empty_catches
-    } on FirebaseAuthException {}
+    } on FirebaseAuthException catch (er) {}
   }
-
+ 
   updatePhoto(String photo) => _firebaseAuth.currentUser!.updatePhotoURL(photo);
+
+  updateFCMToken(String fcmToken, String docId) => 
+      _profileRepository.updateUserFCMToken(fcmToken: fcmToken, docId: docId);
 }
+                                                                                                        

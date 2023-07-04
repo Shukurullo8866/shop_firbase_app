@@ -53,7 +53,7 @@ class _InfoPageState extends State<InfoPage> {
                     totalPrice: widget.getData.price,
                     createdAt: DateTime.now().toString(),
                     userId:
-                        context.read<ProfileViewModel>().user!.docId.toString(),
+                        context.read<ProfileViewModel>().userModel!.docId.toString(),
                     orderStatus: widget.getData.price.toString(),
                     productName: widget.getData.productName,
                     productImages: widget.getData.productImages);
@@ -80,15 +80,14 @@ class _InfoPageState extends State<InfoPage> {
                     light: false);
                 context.read<ProductViewModel>().updateProduct(productModel);
                 setState(() {});
-
                 print("deeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
                 print(widget.getData.productId.toString());
               }
             },
             icon: Icon(
               widget.getData.light == false
-                  ? Icons.heart_broken_outlined
-                  : Icons.heart_broken,
+                  ? Icons.favorite_border
+                  : Icons.favorite,
               color: Colors.orange,
             ),
           )
