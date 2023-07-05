@@ -43,28 +43,50 @@ class _InfoPageState extends State<InfoPage> {
           IconButton(
             onPressed: () {
               setState(() {});
-              if (isOn == 0) {
+              if (isOn == 0 && widget.getData.light == false) {
                 setState(() {});
-                isOn += 1;
+                
                 OrderModel orderModel = OrderModel(
                     orderId: widget.getData.price.toString(),
                     productId: widget.getData.productId,
                     count: 1,
                     totalPrice: widget.getData.price,
                     createdAt: DateTime.now().toString(),
-                    userId:
-                        context.read<ProfileViewModel>().userModel!.docId.toString(),
+                    userId: context.read<ProfileViewModel>().user!.uid,
                     orderStatus: widget.getData.price.toString(),
                     productName: widget.getData.productName,
                     productImages: widget.getData.productImages);
 
-                Provider.of<OrdersViewModel>(context, listen: false)
-                    .addOrder(orderModel);
-                isOn = 1;
+                ProductModel productModel = ProductModel(
+                    count: widget.getData.count,
+                    price: widget.getData.price,
+                    productImages: widget.getData.productImages,
+                    categoryId: widget.getData.categoryId,
+                    productId: widget.getData.productId,
+                    productName: widget.getData.productName,
+                    description: widget.getData.description,
+                    createdAt: widget.getData.createdAt,
+                    currency: widget.getData.currency,
+                    light: true);
+                context.read<OrdersViewModel>().userOrders.map(
+                      (e) => e.productId == widget.getData.productId
+                          ? Provider.of<OrdersViewModel>(context, listen: false)
+                              .addOrder(orderModel)
+                          : const SizedBox(),
+                    );
                 setState(() {});
-              } else if (isOn == 1) {
+                context.read<ProductViewModel>().updateProduct(productModel);
+                
+
+              
+                setState(() {
+                  isOn = 1;
+                });
+              } else if(isOn <1){
                 setState(() {});
-                Provider.of<OrdersViewModel>(context, listen: false)
+                print("deeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+                print(widget.getData.price.toString());
+                Provider.of<OrdersViewModel>(context, listen: true)
                     .deleteOrder(docId: widget.getData.price.toString());
                 isOn = 0;
                 ProductModel productModel = ProductModel(
@@ -80,8 +102,6 @@ class _InfoPageState extends State<InfoPage> {
                     light: false);
                 context.read<ProductViewModel>().updateProduct(productModel);
                 setState(() {});
-                print("deeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-                print(widget.getData.productId.toString());
               }
             },
             icon: Icon(
