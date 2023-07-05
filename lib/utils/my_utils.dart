@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shop_firbase_app/utils/style.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 class MyUtils {
   static showSnackBar(BuildContext context, String? text) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -54,28 +54,30 @@ class MyUtils {
       fontSize: 16.0,
     );
   }
-
-
 }
 
-InputDecoration getInputDecoration( {required String label}) {
+InputDecoration getInputDecoration({required String label}) {
   return InputDecoration(
+    disabledBorder: InputBorder.none,
     labelText: label,
     labelStyle: MyTextStyle.sfProRegular.copyWith(
       color: Colors.black,
       fontSize: 10,
     ),
-    border:  const OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(5)),
-      borderSide: BorderSide(
-        width: 5,
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(15),
+      borderSide: const BorderSide(
+        width: 25,
       ),
     ),
     enabledBorder: const OutlineInputBorder(
-        borderSide: BorderSide(width: 0.5, color: Colors.black)),
+        borderSide: BorderSide(
+      width: 0.5,
+      color: Colors.black,
+    )),
     focusedBorder: const OutlineInputBorder(
         borderSide: BorderSide(width: 0.5, color: Colors.black)),
     errorBorder: const OutlineInputBorder(
-        borderSide: BorderSide(width: 0.5, color: Colors.black)),
+        borderSide: BorderSide(width: 0.5, color: Colors.red)),
   );
 }
