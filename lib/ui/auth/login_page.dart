@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_firbase_app/ui/auth/widgets/signIn_button.dart';
 import 'package:shop_firbase_app/utils/app_image.dart';
 import '../../utils/color.dart';
 import '../../utils/my_utils.dart';
@@ -50,18 +51,23 @@ class _LoginPageState extends State<LoginPage> {
                       fit: BoxFit.cover,
                       height: 250,
                     ))),
+            const Text(
+              "Sign in to your account",
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 23),
+            ),
             const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 29),
               child: TextFormField(
                 controller: emailController,
                 textInputAction: TextInputAction.next,
-          
                 style: MyTextStyle.sfProRegular.copyWith(
                   color: MyColors.black,
                   fontSize: 17,
                 ),
-                decoration: getInputDecoration(label: "Email",),
+                decoration: getInputDecoration(
+                  label: "Email",
+                ),
               ),
             ),
             const SizedBox(height: 20),
@@ -79,8 +85,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             const SizedBox(height: 100),
-            TextButton(onPressed: signIn, child: Text("Sign In")),
-            const SizedBox(height: 20),
+            SingnInButton(onTap: signIn, text: 'Sign In'),
+            const SizedBox(height: 60),
             RichText(
               text: TextSpan(
                 style: MyTextStyle.sfProRegular
