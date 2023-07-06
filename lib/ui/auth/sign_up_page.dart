@@ -1,8 +1,10 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_firbase_app/data/model/user_model.dart';
+import 'package:shop_firbase_app/ui/auth/login_page.dart';
 import 'package:shop_firbase_app/ui/auth/widgets/my_rich_text.dart';
 import 'package:shop_firbase_app/ui/auth/widgets/signIn_button.dart';
 import 'package:shop_firbase_app/view_model/profile_view_model.dart';
@@ -35,10 +37,6 @@ class _SignUpPageState extends State<SignUpPage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: MyColors.white,
-        leading: const Icon(
-          Icons.arrow_back_ios_new,
-          color: MyColors.C_4C5661,
-        ),
         flexibleSpace: Container(color: MyColors.white),
         elevation: 0, // Pastki soyaning kordikligini 0 ga o'zgartiramiz
       ),
@@ -49,21 +47,25 @@ class _SignUpPageState extends State<SignUpPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 20),
-               SizedBox(
-                height: 250,
-                width: double.infinity,
-                child: Padding(
-                    padding:
-                        const EdgeInsets.only(right: 20, left: 20, bottom: 20),
-                    child: Image.asset(
-                      AppImage.d_r,
-                      fit: BoxFit.cover,
-                      height: 250,
-                    ))),
-                    const Text(
-              "Sign up for free",
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 23,color: Color.fromARGB(255, 157, 86, 5)),
-            ),
+              SizedBox(
+                  height: 250,
+                  width: double.infinity,
+                  child: Padding(
+                      padding: const EdgeInsets.only(
+                          right: 20, left: 20, bottom: 20),
+                      child: Image.asset(
+                        AppImage.d_r,
+                        fit: BoxFit.cover,
+                        height: 250,
+                      ))),
+              const Text(
+                "Sign up for free",
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 23,
+                    color: Color.fromARGB(255, 175, 112, 2)),
+              ),
+              SizedBox(height: 15.h),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 19),
                 child: TextFormField(

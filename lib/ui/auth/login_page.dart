@@ -53,7 +53,10 @@ class _LoginPageState extends State<LoginPage> {
                     ))),
             const Text(
               "Sign in to your account",
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 23,color: Color.fromARGB(255, 157, 86, 5)),
+              style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 23,
+                  color: Color.fromARGB(255, 175, 112, 2)),
             ),
             const SizedBox(height: 40),
             Padding(
@@ -84,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: getInputDecoration(label: "Password"),
               ),
             ),
-            const SizedBox(height:70),
+            const SizedBox(height: 70),
             SingnInButton(onTap: signIn, text: 'Sign In'),
             const SizedBox(height: 45),
             RichText(
