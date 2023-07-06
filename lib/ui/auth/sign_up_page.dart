@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_firbase_app/data/model/user_model.dart';
-import 'package:shop_firbase_app/ui/auth/login_page.dart';
 import 'package:shop_firbase_app/ui/auth/widgets/my_rich_text.dart';
 import 'package:shop_firbase_app/ui/auth/widgets/signIn_button.dart';
 import 'package:shop_firbase_app/view_model/profile_view_model.dart';
