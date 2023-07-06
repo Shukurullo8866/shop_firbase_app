@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_firbase_app/ui/auth/widgets/repositories/product_repocitory.dart';
 import 'package:shop_firbase_app/ui/auth/auth_page.dart';
+import 'package:shop_firbase_app/ui/on_boarding/on_boarding_screen.dart';
 import 'package:shop_firbase_app/ui/splash/splashPage.dart';
 import 'package:shop_firbase_app/view_model/auth_view_model.dart';
 import 'package:shop_firbase_app/view_model/categoryries_view_model.dart';
@@ -98,7 +99,7 @@ class MainPage extends StatelessWidget {
         if (snapshot.hasData) {
           return const SplashPage();
         } else {
-          return const AuthPage();
+          return const OnBoardingScreen();
         }
       },
     );
