@@ -1,12 +1,13 @@
-
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_firbase_app/data/model/user_model.dart';
 import 'package:shop_firbase_app/ui/auth/widgets/my_rich_text.dart';
+import 'package:shop_firbase_app/ui/auth/widgets/signIn_button.dart';
 import 'package:shop_firbase_app/view_model/profile_view_model.dart';
 
+import '../../utils/app_image.dart';
 import '../../utils/color.dart';
 import '../../utils/my_utils.dart';
 import '../../utils/style.dart';
@@ -25,25 +26,42 @@ class _SignUpPageState extends State<SignUpPage> {
   final formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColors.grey,
       appBar: AppBar(
-          title: Text(
-        "Sign Up",
-      )),
+        backgroundColor: MyColors.white,
+        leading: const Icon(
+          Icons.arrow_back_ios_new,
+          color: MyColors.C_4C5661,
+        ),
+        flexibleSpace: Container(color: MyColors.white),
+        elevation: 0, // Pastki soyaning kordikligini 0 ga o'zgartiramiz
+      ),
       body: SingleChildScrollView(
         child: Form(
           key: formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
+               SizedBox(
+                height: 250,
+                width: double.infinity,
+                child: Padding(
+                    padding:
+                        const EdgeInsets.only(right: 20, left: 20, bottom: 20),
+                    child: Image.asset(
+                      AppImage.d_r,
+                      fit: BoxFit.cover,
+                      height: 250,
+                    ))),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: TextFormField(
                   controller: emailController,
                   textInputAction: TextInputAction.next,
@@ -59,9 +77,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   decoration: getInputDecoration(label: "Email"),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: TextFormField(
                   controller: passwordController,
                   textInputAction: TextInputAction.next,
@@ -98,7 +116,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
               const SizedBox(height: 50),
-              TextButton(onPressed: signUp, child: Text("Sign Up")),
+              SingnInButton(onTap: signUp, text: "Sign Up"),
               const SizedBox(height: 20),
               MyRichText(
                 onTap: widget.onClickedSignIn,
@@ -123,7 +141,8 @@ class _SignUpPageState extends State<SignUpPage> {
         email: email,
         password: password,
       );
-      Provider.of<ProfileViewModel>(context,listen: false).addUser(
+      // ignore: use_build_context_synchronously
+      Provider.of<ProfileViewModel>(context, listen: false).addUser(
         UserModel(
           fcmToken: "",
           docId: "",
