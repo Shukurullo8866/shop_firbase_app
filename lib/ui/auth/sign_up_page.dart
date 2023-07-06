@@ -32,7 +32,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.grey,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: MyColors.white,
         leading: const Icon(
@@ -60,8 +60,12 @@ class _SignUpPageState extends State<SignUpPage> {
                       fit: BoxFit.cover,
                       height: 250,
                     ))),
+                    const Text(
+              "Sign up for free",
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 23,color: Color.fromARGB(255, 157, 86, 5)),
+            ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 19),
                 child: TextFormField(
                   controller: emailController,
                   textInputAction: TextInputAction.next,
@@ -79,7 +83,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               const SizedBox(height: 20),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 19),
                 child: TextFormField(
                   controller: passwordController,
                   textInputAction: TextInputAction.next,
@@ -96,9 +100,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   decoration: getInputDecoration(label: "Password"),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 19),
                 child: TextFormField(
                   controller: confirmPasswordController,
                   textInputAction: TextInputAction.done,

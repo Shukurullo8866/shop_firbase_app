@@ -53,11 +53,11 @@ class _LoginPageState extends State<LoginPage> {
                     ))),
             const Text(
               "Sign in to your account",
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 23),
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 23,color: Color.fromARGB(255, 157, 86, 5)),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 40),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 29),
+              padding: const EdgeInsets.symmetric(horizontal: 18),
               child: TextFormField(
                 controller: emailController,
                 textInputAction: TextInputAction.next,
@@ -72,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 20),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 29),
+              padding: const EdgeInsets.symmetric(horizontal: 18),
               child: TextFormField(
                 controller: passwordController,
                 obscureText: true,
@@ -84,9 +84,9 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: getInputDecoration(label: "Password"),
               ),
             ),
-            const SizedBox(height: 100),
+            const SizedBox(height:70),
             SingnInButton(onTap: signIn, text: 'Sign In'),
-            const SizedBox(height: 60),
+            const SizedBox(height: 45),
             RichText(
               text: TextSpan(
                 style: MyTextStyle.sfProRegular
