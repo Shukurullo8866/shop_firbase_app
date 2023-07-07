@@ -1,4 +1,3 @@
-// ignore_for_file: unused_field
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -18,8 +17,6 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final ImagePicker _picker = ImagePicker();
-
-  XFile? _image;
 
   String imageUrl = "";
 
@@ -98,10 +95,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Text(profileViewModel.user!.emailVerified.toString()),
                       isLoading
                           ? Container(
-                              color: Colors.red,
-                              height: 100,
-                              width: 100,
-                            )
+                              color: Colors.red, height: 100, width: 100)
                           : const SizedBox(),
                       ElevatedButton(
                         onPressed: () {
@@ -165,12 +159,9 @@ class _ProfilePageState extends State<ProfilePage> {
       if (!mounted) return;
       Provider.of<ProfileViewModel>(context, listen: false)
           .updatePhoto(imageUrl);
-      setState(
-        () {
-          isLoading = false;
-          _image = pickedFile;
-        },
-      );
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -186,11 +177,7 @@ class _ProfilePageState extends State<ProfilePage> {
       if (!mounted) return;
       Provider.of<ProfileViewModel>(context, listen: false)
           .updatePhoto(imageUrl);
-      setState(
-        () {
-          _image = pickedFile;
-        },
-      );
+      setState(() {});
     }
   }
 }

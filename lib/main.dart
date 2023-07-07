@@ -1,3 +1,4 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ import 'package:shop_firbase_app/view_model/order_view_model.dart';
 import 'package:shop_firbase_app/view_model/product_view_model.dart';
 import 'package:shop_firbase_app/view_model/profile_view_model.dart';
 import 'package:shop_firbase_app/view_model/tab_view_model.dart';
+import 'data/hive/hive_servise.dart';
 import 'data/repositories/auth_repository.dart';
 import 'data/repositories/orders_repository.dart';
 import 'data/repositories/profile_repository.dart';
@@ -19,7 +21,12 @@ import 'ui/auth/widgets/repositories/categories_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+    WidgetsFlutterBinding.ensureInitialized();
+// ignore: avoid_single_cascade_in_expression_statements
+  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  await HiveService.init();
+  
   await Firebase.initializeApp();
   var fireStore = FirebaseFirestore.instance;
   runApp(

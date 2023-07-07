@@ -7,6 +7,7 @@ import 'package:shop_firbase_app/ui/tab_box/profile/profile_page.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:shop_firbase_app/utils/color.dart';
 import '../../view_model/tab_view_model.dart';
+import 'map/map_screen.dart';
 
 class TabBox extends StatefulWidget {
   const TabBox({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class _TabBoxState extends State<TabBox> {
   void initState() {
     screens.add(const HomePage());
     screens.add(const CardPage());
-    screens.add( Container(color: Colors.white, child: Center(   child: Text("Map Screen")),));
+    screens.add(const GoogleMapScreen());
     screens.add(const ProfilePage());
     super.initState();
   }
@@ -34,20 +35,25 @@ class _TabBoxState extends State<TabBox> {
     return Scaffold(
       backgroundColor: Colors.white70,
       body: screens[index],
-
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
         index: 0,
         height: 60.0,
         items: const <Widget>[
-          Icon(CupertinoIcons.home, size: 28,),
-          Icon(Icons.favorite_border_outlined, size: 28,),
-          Icon(CupertinoIcons.map_pin_ellipse, size: 28,color: Color.fromARGB(255, 202, 5, 5)),
+          Icon(
+            CupertinoIcons.home,
+            size: 28,
+          ),
+          Icon(
+            Icons.favorite_border_outlined,
+            size: 28,
+          ),
+          Icon(CupertinoIcons.map_pin_ellipse,
+              size: 28, color: Color.fromARGB(255, 202, 5, 5)),
           Icon(CupertinoIcons.person, size: 28),
-          
         ],
-        color: Color.fromARGB(255, 248, 192, 119),
-        buttonBackgroundColor: Color.fromARGB(255, 239, 173, 73),
+        color: const Color.fromARGB(255, 248, 192, 119),
+        buttonBackgroundColor: const Color.fromARGB(255, 239, 173, 73),
         backgroundColor: MyColors.white,
         animationCurve: Curves.easeInOut,
         animationDuration: const Duration(milliseconds: 600),
@@ -55,8 +61,6 @@ class _TabBoxState extends State<TabBox> {
             .changePageIndex(value),
         letIndexChange: (index) => true,
       ),
-
-
     );
   }
 }
