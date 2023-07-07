@@ -97,7 +97,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: _curr == index
-                            ? Color.fromARGB(255, 254, 112, 41)
+                            ? const Color.fromARGB(255, 254, 112, 41)
                             : const Color(0xFFEBEEF2)),
                   );
                 },
@@ -168,9 +168,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 ),
               ),
             ),
-          ),
-          SizedBox(
-            height: height(context) * .0353,
           ),
         ],
       ),
