@@ -168,12 +168,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 ),
               ),
             ),
-          ),
-          SizedBox(
-            height: height(context) * .0353,
-          ),
-        ],
-      ),
+
     );
   }
 
