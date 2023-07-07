@@ -62,7 +62,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 23,
-                    color: Color.fromARGB(255, 175, 112, 2)),
+                    color: Color.fromARGB(255, 240, 147, 33)),
               ),
               SizedBox(height: 15.h),
               Padding(
@@ -76,7 +76,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ? "Enter a valid email"
                           : null,
                   style: MyTextStyle.sfProRegular.copyWith(
-                    color: MyColors.white,
+                    color: MyColors.black,
                     fontSize: 17,
                   ),
                   decoration: getInputDecoration(label: "Email"),
@@ -95,7 +95,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ? "Enter at least 6 charcter !"
                           : null,
                   style: MyTextStyle.sfProRegular.copyWith(
-                    color: MyColors.white,
+                    color: MyColors.black,
                     fontSize: 17,
                   ),
                   decoration: getInputDecoration(label: "Password"),
@@ -114,7 +114,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ? "Enter at least 6 charcter !"
                           : null,
                   style: MyTextStyle.sfProRegular.copyWith(
-                    color: MyColors.white,
+                    color: MyColors.black,
                     fontSize: 17,
                   ),
                   decoration: getInputDecoration(label: "Confirm password"),

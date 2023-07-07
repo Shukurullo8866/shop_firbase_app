@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shop_firbase_app/ui/auth/auth_page.dart';
 import 'package:shop_firbase_app/utils/app_image.dart';
 import '../../utils/const.dart';
 import '../auth/login_page.dart';
@@ -140,9 +141,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (_) => isLogged
-                              ? LoginPage(onClickSignUp: switchAuthPages)
-                              : SignUpPage(onClickedSignIn: switchAuthPages)));
+                          builder: (_) => const AuthPage()));
                 }
                 _pageController.nextPage(
                     duration: const Duration(seconds: 1), curve: Curves.ease);

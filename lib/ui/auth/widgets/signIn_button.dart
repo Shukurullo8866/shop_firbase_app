@@ -25,10 +25,10 @@ class SingnInButton extends StatelessWidget {
           borderRadius:
               BorderRadius.circular(MediaQuery.of(context).size.height * 0.2),
         ),
-        child: const Center(
+        child:  Center(
           child: Text(
-            "Sign In",
-            style: TextStyle(color: Colors.white, fontSize: 16),
+            text,
+            style: const TextStyle(color: Colors.white, fontSize: 16),
           ),
         ),
       ),

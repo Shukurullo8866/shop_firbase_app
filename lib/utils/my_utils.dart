@@ -26,12 +26,13 @@ class MyUtils {
 
   static showLoader(BuildContext context) {
     showDialog(
-        context: context,
-        builder: (_) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        });
+      context: context,
+      builder: (_) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
   }
 
   static void fieldFocusChange(
@@ -55,8 +56,6 @@ class MyUtils {
     );
   }
 }
-
-
 InputDecoration getInputDecoration({required String label}) {
   return InputDecoration(
     disabledBorder: InputBorder.none,
@@ -72,13 +71,16 @@ InputDecoration getInputDecoration({required String label}) {
       ),
     ),
     enabledBorder: const OutlineInputBorder(
-        borderSide: BorderSide(
-      width: 0.9,
-      color: Colors.black,
-    )),
+      borderSide: BorderSide(
+        width: 0.9,
+        color: Colors.black,
+      ),
+    ),
     focusedBorder: const OutlineInputBorder(
-        borderSide: BorderSide(width: 0.9, color: Colors.black)),
+      borderSide: BorderSide(width: 0.9, color: Colors.black),
+    ),
     errorBorder: const OutlineInputBorder(
-        borderSide: BorderSide(width: 0.9, color: Colors.red)),
+      borderSide: BorderSide(width: 0.9, color: Colors.red),
+    ),
   );
 }

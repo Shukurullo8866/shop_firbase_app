@@ -54,9 +54,11 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
         ],
-        leading:  IconButton(
-          icon: const Icon(Icons.menu,
-          color: Colors.orange,),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.menu,
+            color: Colors.orange,
+          ),
           onPressed: () {
             context.read<ProfileViewModel>().fetchUser();
           },
@@ -65,7 +67,7 @@ class _ProfilePageState extends State<ProfilePage> {
       body: SingleChildScrollView(
         child: Consumer<ProfileViewModel>(
           builder: (context, profileViewModel, child) {
-            return profileViewModel.userModel != null
+            return profileViewModel.user != null
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -74,13 +76,13 @@ class _ProfilePageState extends State<ProfilePage> {
                         decoration: const BoxDecoration(shape: BoxShape.circle),
                         width: 100,
                         height: 100,
-                        child: profileViewModel.userModel != null
+                        child: profileViewModel.user != null
                             ? Image.asset(
                                 AppImage.d_r,
                                 fit: BoxFit.cover,
                               )
                             : Image.network(
-                                profileViewModel.userModel!.fullName,
+                                profileViewModel.user!.photoURL.toString(),
                                 fit: BoxFit.cover,
                               ),
                       ),
@@ -90,10 +92,10 @@ class _ProfilePageState extends State<ProfilePage> {
                         },
                         child: const Text("Log Out"),
                       ),
-                      Text(profileViewModel.userModel!.age.toString()),
-                      Text(profileViewModel.userModel!.docId.toString()),
-                      Text(profileViewModel.userModel!.createdAt.toString()),
-                      Text(profileViewModel.userModel!.fullName.toString()),
+                      Text(profileViewModel.user!.phoneNumber.toString()),
+                      Text(profileViewModel.user!.metadata.toString()),
+                      Text(profileViewModel.user!.displayName.toString()),
+                      Text(profileViewModel.user!.emailVerified.toString()),
                       isLoading
                           ? Container(
                               color: Colors.red,
