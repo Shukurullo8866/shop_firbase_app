@@ -24,6 +24,7 @@ class _TabBoxState extends State<TabBox> {
     screens.add(const HomePage());
     screens.add(const CardPage());
     screens.add(const GoogleMapScreen());
+
     screens.add(const ProfilePage());
     super.initState();
   }
@@ -35,6 +36,7 @@ class _TabBoxState extends State<TabBox> {
     return Scaffold(
       backgroundColor: Colors.white70,
       body: screens[index],
+
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
         index: 0,
