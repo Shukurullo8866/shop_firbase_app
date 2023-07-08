@@ -1,18 +1,7 @@
-/*
-    CREATED BY: BAKHROMJON POLAT
-    CREATED AT: Sep 28 2022 12:39
-
-    Github: https://github.com/BahromjonPolat
-    Linked In: https://linkedin.com/in/bahromjon-polat
-    Telegram: https://t.me/BahromjonPolat
-
-    Description: App dialogs
-
-*/
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shop_firbase_app/ui/tab_box/map/widget/app_buttonshit.dart';
 import 'package:shop_firbase_app/ui/tab_box/map/widget/primaryButton.dart';
 import 'package:shop_firbase_app/utils/app_image.dart';
 import 'package:shop_firbase_app/utils/color.dart';
@@ -20,10 +9,11 @@ import 'package:shop_firbase_app/utils/color.dart';
 import '../../../../data/model/branch/branch_model.dart';
 
 
+// ignore: must_be_immutable
 class BranchInfoTile extends StatelessWidget {
-  
-  const BranchInfoTile({
-    Key? key, required BranchModel branch,
+  BranchModel branch;
+   BranchInfoTile({
+    Key? key, required this.branch,
     
   }) : super(key: key);
 
@@ -88,9 +78,9 @@ class BranchInfoTile extends StatelessWidget {
             label: "ssssssss",
             onPressed: () {
               Navigator.pop(context);
-              // AppBottomSheets bottomSheets = AppBottomSheets(context);
-              // bottomSheets.launchBranch(branch.location);
-              // AppNavigator.pop();
+              AppBottomSheets bottomSheets = AppBottomSheets(context);
+              bottomSheets.launchBranch(branch.location);
+              Navigator.pop(context);
             },
           )
         ],
