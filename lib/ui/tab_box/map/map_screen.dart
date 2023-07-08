@@ -22,28 +22,35 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: HiveBoxes.branchBox.listenable(),
-      builder: (context, Box<BranchModel> box, child) {
-        _setUpMarkers(box.values.toList());
-        return GoogleMap(
-          zoomControlsEnabled: false,
-          markers: _markers,
-          initialCameraPosition: const CameraPosition(
-            target: LatLng(41.289711812226926, 69.26581956446171),
-            zoom: 11.2,
-          ),
-        );
-      },
-    );
+    return Scaffold(
+      body: ValueListenableBuilder(
+        valueListenable: HiveBoxes.branchBox.listenable(),
+        builder: (context, Box<BranchModel> box, child) {
+          _setUpMarkers(box.values.toList());
+          return GoogleMap(
+            mapType: MapType.normal,
+            zoomControlsEnabled: false,
+            markers: _markers,
+            initialCameraPosition: const CameraPosition(
+              target: LatLng(41.289711812226926, 69.26581956446171),
+              zoom: 11.5,
+            ),
+            
+          );
+          
+        },
+        
+      ),
+      
+    );  
   }
   Marker _setMarker(BranchModel branch) {
     final icon = BitmapDescriptor.fromBytes(
       Uint8List.fromList(AppIconBytes.mapMarkerBytes),
     );
-    LatLng latLng = LatLng(
-      branch.location?.latitude ?? 0,
-      branch.location?.longitude ?? 0,
+    LatLng latLng = const LatLng(
+       41.334122,
+       69.144771,
     );
 
     return Marker(
