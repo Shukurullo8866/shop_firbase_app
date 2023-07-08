@@ -23,7 +23,7 @@ class _TabBoxState extends State<TabBox> {
   void initState() {
     screens.add(const HomePage());
     screens.add(const CardPage());
-    screens.add(const GoogleMapScreen());
+    screens.add( GoogleMapScreen());
 
     screens.add(const ProfilePage());
     super.initState();
