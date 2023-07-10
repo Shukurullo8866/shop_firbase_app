@@ -16,8 +16,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:map_launcher/map_launcher.dart';
-import 'package:shop_firbase_app/data/model/branch/branch_model.dart';
 
 import '../../../../data/model/local/local_model.dart';
 import '../../../../utils/color.dart';
@@ -37,42 +37,43 @@ class AppBottomSheets {
 
   Future _baseBottomSheet({String title = '', required Widget content}) async {
     showModalBottomSheet(
-        context: context,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(27.r),
-            topRight: Radius.circular(27.r),
-          ),
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(27.r),
+          topRight: Radius.circular(27.r),
         ),
-        builder: (_) {
-          return Padding(
-            padding: EdgeInsets.fromLTRB(30.w, 30.h, 30.w, 10.h),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      title,
-                      style: const TextStyle(fontSize: 24),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 15.h),
-                content,
-              ],
-            ),
-          );
-        });
+      ),
+      builder: (_) {
+        return Padding(
+          padding: EdgeInsets.fromLTRB(30.w, 30.h, 30.w, 10.h),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(fontSize: 24),
+                  ),
+                ],
+              ),
+              SizedBox(height: 15.h),
+              content,
+            ],
+          ),
+        );
+      },
+    );
   }
 
-  Future launchBranch(Location? location) async {
-    double lat = location?.latitude ?? 41.3281858698788;
-    double long = location?.longitude ?? 69.32101006558912;
+  Future launchBranch() async {
+    double lat = 41.334122;
+    double long = 69.144771;
     try {
       final coords = Coords(lat, long);
-      const title = "";
+      const title = "dfdf";
       final availableMaps = await MapLauncher.installedMaps;
 
       if (Platform.isIOS) {
@@ -88,9 +89,9 @@ class AppBottomSheets {
               ),
           ],
           cancelButton: CupertinoActionSheetAction(
-            onPressed:  (){
-                    Navigator.pop(context);
-                  },
+            onPressed: () {
+              Navigator.pop(context);
+            },
             child: const Text("cancel"),
           ),
         );
@@ -117,11 +118,11 @@ class AppBottomSheets {
                               .then((value) => Navigator.pop(context));
                         },
                         title: Text(map.mapName),
-                        // leading: SvgPicture.asset(
-                        //   map.icon,
-                        //   height: 30.0,
-                        //   width: 30.0,
-                        // ),
+                        leading: SvgPicture.asset(
+                          map.icon,
+                          height: 30.0,
+                          width: 30.0,
+                        ),
                       ),
                   ],
                 ),
