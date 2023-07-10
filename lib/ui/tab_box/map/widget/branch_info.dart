@@ -30,7 +30,7 @@ class BranchInfoTile extends StatelessWidget {
             title: Padding(
               padding: EdgeInsets.only(top: 10.h),
               child: const Text(
-                "Tiin - Ulgurji Market",
+                "ddd - Ulgurji Market",
                 
               ),
             ),
@@ -79,7 +79,7 @@ class BranchInfoTile extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
               AppBottomSheets bottomSheets = AppBottomSheets(context);
-              bottomSheets.launchBranch(branch.location);
+              bottomSheets.launchBranch();
               Navigator.pop(context);
             },
           )
