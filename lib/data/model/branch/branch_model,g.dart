@@ -30,6 +30,7 @@ class BranchAdapter extends TypeAdapter<BranchModel> {
       .._isActive = fields[4] as bool?
       .._phone = fields[5] as String?;
   }
+  
 
   @override
   void write(BinaryWriter writer, BranchModel obj) {
@@ -71,8 +72,8 @@ class LocationAdapter extends TypeAdapter<Location> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Location()
-      .._latitude = fields[0] as double?
-      .._longitude = fields[1] as double?;
+      .._latitude = (fields[0] as double?)!
+      .._longitude = (fields[1] as double?)!;
   }
 
   @override

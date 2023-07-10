@@ -3,14 +3,16 @@
 
 // ignore: duplicate_import
 import 'package:hive_flutter/adapters.dart';
+
 import 'hive_adapter.dart';
 
 part 'branch_model,g.dart';
 
+
 @HiveType(typeId: HiveTypes.branch, adapterName: HiveAdapters.branch)
 class BranchModel extends HiveObject {
   @override
-  get key => _sId;
+  String get key => _sId!;
 
   @HiveField(0)
   String? _sId;
@@ -29,55 +31,44 @@ class BranchModel extends HiveObject {
 
   @HiveField(5)
   String? _phone;
- BranchModel({
+
+  BranchModel({
     String? sId,
     Location? location,
     String? address,
     String? name,
     bool? isActive,
     String? phone,
-  }) {
-    if (sId != null) {
-      _sId = sId;
-    }
-    if (location != null) {
-      _location = location;
-    }
-    if (address != null) {
-      _address = address;
-    }
-    if (name != null) {
-      _name = name;
-    }
-    if (isActive != null) {
-      _isActive = isActive;
-    }
-    if (phone != null) {
-      _phone = phone;
-    }
+  })  : _sId = sId,
+        _location = location,
+        _address = address,
+        _name = name,
+        _isActive = isActive,
+        _phone = phone {
+    _sId ??= '1';
+    _location ??= Location(latitude: 41.334122, longitude: 69.144771);
+    _address ??= 'Tashkent';
+    _name ??= 'nmadur';
+    _isActive ??= true;
+    _phone ??= '+998971233323';
   }
 
   String? get sId => _sId;
-  // set sId(String? sId) => _sId = sId;
+  set sId(String? sId) => _sId = sId;
   Location? get location => _location;
-  // set location(Location? location) => _location = location;
+  set location(Location? location) => _location = location;
   String? get address => _address;
-  // set address(String? address) => _address = address;
+  set address(String? address) => _address = address;
   String? get name => _name;
-  // set name(String? name) => _name = name;
+  set name(String? name) => _name = name;
   bool? get isActive => _isActive;
-  // set isActive(bool? isActive) => _isActive = isActive;
+  set isActive(bool? isActive) => _isActive = isActive;
   String? get phone => _phone;
-  // set phone(String? phone) => _phone = phone;
+  set phone(String? phone) => _phone = phone;
 
   BranchModel.fromJson(Map<String, dynamic> json) {
     _sId = json['_id'];
-    _location = json['location'] != null
-        ? Location.fromJson(json['location'])
-        : Location(
-            latitude: 41.3281858698788,
-            longitude: 69.32101006558912,
-          );
+    _location = json['location'] != null ? Location.fromJson(json['location']) : Location();
     _address = json['address'];
     _name = json['name'];
     _isActive = json['is_active'];
@@ -96,8 +87,6 @@ class BranchModel extends HiveObject {
     data['phone'] = _phone;
     return data;
   }
-
-  
 }
 
 @HiveType(typeId: HiveTypes.location, adapterName: HiveAdapters.location)
@@ -108,19 +97,14 @@ class Location {
   @HiveField(1)
   double? _longitude;
 
-  Location({double? latitude, double? longitude}) {
-    if (latitude != null) {
-      _latitude = latitude;
-    }
-    if (longitude != null) {
-      _longitude = longitude;
-    }
-  }
+  Location({double? latitude, double? longitude})
+      : _latitude = latitude,
+        _longitude = longitude;
 
   double? get latitude => _latitude;
-  // set latitude(double? latitude) => _latitude = latitude;
+  set latitude(double? latitude) => _latitude = latitude;
   double? get longitude => _longitude;
-  // set longitude(double? longitude) => _longitude = longitude;
+  set longitude(double? longitude) => _longitude = longitude;
 
   Location.fromJson(Map<String, dynamic> json) {
     _latitude = json['latitude'];
@@ -133,9 +117,7 @@ class Location {
     data['longitude'] = _longitude;
     return data;
   }
-}
-
-// /// It's a class that contains a static list of BranchModel objects
+} /// It's a class that contains a static list of BranchModel objects
 // class BranchData {
 //   static final List<BranchModel> _branches = [
 //     BranchModel(
