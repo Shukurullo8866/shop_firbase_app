@@ -1,6 +1,6 @@
-import 'dart:io';
 
 import 'package:hive_flutter/adapters.dart';
+// ignore: depend_on_referenced_packages
 import 'package:path_provider/path_provider.dart' as pp;
 
 import '../model/branch/branch_model.dart';
@@ -21,13 +21,5 @@ class HiveService {
 }
 
 
-class AppHttpOverrides extends HttpOverrides {
-  @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-  }
-  
-}
+
 
