@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_firbase_app/data/model/branch/branch_model.dart';
 import 'package:shop_firbase_app/ui/tab_box/card/card_page.dart';
 import 'package:shop_firbase_app/ui/tab_box/home_page/home_page.dart';
 import 'package:shop_firbase_app/ui/tab_box/profile/profile_page.dart';
@@ -23,9 +24,27 @@ class _TabBoxState extends State<TabBox> {
   void initState() {
     screens.add(const HomePage());
     screens.add(const CardPage());
-    screens.add( GoogleMapScreen());
+    screens.add(const GoogleMapScreen());
 
     screens.add(const ProfilePage());
+
+    Map<String, dynamic> data = {
+      "_id": "1",
+      "location": null,
+      "address": "Tashkent",
+      "name": "Hello World",
+      "is_active": true,
+      "phone": "+998971233323"
+    };
+    BranchModel.fromJson(data);
+    BranchModel branchModel = BranchModel();
+    branchModel.address = "Tashkent";
+    branchModel.name = "Hello World";
+    branchModel.phone = "+998971233323";
+    branchModel.isActive = true;
+    branchModel.sId = "1";
+    branchModel.location = Location(latitude: 41.334122, longitude: 69.144771);
+
     super.initState();
   }
 
@@ -36,7 +55,6 @@ class _TabBoxState extends State<TabBox> {
     return Scaffold(
       backgroundColor: Colors.white70,
       body: screens[index],
-
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
         index: 0,
