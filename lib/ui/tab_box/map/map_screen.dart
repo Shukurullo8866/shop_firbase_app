@@ -17,6 +17,7 @@ class GoogleMapScreen extends StatefulWidget {
 
 class _GoogleMapScreenState extends State<GoogleMapScreen> {
   final Set<Marker> _markers = {};
+  BranchModel branchModel = BranchModel();
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +25,21 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
       body: ValueListenableBuilder(
         valueListenable: HiveBoxes.branchBox.listenable(),
         builder: (context, Box<BranchModel> box, child) {
-          _setUpMarkers(box.values.toList());
+          _setUpMarkers(branchModel);
           print("eeeeeeeeeeeeeeeeeeeeeeeeeee");
           print(_markers.length);
+          print("name name name name name name" );
+          print(box.values.isEmpty);
+          print("name name name name name name " );
+          print(branchModel.name.toString());
+          print(branchModel.location);
           return GoogleMap(
             mapType: MapType.normal,
             zoomControlsEnabled: false,
             markers: _markers,
             initialCameraPosition: const CameraPosition(
-              target: LatLng(41.289711812226926, 69.26581956446171),
-              zoom: 11.5,
+              target: LatLng(41.320365, 69.244921),
+              zoom: 11.2,
             ),
           );
         },
@@ -42,12 +48,15 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
   }
 
   Marker _setMarker(BranchModel branch) {
+    print("_stMarker in print ++++++++++++++++++++++++++++++++++++++++");
+      print(branch.phone);
     final icon = BitmapDescriptor.fromBytes(
       Uint8List.fromList(AppIconBytes.mapMarkerBytes),
     );
 
     return Marker(
-      markerId: const MarkerId("7"),
+      
+      markerId:  MarkerId(branch.sId.toString()),
       position: const LatLng(
         41.334122,
         69.144771,
@@ -55,6 +64,8 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
       icon: icon,
       visible: true,
       onTap: () async {
+        print("return Marker in print *****************************************************");
+      print(branch.phone);
         AppDialog dialog = AppDialog(context);
         dialog.showBranchInfoDialog(branch: branch);
 
@@ -62,10 +73,12 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
     );
   }
 
-  Future<void> _setUpMarkers(List<BranchModel> branches) async {
-    for (var branch in branches) {
+  Future<void> _setUpMarkers(BranchModel branch) async {
+    
+     print("For in print ---------------------------------------------");
+      print(branch.phone);
       _markers.add(_setMarker(branch));
-    }
+    
   }
 }
 
