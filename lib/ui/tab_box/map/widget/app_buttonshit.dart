@@ -73,7 +73,7 @@ class AppBottomSheets {
     double long = 69.144771;
     try {
       final coords = Coords(lat, long);
-      const title = "dfdf";
+      const title = "";
       final availableMaps = await MapLauncher.installedMaps;
 
       if (Platform.isIOS) {
