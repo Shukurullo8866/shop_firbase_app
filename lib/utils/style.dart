@@ -87,21 +87,7 @@ class AppShape {
         borderRadius: BorderRadius.circular(radius.r),
       );
 
-  // static withImage({
-  //   String? image,
-  //   double radius = 10,
-  //   Color color = AppColors.lightGreen,
-  // }) =>
-  //     BoxDecoration(
-  //       color: color,
-  //       borderRadius: BorderRadius.circular(radius.r),
-  //       image: image != null
-  //           ? DecorationImage(fit: BoxFit.cover, image: NetworkImage(image))
-  //           : const DecorationImage(
-  //               fit: BoxFit.cover,
-  //               image: AssetImage(AppImages.),
-  //             ),
-  //     );
+ 
 
   static cardDesign({
     double radius = 10,
@@ -114,5 +100,51 @@ class AppShape {
           BoxShadow(blurRadius: 3.r, color: MyColors.grey.withOpacity(.5)),
           // BoxShadow(blurRadius: 5.r, color: AppColors.grey),
         ],
+      );
+}
+
+
+class AppTextStyle {
+  const AppTextStyle._();
+  static const String _INTER = 'Inter';
+
+  static TextStyle _getTextStyle(
+      double fontSize, FontWeight fontWeight, Color? color) {
+    return TextStyle(
+      fontSize: fontSize.sp,
+      fontFamily: _INTER,
+      color: color ?? MyColors.black,
+      fontWeight: fontWeight,
+    );
+  }
+
+  // regular style
+  static TextStyle regular({double size = 16.0, Color? color}) {
+    return _getTextStyle(size, FontWeight.w400, color);
+  }
+
+
+
+// bold text style
+  static TextStyle bold({double size = 22.0, Color? color}) {
+    return _getTextStyle(size, FontWeight.bold, color);
+  }
+
+// semi bold text style
+  static TextStyle semiBold({double size = 14.0, Color? color}) {
+    return _getTextStyle(size, FontWeight.w600, color);
+  }
+
+// medium text style
+
+  static TextStyle medium({double size = 16.0, Color? color}) {
+    return _getTextStyle(size, FontWeight.w500, color);
+  }
+
+  static TextStyle getButtonStyle({double size = 14.0}) => TextStyle(
+        letterSpacing: 0.8,
+        color: MyColors.white,
+        fontWeight: FontWeight.w600,
+        fontSize: size.sp,
       );
 }
