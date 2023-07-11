@@ -8,6 +8,7 @@ class MyColors {
   static const Color black = Colors.black;
   static const Color textColor = Color(0xFF3E434D);
   static const Color C_F2F2F2 = Color(0xFFF2F2F2); 
+  static const Color appColor1 = Color.fromARGB(231, 228, 157, 76);
 
   static const grey = Colors.grey;
   static const c_1F1914 = Color(0xff1F1914);

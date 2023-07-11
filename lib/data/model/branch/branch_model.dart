@@ -68,7 +68,7 @@ class BranchModel extends HiveObject {
 
   BranchModel.fromJson(Map<String, dynamic> json) {
     _sId = json['_id'];
-    _location = json['location'] != null ? Location.fromJson(json['location']) : Location();
+    _location = json['location'] != null ? Location.fromJson(json['location']) : Location(latitude: 41.334122, longitude: 69.144771);
     _address = json['address'];
     _name = json['name'];
     _isActive = json['is_active'];
