@@ -96,7 +96,7 @@ class _TabBoxState extends State<TabBox> {
       //     ),
       //     BottomNavigationBarItem(
       //       icon: Icon(Icons.favorite_border),
-      //       label: "Favarite",
+      //       label: "",
       //       activeIcon: Icon(Icons.favorite),
       //     ),
       //     BottomNavigationBarItem(
