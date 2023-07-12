@@ -23,14 +23,13 @@ class InfoPage extends StatefulWidget {
   State<InfoPage> createState() => _InfoPageState();
 }
 
+int isOn = 0;
+
 class _InfoPageState extends State<InfoPage> {
   @override
-  int isOn = 0;
-
   @override
   Widget build(BuildContext context) {
     //var userId = context.read<UserModel>().userId;
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white70,
@@ -42,12 +41,12 @@ class _InfoPageState extends State<InfoPage> {
         actions: [
           IconButton(
             onPressed: () {
-              setState(() {});
-              if (isOn == 0 && widget.getData.light == false) {
-                setState(() {});
-
-                OrderModel orderModel = OrderModel(
-                    orderId: widget.getData.price.toString(),
+              setState(() {
+                if (isOn == 0) {
+                  print("ssssssssssssssssssssssssssssssssssssssssssssS");
+                  print(widget.getData.productId.toString());
+                  OrderModel orderModel = OrderModel(
+                    orderId: widget.getData.productId,
                     productId: widget.getData.productId,
                     count: 1,
                     totalPrice: widget.getData.price,
@@ -55,9 +54,10 @@ class _InfoPageState extends State<InfoPage> {
                     userId: context.read<ProfileViewModel>().user!.uid,
                     orderStatus: widget.getData.price.toString(),
                     productName: widget.getData.productName,
-                    productImages: widget.getData.productImages);
+                    productImages: widget.getData.productImages,
+                  );
 
-                ProductModel productModel = ProductModel(
+                  ProductModel productModel = ProductModel(
                     count: widget.getData.count,
                     price: widget.getData.price,
                     productImages: widget.getData.productImages,
@@ -67,27 +67,29 @@ class _InfoPageState extends State<InfoPage> {
                     description: widget.getData.description,
                     createdAt: widget.getData.createdAt,
                     currency: widget.getData.currency,
-                    light: true);
-                context.read<OrdersViewModel>().userOrders.map(
-                      (e) => e.productId == widget.getData.productId
-                          ? Provider.of<OrdersViewModel>(context, listen: false)
-                              .addOrder(orderModel)
-                          : const SizedBox(),
-                    );
-                setState(() {});
-                context.read<ProductViewModel>().updateProduct(productModel);
+                    light: true,
+                  );
+                  context.read<OrdersViewModel>().userOrders.map(
+                        (e) => e.productId != widget.getData.productId
+                            ? context
+                                    .read<OrdersViewModel>()
+                                    .addOrder(orderModel) &&
+                                context
+                                    .read<ProductViewModel>()
+                                    .updateProduct(productModel) 
+                            : const SizedBox(),
+                      );
 
-                setState(() {
-                  isOn = 1;
-                });
-              } else if (isOn < 1) {
-                setState(() {});
-                print("deeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-                print(widget.getData.price.toString());
-                Provider.of<OrdersViewModel>(context, listen: true)
-                    .deleteOrder(docId: widget.getData.price.toString());
-                isOn = 0;
-                ProductModel productModel = ProductModel(
+                  isOn += 1;
+                } else if (isOn != 0) {
+                  print(
+                      "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDelet");
+                  print(widget.getData.productId.toString());
+                  context.read<OrdersViewModel>().deleteOrder(docId:widget.getData.productId );
+                  Provider.of<OrdersViewModel>(context, listen: false)
+                      .deleteOrder(docId: widget.getData.productId);
+                  isOn = 0;
+                  ProductModel productModel = ProductModel(
                     count: widget.getData.count,
                     price: widget.getData.price,
                     productImages: widget.getData.productImages,
@@ -97,15 +99,14 @@ class _InfoPageState extends State<InfoPage> {
                     description: widget.getData.description,
                     createdAt: widget.getData.createdAt,
                     currency: widget.getData.currency,
-                    light: false);
-                context.read<ProductViewModel>().updateProduct(productModel);
-                setState(() {});
-              }
+                    light: false,
+                  );
+                  context.read<ProductViewModel>().updateProduct(productModel);
+                }
+              });
             },
             icon: Icon(
-              widget.getData.light == false
-                  ? Icons.favorite_border
-                  : Icons.favorite,
+              widget.getData.light ? Icons.favorite : Icons.favorite_border,
               color: Colors.orange,
             ),
           )
