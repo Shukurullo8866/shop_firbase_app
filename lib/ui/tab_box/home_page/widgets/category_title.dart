@@ -16,7 +16,7 @@ class CategoryTitleWidget extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.055),
+      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.045),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

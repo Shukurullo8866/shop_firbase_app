@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_firbase_app/data/model/category_model.dart';
 import 'package:shop_firbase_app/ui/tab_box/home_page/product_by_category/productByCategory.dart';
@@ -49,7 +50,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: CustomScrollView(
         slivers: [
-          const SliverToBoxAdapter(child: SizedBox(height: 12)),
+          SliverToBoxAdapter(child: SizedBox(height: 15.h)),
           SliverPersistentHeader(
               delegate: DiscountWidget(screenHeight: height(context))),
           SliverPersistentHeader(
@@ -58,12 +59,11 @@ class _HomePageState extends State<HomePage> {
               screenWidth: width(context),
               title: """
 
-Categories
-
-"""
+Categories"""
                   .tr(),
             ),
           ),
+          SliverToBoxAdapter(child: SizedBox(height: 8.h)),
           SliverToBoxAdapter(
             child: Container(
               color: Colors.transparent,

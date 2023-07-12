@@ -45,7 +45,7 @@ class _InfoPageState extends State<InfoPage> {
               setState(() {});
               if (isOn == 0 && widget.getData.light == false) {
                 setState(() {});
-                
+
                 OrderModel orderModel = OrderModel(
                     orderId: widget.getData.price.toString(),
                     productId: widget.getData.productId,
@@ -76,13 +76,11 @@ class _InfoPageState extends State<InfoPage> {
                     );
                 setState(() {});
                 context.read<ProductViewModel>().updateProduct(productModel);
-                
 
-              
                 setState(() {
                   isOn = 1;
                 });
-              } else if(isOn <1){
+              } else if (isOn < 1) {
                 setState(() {});
                 print("deeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
                 print(widget.getData.price.toString());
@@ -187,16 +185,20 @@ class _InfoPageState extends State<InfoPage> {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 14.h,
-                ),
+                SizedBox(height: 14.h),
                 const Divider(
-                  height: 8.0,
-                  thickness: 0.8,
-                  color: Color.fromARGB(231, 228, 157, 76),
-                  indent: 1.0,
-                  endIndent: 1.0,
-                ),
+                    height: 8.0,
+                    thickness: 0.8,
+                    color: Color.fromARGB(231, 228, 157, 76),
+                    indent: 1.0,
+                    endIndent: 1.0),
+                Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      "Omborda mavjud: ${widget.getData.count} - kub",
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.w500),
+                    )),
                 Padding(
                     padding: const EdgeInsets.all(10),
                     child: Text(
@@ -215,48 +217,46 @@ class _InfoPageState extends State<InfoPage> {
                 ),
                 const SizedBox(height: 41),
                 SizedBox(
-                  height: 220,
-                  child: Consumer<ProductViewModel>(
-                    builder: (context, productViewModel, child) {
+                    height: 220,
+                    child: Consumer<ProductViewModel>(
+                        builder: (context, productViewModel, child) {
                       if (productViewModel.products.isNotEmpty) {
                         return ListView.builder(
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemCount: productViewModel.products.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            var product = productViewModel.products[index];
-                            if (product.categoryId ==
-                                    widget.getData.categoryId &&
-                                widget.getData.productId != product.productId) {
-                              return ZoomTapAnimation(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) =>
-                                          InfoPage(getData: product),
-                                    ),
-                                  );
-                                },
-                                child: SizedBox(
-                                  height: 150,
-                                  width: 180,
-                                  child: ProductsScreen(data: product),
-                                ),
-                              );
-                            } else {
-                              return const SizedBox();
-                            }
-                          },
-                        );
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemCount: productViewModel.products.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              var product = productViewModel.products[index];
+                              if (product.categoryId ==
+                                      widget.getData.categoryId &&
+                                  widget.getData.productId !=
+                                      product.productId) {
+                                return ZoomTapAnimation(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) =>
+                                            InfoPage(getData: product),
+                                      ),
+                                    );
+                                  },
+                                  child: SizedBox(
+                                    height: 150,
+                                    width: 180,
+                                    child: ProductsScreen(data: product),
+                                  ),
+                                );
+                              } else {
+                                return const SizedBox();
+                              }
+                            });
                       } else {
                         return const Center(
                           child: Text("error"),
                         );
                       }
-                    },
-                  ),
-                ),
+                    })),
                 SizedBox(height: 75.h),
               ],
             ),
@@ -265,7 +265,7 @@ class _InfoPageState extends State<InfoPage> {
               left: 0.1,
               right: 0.1,
               child: Container(
-                padding: EdgeInsets.only(right: 5, left: 5),
+                padding: const EdgeInsets.only(right: 5, left: 5),
                 width: MediaQuery.of(context).size.width,
                 height: 70,
                 color: Colors.transparent,
@@ -278,48 +278,3 @@ class _InfoPageState extends State<InfoPage> {
     );
   }
 }
-/* SliverGrid(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                ProductModel product = productViewModel.products[index];
-                return ProductsScreen(data: product);
-              },
-              childCount: productViewModel.products.length,
-            ),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-               childAspectRatio: 0.88,
-              mainAxisSpacing: 8.5,
-              crossAxisSpacing: 5,
-            ),
-
-          );
-          
-           Consumer<ProductViewModel>(
-              builder: (context, productViewModel, child) {
-                if (productViewModel.products.isNotEmpty) {
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
-                    itemCount: productViewModel.products.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      var product = productViewModel.products[index];
-                      if (product.categoryId == widget.getData.categoryId) {
-                        return Container(
-                          height: 150,
-                          width: 200,
-                          child: ProductsScreen(data: product));
-                      } else {
-                        return SizedBox();
-                      }
-                    },
-                  );
-                } else {
-                  return const Center(
-                    child: Text("error"),
-                  );
-                }
-              },
-            )
-            */ 

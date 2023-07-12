@@ -32,7 +32,7 @@ class CategoryItem extends StatelessWidget {
             onTap: onCategoryTap,
             child: ClipRRect(
               borderRadius: const BorderRadius.all(
-                Radius.circular(9.5),
+                Radius.circular(9.6),
               ),
               child: Image.network(
                 data.imageUrl,
@@ -46,7 +46,7 @@ class CategoryItem extends StatelessWidget {
           data.categoryName,
           maxLines: 2,
           style: const TextStyle(
-              fontSize: 14, fontWeight: FontWeight.w400, color: Colors.black),
+              fontSize: 14, fontWeight: FontWeight.w500, color: Colors.black),
         ),
       ],
     );
