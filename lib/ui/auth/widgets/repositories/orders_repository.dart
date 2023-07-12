@@ -37,7 +37,7 @@
 //           .doc(orderModel.orderId)
 //           .update(orderModel.toJson());
 
-//       MyUtils.getMyToast(message: "Buyurtma muvaffaqiyatli yangilandi!");
+//       MyUtils.getMyToast(message: "Buyurtma muvaffaqiyatli yapping!");
 //     } on FirebaseException catch (er) {
 //       MyUtils.getMyToast(message: er.message.toString());
 //     }
@@ -49,7 +49,6 @@
 //                 .map((doc) => OrderModel.fromJson(doc.data()))
 //                 .toList(),
 //           );
-
 //   Stream<List<OrderModel>> getOrdersByUserId({required String userId}) =>
 //       _firestore
 //           .collection("orders")

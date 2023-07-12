@@ -1,9 +1,6 @@
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:shop_firbase_app/ui/tab_box/map/widget/app_icon_bytes.dart';
-
 import '../../../data/hive/hive_box.dart';
 import '../../../data/model/branch/branch_model.dart';
 import '../../../utils/app_dialog.dart';
@@ -28,9 +25,9 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
           _setUpMarkers(branchModel);
           print("eeeeeeeeeeeeeeeeeeeeeeeeeee");
           print(_markers.length);
-          print("name name name name name name" );
+          print("name name name name name name");
           print(box.values.isEmpty);
-          print("name name name name name name " );
+          print("name name name name name name ");
           print(branchModel.name.toString());
           print(branchModel.location);
           return GoogleMap(
@@ -49,14 +46,12 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
 
   Marker _setMarker(BranchModel branch) {
     print("_stMarker in print ++++++++++++++++++++++++++++++++++++++++");
-      print(branch.phone);
-    final icon = BitmapDescriptor.fromBytes(
-      Uint8List.fromList(AppIconBytes.mapMarkerBytes),
-    );
+    print(branch.phone);
+    final icon =
+        BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange);
 
     return Marker(
-      
-      markerId:  MarkerId(branch.sId.toString()),
+      markerId: MarkerId(branch.sId.toString()),
       position: const LatLng(
         41.334122,
         69.144771,
@@ -64,21 +59,18 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
       icon: icon,
       visible: true,
       onTap: () async {
-        print("return Marker in print *****************************************************");
-      print(branch.phone);
+        print(
+            "return Marker in print *****************************************************");
+        print(branch.phone);
         AppDialog dialog = AppDialog(context);
         dialog.showBranchInfoDialog(branch: branch);
-
       },
     );
   }
 
   Future<void> _setUpMarkers(BranchModel branch) async {
-    
-     print("For in print ---------------------------------------------");
-      print(branch.phone);
-      _markers.add(_setMarker(branch));
-    
+    print("For in print ---------------------------------------------");
+    print(branch.phone);
+    _markers.add(_setMarker(branch));
   }
 }
-
