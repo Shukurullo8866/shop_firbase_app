@@ -25,9 +25,11 @@ class ProfileRepository {
   Future<void> updateUserFCMToken(
       {required String fcmToken, required String docId}) async {
     try {
-      await _firestore.collection("users").doc(docId).update({
-        "fcm_token": fcmToken,
-      });
+      await _firestore.collection("users").doc(docId).update(
+        {
+          "fcm_token": fcmToken,
+        },
+      );
     } on FirebaseException catch (er) {
       MyUtils.getMyToast(message: er.message.toString());
     }
@@ -40,10 +42,13 @@ class ProfileRepository {
         .where("userId", isEqualTo: userId)
         .snapshots()
         .map(
-          (event1) => event1.docs.map((doc) => UserModel.fromJson(doc.data())).toList(),
+          (event1) =>
+              event1.docs.map((doc) => UserModel.fromJson(doc.data())).toList(),
         )
         .listen((event) {
       userModel = event.first;
+      print("reporrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+      print(userModel);
     });
     return userModel;
   }
