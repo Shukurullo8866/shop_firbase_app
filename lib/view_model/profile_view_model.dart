@@ -28,8 +28,20 @@ class ProfileViewModel extends ChangeNotifier {
   Stream<User?> getCurrentUser() => _firebaseAuth.authStateChanges();
 
   listenUser() {
-    _firebaseAuth.authStateChanges().listen((updatedUser) {
-      user = updatedUser;
+    _firebaseAuth.authStateChanges().listen((getUser) async {
+      if (getUser != null) {
+        print("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvwwwwwwwww");
+        print(getUser);
+        user = getUser;
+        userModel = await _profileRepository.getSingleUser(
+          userId: getUser.uid,
+          
+        );
+        print(userModel);
+      } else {
+        user = null;
+        userModel = null;
+      }
       notifyListeners();
     });
   }
@@ -40,13 +52,12 @@ class ProfileViewModel extends ChangeNotifier {
   setUserName(String userName) async {
     try {
       _firebaseAuth.currentUser!.updateDisplayName(userName);
-    // ignore: empty_catches
+      // ignore: empty_catches
     } on FirebaseAuthException catch (er) {}
   }
- 
+
   updatePhoto(String photo) => _firebaseAuth.currentUser!.updatePhotoURL(photo);
 
-  updateFCMToken(String fcmToken, String docId) => 
+  updateFCMToken(String fcmToken, String docId) =>
       _profileRepository.updateUserFCMToken(fcmToken: fcmToken, docId: docId);
 }
-                                                                                                        
