@@ -51,13 +51,11 @@ class _LoginPageState extends State<LoginPage> {
                       fit: BoxFit.cover,
                       height: 250,
                     ))),
-            const Text(
-              "Sign in to your account",
-              style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 23,
-                  color: Color.fromARGB(255, 175, 112, 2)),
-            ),
+            const Text("Sign in to your account",
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 23,
+                    color: Color.fromARGB(255, 240, 147, 33))),
             const SizedBox(height: 40),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
@@ -92,8 +90,11 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 45),
             RichText(
               text: TextSpan(
-                style: MyTextStyle.sfProRegular
-                    .copyWith(color: const Color(0xFFFBDF00), fontSize: 18),
+                style: MyTextStyle.sfProRegular.copyWith(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 23,
+                color:Color.fromARGB(255, 175, 112, 2),
+                ),
                 text: "Don't have an account?  ",
                 children: [
                   TextSpan(
