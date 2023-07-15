@@ -22,11 +22,11 @@ class ProductViewModel extends ChangeNotifier {
   List<ProductModel> productsAdmin = [];
   
 
-  listenProducts(String category_Id) async {
+  listenProducts(String categoryId) async {
     subscription = productRepository
-        .getProducts(category_Id: category_Id)
+        .getProducts(category_Id: categoryId)
         .listen((allProducts) {
-          if(category_Id.isEmpty) productsAdmin = allProducts;
+          if(categoryId.isEmpty) productsAdmin = allProducts;
       print("ALL PRODUCTS LENGTH:${allProducts.length}");
       products = allProducts;
       notifyListeners();

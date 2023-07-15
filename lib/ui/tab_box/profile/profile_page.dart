@@ -75,7 +75,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         height: 100,
                         child: profileViewModel.user != null
                             ? Image.asset(
-                                AppImage.d_r,
+                                AppImage.fon_3,
                                 fit: BoxFit.cover,
                               )
                             : Image.network(
@@ -93,8 +93,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       Text(profileViewModel.user!.metadata.toString()),
                       Text(profileViewModel.user!.displayName.toString()),
                       Text(profileViewModel.user!.emailVerified.toString()),
-                      // Text(profileViewModel.userModel!.email.toString()),
-                      // Text(profileViewModel.userModel!.fullName.toString() ),
                       isLoading
                           ? Container(
                               color: Colors.red, height: 100, width: 100)
