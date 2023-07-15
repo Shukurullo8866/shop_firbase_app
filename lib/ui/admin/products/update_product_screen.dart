@@ -1,9 +1,10 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_firbase_app/data/model/category_model.dart';
 import 'package:shop_firbase_app/data/model/product_model.dart';
+import 'package:shop_firbase_app/ui/admin/products/all_prodacts_screen.dart';
 import '../../../data/servise/file_uploder.dart';
 import '../../../utils/my_utils.dart';
 import '../../../view_model/categoryries_view_model.dart';
@@ -29,8 +30,8 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
   CategoryModel? categoryModel;
   List<String> currencies = ["USD", "SO'M", "RUBL", "TENGE"];
   String selectedCurrency = "USD";
-    String imageUrl = "";
-  List<String> images  = [];
+  String imageUrl = "";
+  List<String> images = [];
 
   @override
   void initState() {
@@ -46,108 +47,142 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Update Product screen"),
-      ),
-      body:SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            children: [
-              TextField(
-                controller: countController,
-                keyboardType: TextInputType.number,
-                decoration: getInputDecoration(label: "Count"),
-              ),
-              const SizedBox(height: 20),
-              TextField(
-                controller: priceController,
-                keyboardType: TextInputType.number,
-                decoration: getInputDecoration(label: "Price"),
-              ),
-              const SizedBox(height: 20),
-              TextField(
-                controller: nameController,
-                keyboardType: TextInputType.text,
-                decoration: getInputDecoration(label: "Product Name"),
-              ),
-              const SizedBox(height: 20),
-              SizedBox(
-                height: 200,
-                child: TextField(
-                  controller: descriptionController,
-                  keyboardType: TextInputType.text,
-                  maxLines: 20,
-                  decoration: getInputDecoration(label: "Description"),
-                ),
-              ),
-              const SizedBox(height: 20),
-              ExpansionTile(
-                title: Text(selectedCurrency.isEmpty
-                    ? "Select  Currncy"
-                    : selectedCurrency),
-                children: [
-                  ...List.generate(
-                      currencies.length,
-                          (index) => ListTile(
-                        title: Text(currencies[index]),
-                        onTap: () {
-                          setState(() {
-                            selectedCurrency = currencies[index];
-                          });
-                        },
-                      ))
-                ],
-              ),
-               ElevatedButton(
-                onPressed: () {
-                  _showPicker(context);
-                },
-                child: const Text(
-                  "Upload Student Image",
-                  style: TextStyle(fontSize: 25),
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  selectCategory((selectedCategory) {
-                    categoryModel = selectedCategory;
-                    categoryId = categoryModel!.categoryId;
-                    setState(() {});
-                  });
-                },
-                child: Text(
-                  categoryModel == null
-                      ? "Select Category"
-                      : categoryModel!.categoryName,
-                ),
-              ),
-
-              TextButton(
-                onPressed: () {
-                  ProductModel productModel = ProductModel(
-                    count: int.parse(countController.text),
-                    price: int.parse(priceController.text),
-                    productImages: images,
-                    categoryId: categoryId,
-                    productId: widget.productModel.productId,
-                    productName: nameController.text,
-                    description: descriptionController.text,
-                    createdAt: widget.productModel.createdAt,
-                    currency: selectedCurrency, light: false,
-                  );
-
-                  Provider.of<ProductViewModel>(context,listen: false).updateProduct(productModel);
-
-                },
-                child: Text("Update Product to Fire Store"),
-              )
-            ],
-          ),
+        appBar: AppBar(
+          title: Text("Update Product screen"),
         ),
-      )
-    );
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+            child: Column(
+              children: [
+                TextField(
+                  controller: countController,
+                  keyboardType: TextInputType.number,
+                  decoration: getInputDecoration(label: "Count"),
+                ),
+                const SizedBox(height: 20),
+                TextField(
+                  controller: priceController,
+                  keyboardType: TextInputType.number,
+                  decoration: getInputDecoration(label: "Price"),
+                ),
+                const SizedBox(height: 20),
+                TextField(
+                  controller: nameController,
+                  keyboardType: TextInputType.text,
+                  decoration: getInputDecoration(label: "Product Name"),
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  height: 200,
+                  child: TextField(
+                    controller: descriptionController,
+                    keyboardType: TextInputType.text,
+                    maxLines: 20,
+                    decoration: getInputDecoration(label: "Description"),
+                  ),
+                ),
+                SizedBox(height: 6.h),
+                imageUrl.isEmpty
+                    ? Container(
+                        width: widget.productModel.productImages[0].isEmpty
+                            ? 0
+                            : 200,
+                        height: widget.productModel.productImages[0].isEmpty
+                            ? 0
+                            : 200,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                    widget.productModel.productImages[0]),
+                                fit: BoxFit.cover)),
+                      )
+                    : Container(
+                        width: imageUrl.isEmpty ? 0 : 200,
+                        height: imageUrl.isEmpty ? 0 : 200,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                image: NetworkImage(imageUrl),
+                                fit: BoxFit.cover)),
+                      ),
+                SizedBox(height: 6.h),
+                ExpansionTile(
+                  title: Text(selectedCurrency.isEmpty
+                      ? "Select  Currncy"
+                      : selectedCurrency),
+                  children: [
+                    ...List.generate(
+                        currencies.length,
+                        (index) => ListTile(
+                              title: Text(currencies[index]),
+                              onTap: () {
+                                setState(() {
+                                  selectedCurrency = currencies[index];
+                                });
+                              },
+                            ))
+                  ],
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    _showPicker(context);
+                  },
+                  child: const Text(
+                    "Upload Student Image",
+                    style: TextStyle(fontSize: 25),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    selectCategory((selectedCategory) {
+                      categoryModel = selectedCategory;
+                      categoryId = categoryModel!.categoryId;
+                      setState(() {});
+                    });
+                  },
+                  child: Text(
+                    categoryModel == null
+                        ? "Select Category"
+                        : categoryModel!.categoryName,
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    ProductModel productModel = ProductModel(
+                      count: int.parse(countController.text),
+                      price: int.parse(priceController.text),
+                      productImages: images,
+                      categoryId: categoryId,
+                      productId: widget.productModel.productId,
+                      productName: nameController.text,
+                      description: descriptionController.text,
+                      createdAt: widget.productModel.createdAt,
+                      currency: selectedCurrency,
+                      light: false,
+                    );
+                    
+                         Provider.of<ProductViewModel>(context, listen: false)
+                            .updateProduct(productModel);
+                        // : MyUtils.getMyToast(message: "Image not found");
+                    
+                         Future.delayed(
+                            const Duration(seconds: 2),
+                            () {
+                              Navigator.pop(context);
+                            },
+                          );
+                        
+                  },
+                  child: const Text("Update Product to Fire Store"),
+                )
+              ],
+            ),
+          ),
+        ));
   }
+
   selectCategory(ValueChanged<CategoryModel> onCategorySelect) {
     showDialog(
         context: context,
@@ -170,7 +205,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
                     return ListView(
                       children: List.generate(
                         categories.length,
-                            (index) => ListTile(
+                        (index) => ListTile(
                           title: Text(categories[index].categoryName),
                           onTap: () {
                             onCategorySelect.call(categories[index]);
@@ -190,6 +225,7 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
           );
         });
   }
+
   _getFromGallery() async {
     XFile? pickedFile = await _picker.pickImage(
       maxWidth: 1000,

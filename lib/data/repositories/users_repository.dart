@@ -25,4 +25,17 @@ class UsersRepository {
                 .map((doc) => UserModel.fromJson(doc.data()))
                 .toList(),
           );
+          
+  Stream<List<UserModel>> getSingleUser(String userId ) async* {
+    
+    yield* _firestore
+        .collection('users')
+        .where("userId", isEqualTo: userId)
+        .snapshots()
+        .map(
+          (snapshot) => snapshot.docs
+              .map((doc) => UserModel.fromJson(doc.data()))
+              .toList(),
+        );
+  }
 }
