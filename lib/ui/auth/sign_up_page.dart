@@ -45,24 +45,25 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 20),
+              SizedBox(height: 20.h),
               SizedBox(
-                  height: 250,
+                  height: 250.h,
                   width: double.infinity,
                   child: Padding(
-                      padding: const EdgeInsets.only(
-                          right: 20, left: 20, bottom: 20),
+                      padding:
+                          const EdgeInsets.only(right: 20, left: 20, bottom: 20)
+                              .r,
                       child: Image.asset(
                         AppImage.d_r,
                         fit: BoxFit.cover,
                         height: 250,
                       ))),
-              const Text(
+              Text(
                 "Sign up for free",
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: 23,
-                    color: Color.fromARGB(255, 240, 147, 33)),
+                    fontSize: 23.h,
+                    color: const Color.fromARGB(255, 240, 147, 33)),
               ),
               SizedBox(height: 15.h),
               Padding(
@@ -77,12 +78,12 @@ class _SignUpPageState extends State<SignUpPage> {
                           : null,
                   style: MyTextStyle.sfProRegular.copyWith(
                     color: MyColors.black,
-                    fontSize: 17,
+                    fontSize: 17.w,
                   ),
                   decoration: getInputDecoration(label: "Email"),
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.h),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 19),
                 child: TextFormField(
@@ -101,7 +102,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   decoration: getInputDecoration(label: "Password"),
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.h),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 19),
                 child: TextFormField(
@@ -115,14 +116,14 @@ class _SignUpPageState extends State<SignUpPage> {
                           : null,
                   style: MyTextStyle.sfProRegular.copyWith(
                     color: MyColors.black,
-                    fontSize: 17,
+                    fontSize: 17.h,
                   ),
                   decoration: getInputDecoration(label: "Confirm password"),
                 ),
               ),
-              const SizedBox(height: 50),
+              SizedBox(height: 50.h),
               SingnInButton(onTap: signUp, text: "Sign Up"),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.h),
               MyRichText(
                 onTap: widget.onClickedSignIn,
               ),
@@ -135,7 +136,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   signUp() async {
     final isValid = formKey.currentState!.validate();
-    if (!isValid) return;
+    if (!isValid) return MyUtils.getMyToast(message: "Xatolik yuz berdi");
 
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
@@ -159,6 +160,7 @@ class _SignUpPageState extends State<SignUpPage> {
           imageUrl: "",
         ),
       );
+      MyUtils.getMyToast(message: "Suksess");
     } else {
       MyUtils.getMyToast(message: "Passwords don't match!");
     }

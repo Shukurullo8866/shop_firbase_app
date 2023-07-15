@@ -27,6 +27,12 @@ class ProfileViewModel extends ChangeNotifier {
 
   Stream<User?> getCurrentUser() => _firebaseAuth.authStateChanges();
 
+
+ _fetchSingleUser(String userId) async {
+     userModel = _profileRepository.getSingleUser(userId: userId) as UserModel?;
+  }
+
+
   listenUser() {
     _firebaseAuth.authStateChanges().listen((getUser) async {
       if (getUser != null) {
