@@ -8,6 +8,7 @@ import 'package:shop_firbase_app/data/model/product_model.dart';
 import 'package:shop_firbase_app/ui/tab_box/home_page/widgets/all_product.dart';
 import 'package:shop_firbase_app/ui/tab_box/home_page/widgets/button.dart';
 import 'package:shop_firbase_app/ui/tab_box/home_page/widgets/imageView.dart';
+import 'package:shop_firbase_app/utils/my_utils.dart';
 import 'package:shop_firbase_app/view_model/order_view_model.dart';
 import 'package:shop_firbase_app/view_model/profile_view_model.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
@@ -76,19 +77,22 @@ class _InfoPageState extends State<InfoPage> {
                                     .addOrder(orderModel) &&
                                 context
                                     .read<ProductViewModel>()
-                                    .updateProduct(productModel) 
-                            : const SizedBox(),
+                                    .updateProduct(productModel)
+                            : MyUtils.getMyToast(
+                                message: "Sida Allaqachon saqlangan"),
                       );
 
                   isOn += 1;
-                } else if (isOn != 0) {
+                } else if (isOn < 0) {
                   print(
                       "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDelet");
                   print(widget.getData.productId.toString());
-                  context.read<OrdersViewModel>().deleteOrder(docId:widget.getData.productId );
-                  Provider.of<OrdersViewModel>(context, listen: false)
+                  context
+                      .read<OrdersViewModel>()
                       .deleteOrder(docId: widget.getData.productId);
-                  isOn = 0;
+                  // Provider.of<OrdersViewModel>(context, listen: false)
+                  //     .deleteOrder(docId: widget.getData.productId);
+                  isOn == 0;
                   ProductModel productModel = ProductModel(
                     count: widget.getData.count,
                     price: widget.getData.price,
@@ -218,46 +222,46 @@ class _InfoPageState extends State<InfoPage> {
                 ),
                 const SizedBox(height: 41),
                 SizedBox(
-                    height: 220,
-                    child: Consumer<ProductViewModel>(
-                        builder: (context, productViewModel, child) {
+                  height: 220,
+                  child: Consumer<ProductViewModel>(
+                    builder: (context, productViewModel, child) {
                       if (productViewModel.products.isNotEmpty) {
                         return ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: productViewModel.products.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              var product = productViewModel.products[index];
-                              if (product.categoryId ==
-                                      widget.getData.categoryId &&
-                                  widget.getData.productId !=
-                                      product.productId) {
-                                return ZoomTapAnimation(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: productViewModel.products.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            var product = productViewModel.products[index];
+                            if (product.categoryId ==
+                                    widget.getData.categoryId &&
+                                widget.getData.productId != product.productId) {
+                              return ZoomTapAnimation(
                                   onTap: () {
                                     Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (_) =>
-                                            InfoPage(getData: product),
-                                      ),
-                                    );
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) =>
+                                              InfoPage(getData: product),
+                                        ));
                                   },
                                   child: SizedBox(
                                     height: 150,
                                     width: 180,
                                     child: ProductsScreen(data: product),
-                                  ),
-                                );
-                              } else {
-                                return const SizedBox();
-                              }
-                            });
+                                  ));
+                            } else {
+                              return const SizedBox();
+                            }
+                          },
+                        );
                       } else {
                         return const Center(
                           child: Text("error"),
                         );
                       }
-                    })),
+                    },
+                  ),
+                ),
                 SizedBox(height: 75.h),
               ],
             ),

@@ -43,11 +43,12 @@ class ProductRepository {
             productModel.toJson(),
           );
 
-      MyUtils.getMyToast(message: "O'chirish Muvaffaqiyatli Bajarildi");
+      MyUtils.getMyToast(message: "Yangilanish Muvaffaqiyatli Bajarildi");
     } on FirebaseException catch (er) {
       MyUtils.getMyToast(message: er.message.toString());
     }
   }
+ // ignore: non_constant_identifier_names
  Stream<List<ProductModel>> getProducts({required String category_Id}) async* {
     if (category_Id.isEmpty) {
       yield* _firestore.collection("products").snapshots().map(

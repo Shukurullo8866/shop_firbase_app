@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:shop_firbase_app/data/model/product_model.dart';
 import 'package:shop_firbase_app/utils/style.dart';
-
 import '../info_page.dart';
 
 class ProductsScreen extends StatelessWidget {
@@ -29,7 +28,6 @@ class ProductsScreen extends StatelessWidget {
         height: 150,
         width: 100,
         margin: const EdgeInsets.only(left: 8, right: 8),
-        // padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border.all(

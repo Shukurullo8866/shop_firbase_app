@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
           color: MyColors.C_4C5661,
         ),
         flexibleSpace: Container(color: MyColors.white),
-        elevation: 0, // Pastki soyaning kordikligini 0 ga o'zgartiramiz
+        elevation: 0, 
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -122,6 +122,7 @@ class _LoginPageState extends State<LoginPage> {
       email: emailController.text.trim(),
       password: passwordController.text.trim(),
     );
+    MyUtils.getMyToast(message: "Susses");
   }
 
   @override

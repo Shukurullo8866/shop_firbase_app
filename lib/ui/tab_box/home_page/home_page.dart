@@ -57,13 +57,9 @@ class _HomePageState extends State<HomePage> {
             delegate: CategoryTitleWidget(
               screenHeight: height(context),
               screenWidth: width(context),
-              title: """
-
-Categories"""
-                  .tr(),
+              title: """\nCategories\n""".tr(),
             ),
           ),
-          SliverToBoxAdapter(child: SizedBox(height: 8.h)),
           SliverToBoxAdapter(
             child: Container(
               color: Colors.transparent,

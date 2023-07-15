@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_firbase_app/data/model/category_model.dart';
 import 'package:shop_firbase_app/data/model/product_model.dart';
+import 'package:shop_firbase_app/utils/style.dart';
 import '../../../data/servise/file_uploder.dart';
 import '../../../utils/my_utils.dart';
 import '../../../view_model/categoryries_view_model.dart';
@@ -31,7 +33,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
   String selectedCurrency = "USD";
   final ImagePicker _picker = ImagePicker();
   String imageUrl = "";
-  List<String> images  = [];
+  List<String> images = [];
 
   @override
   Widget build(BuildContext context) {
@@ -76,14 +78,18 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   decoration: getInputDecoration(label: "Description"),
                 ),
               ),
-                Container(
-              width: imageUrl.isEmpty ? 0 : 200,
-              height: imageUrl.isEmpty ? 0 : 200,
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: NetworkImage(imageUrl), fit: BoxFit.cover)),
-            ),
+              SizedBox(height: 10.h),
+              imageUrl.isEmpty
+                  ? const Text("no image")
+                  : Container(
+                      width: imageUrl.isEmpty ? 0 : 200,
+                      height: imageUrl.isEmpty ? 0 : 200,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              image: NetworkImage(imageUrl),
+                              fit: BoxFit.cover)),
+                    ),
               const SizedBox(height: 20),
               ExpansionTile(
                 title: Text(selectedCurrency.isEmpty
@@ -130,7 +136,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
               ),
               TextButton(
                 onPressed: () {
-                  
                   ProductModel productModel = ProductModel(
                     count: int.parse(countController.text),
                     price: int.parse(priceController.text),
@@ -140,13 +145,22 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     productName: nameController.text,
                     description: descriptionController.text,
                     createdAt: createdAt,
-                    currency: selectedCurrency, light: false,
+                    currency: selectedCurrency,
+                    light: false,
                   );
-
-                  Provider.of<ProductViewModel>(context, listen: false)
-                      .addProduct(productModel);
+                  imageUrl.isNotEmpty
+                      ? categoryId.isNotEmpty
+                          ? Provider.of<ProductViewModel>(context,
+                                  listen: false)
+                              .addProduct(productModel)
+                          : MyUtils.getMyToast(message: "Category not selected")
+                      : MyUtils.getMyToast(
+                          message: "image not added yet please wait");
                 },
-                child: const Text("Add Product to Fire Store"),
+                child: Text(
+                  "Add Product to Fire Store",
+                  style: AppTextStyle.medium(color: Colors.blue),
+                ),
               )
             ],
           ),
