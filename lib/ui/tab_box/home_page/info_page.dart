@@ -44,6 +44,7 @@ class _InfoPageState extends State<InfoPage> {
             onPressed: () {
               setState(() {
                 if (isOn == 0) {
+                  isOn += 1;
                   print("ssssssssssssssssssssssssssssssssssssssssssssS");
                   print(widget.getData.productId.toString());
                   OrderModel orderModel = OrderModel(
@@ -82,7 +83,7 @@ class _InfoPageState extends State<InfoPage> {
                                 message: "Sida Allaqachon saqlangan"),
                       );
 
-                  isOn += 1;
+                  print(isOn);
                 } else if (isOn < 0) {
                   print(
                       "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDelet");

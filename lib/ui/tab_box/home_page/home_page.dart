@@ -38,15 +38,9 @@ class _HomePageState extends State<HomePage> {
           child: Image.asset(AppImage.d_r, height: 100, width: 190),
         ),
         actions: const [
-          Icon(
-            Icons.search_rounded,
-            color: Colors.orange,
-          ),
+          Icon(Icons.search_rounded, color: Colors.orange),
         ],
-        leading: const Icon(
-          Icons.menu,
-          color: Colors.orange,
-        ),
+        leading: const Icon(Icons.menu, color: Colors.orange),
       ),
       body: CustomScrollView(
         slivers: [
@@ -54,12 +48,10 @@ class _HomePageState extends State<HomePage> {
           SliverPersistentHeader(
               delegate: DiscountWidget(screenHeight: height(context))),
           SliverPersistentHeader(
-            delegate: CategoryTitleWidget(
-              screenHeight: height(context),
-              screenWidth: width(context),
-              title: """\nCategories\n""".tr(),
-            ),
-          ),
+              delegate: CategoryTitleWidget(
+                  screenHeight: height(context),
+                  screenWidth: width(context),
+                  title: """\nCategories\n""".tr())),
           SliverToBoxAdapter(
             child: Container(
               color: Colors.transparent,

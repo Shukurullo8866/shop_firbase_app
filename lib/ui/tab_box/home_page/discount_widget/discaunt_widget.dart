@@ -36,7 +36,7 @@ class DiscountWidget extends SliverPersistentHeaderDelegate {
               borderRadius: BorderRadius.circular(screenHeight * 0.025),
               image: const DecorationImage(
                 image: NetworkImage(
-                    "https://celes.club/uploads/posts/2022-08/1661217387_8-celes-club-p-tekstura-plankena-instagram-8.jpg"),
+                    "https://as2.ftcdn.net/v2/jpg/02/14/73/19/1000_F_214731909_HJjnYXsyW9KkoP9S2E61ZqUSjAoXi8bp.jpg"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -64,7 +64,8 @@ class DiscountWidget extends SliverPersistentHeaderDelegate {
                                     .headlineMedium
                                     ?.copyWith(
                                         fontSize: 16.sp,
-                                        fontWeight: FontWeight.w600,color: Colors.white)),
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white)),
                             TextSpan(
                                 text: productName.length > 15 ? "..." : "",
                                 style: Theme.of(context)
@@ -72,7 +73,8 @@ class DiscountWidget extends SliverPersistentHeaderDelegate {
                                     .headlineMedium
                                     ?.copyWith(
                                         fontSize: 12.sp,
-                                        fontWeight: FontWeight.w600,color: Colors.white))
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white))
                           ],
                         ),
                       ),
@@ -90,9 +92,9 @@ class DiscountWidget extends SliverPersistentHeaderDelegate {
                                   .titleLarge!
                                   .copyWith(
                                       fontSize: 16.sp,
-                                      fontWeight: FontWeight.w600,color: Colors.white),
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white),
                             ),
-                           
                           ],
                         ),
                       ),
@@ -128,39 +130,12 @@ class DiscountWidget extends SliverPersistentHeaderDelegate {
                     ),
                   ],
                 ),
-                // ClipRRect(
-                //   borderRadius: BorderRadius.circular(10),
-                //   child: CachedNetworkImage(
-                //     imageUrl:
-                //         'https://mir-s3-cdn-cf.behance.net/project_modules/fs/3e2c1f41522677.57a9ad1c87e3e.jpg',
-                //     width: 80.w,
-                //     height: 100.h,
-                //     fit: BoxFit.cover,
-                //     placeholder: (context, url) {
-                //       return Shimmer.fromColors(
-                //         period: const Duration(seconds: 2),
-                //         baseColor: Colors.grey.shade300,
-                //         highlightColor: Colors.grey.shade100,
-                //         child: Container(
-                //           width: 120,
-                //           height: 100,
-                //           color: Colors.white,
-                //         ),
-                //       );
-                //     },
-                //     errorWidget: (context, url, error) =>
-                //         const Icon(Icons.error),
-                //   ),
-                // ),
+                
                 Container(
                   height: 200.h,
                   width: 140.w,
                   decoration: const BoxDecoration(
                     color: Colors.amber,
-                    // border: Border.all(
-                    //   color: Colors.black, // Set the border color
-                    //   width: 2.0, // Set the border width
-                    // ),
                     borderRadius: BorderRadius.only(
                       bottomRight: Radius.circular(35),
                       topRight: Radius.circular(35),
