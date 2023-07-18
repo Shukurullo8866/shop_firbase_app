@@ -59,7 +59,11 @@ class OrdersViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  deleteOrder({required String docId}) => ordersRepository.deleteOrderById(docId: docId);
+  deleteOrder({required String docId}) {
+    print("DELETET O'RDER DOC ID  ${docId}");
+     ordersRepository.deleteOrderById(docId: docId);
+     print("DELETET O'RDER CHECK");
+  }
 
   @override
   void dispose() {
