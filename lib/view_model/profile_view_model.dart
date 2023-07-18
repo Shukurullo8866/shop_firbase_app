@@ -20,6 +20,7 @@ class ProfileViewModel extends ChangeNotifier {
   User? user;
   UserModel? userModel;
 
+
   fetchUser() async {
     userModel = await _profileRepository.getSingleUser(
         userId: FirebaseAuth.instance.currentUser!.uid);
@@ -30,9 +31,12 @@ class ProfileViewModel extends ChangeNotifier {
 
  _fetchSingleUser(String userId) async {
      userModel = _profileRepository.getSingleUser(userId: userId) as UserModel?;
+     print("user user user user user user");
+        print(userModel);
   }
-
-
+    // !   userRepository.getSingleUser().listen((users) {
+    // !    emit(state.copyWith(userModel: users.first));
+    // });
   listenUser() {
     _firebaseAuth.authStateChanges().listen((getUser) async {
       if (getUser != null) {

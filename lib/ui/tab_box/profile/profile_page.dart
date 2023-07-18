@@ -17,11 +17,8 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final ImagePicker _picker = ImagePicker();
-
   String imageUrl = "";
-
   bool isLoading = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,10 +49,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ],
         leading: IconButton(
-          icon: const Icon(
-            Icons.menu,
-            color: Colors.orange,
-          ),
+          icon: const Icon(Icons.menu, color: Colors.orange),
           onPressed: () {
             context.read<ProfileViewModel>().fetchUser();
           },
@@ -70,29 +64,31 @@ class _ProfilePageState extends State<ProfilePage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        decoration: const BoxDecoration(shape: BoxShape.circle),
-                        width: 100,
-                        height: 100,
-                        child: profileViewModel.user != null
-                            ? Image.asset(
-                                AppImage.fon_3,
-                                fit: BoxFit.cover,
-                              )
-                            : Image.network(
-                                profileViewModel.user!.photoURL.toString(),
-                                fit: BoxFit.cover,
-                              ),
-                      ),
+                          decoration:
+                              const BoxDecoration(shape: BoxShape.circle),
+                          width: 100,
+                          height: 100,
+                          child: profileViewModel.user != null
+                              ? Image.network(
+                                  profileViewModel.user!.photoURL.toString(),
+                                  fit: BoxFit.cover)
+                              : Image.asset(
+                                  AppImage.fon_3,
+                                  fit: BoxFit.cover,
+                                )),
                       TextButton(
                         onPressed: () {
                           FirebaseAuth.instance.signOut();
                         },
                         child: const Text("Log Out"),
                       ),
+                      Text(profileViewModel.user!.photoURL.toString()),
                       Text(profileViewModel.user!.phoneNumber.toString()),
                       Text(profileViewModel.user!.metadata.toString()),
                       Text(profileViewModel.user!.displayName.toString()),
                       Text(profileViewModel.user!.emailVerified.toString()),
+                      Text(profileViewModel.user!.phoneNumber.toString()),
+                      Text(profileViewModel.user!.displayName.toString()),
                       isLoading
                           ? Container(
                               color: Colors.red, height: 100, width: 100)
@@ -159,9 +155,11 @@ class _ProfilePageState extends State<ProfilePage> {
       if (!mounted) return;
       Provider.of<ProfileViewModel>(context, listen: false)
           .updatePhoto(imageUrl);
-      setState(() {
-        isLoading = false;
-      });
+      setState(
+        () {
+          isLoading = false;
+        },
+      );
     }
   }
 
