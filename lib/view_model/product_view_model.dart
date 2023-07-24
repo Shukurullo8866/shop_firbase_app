@@ -7,34 +7,33 @@ import 'package:provider/provider.dart';
 import 'package:shop_firbase_app/data/model/product_model.dart';
 import 'package:shop_firbase_app/ui/auth/widgets/repositories/product_repocitory.dart';
 
-
-
 class ProductViewModel extends ChangeNotifier {
   final ProductRepository productRepository;
-
-  ProductViewModel({required this.productRepository,
-  
-  }){listenProducts('');}
+  ProductViewModel({
+    required this.productRepository,
+  }) {
+    listenProducts('');
+  }
 
   late StreamSubscription subscription;
 
   List<ProductModel> products = [];
   List<ProductModel> productsAdmin = [];
-  
-
   listenProducts(String categoryId) async {
     subscription = productRepository
         .getProducts(category_Id: categoryId)
         .listen((allProducts) {
-          if(categoryId.isEmpty) productsAdmin = allProducts;
-      print("ALL PRODUCTS LENGTH:${allProducts.length}");
+      if (categoryId.isEmpty) productsAdmin = allProducts;
       products = allProducts;
       notifyListeners();
     });
   }
+
   addProduct(ProductModel productModel) =>
       productRepository.addProduct(productModel: productModel);
-  updateProduct(ProductModel productModel, ) =>
+  updateProduct(
+    ProductModel productModel,
+  ) =>
       productRepository.updateProduct(productModel: productModel);
   deleteProduct(String docId) => productRepository.deleteProduct(docId: docId);
 
