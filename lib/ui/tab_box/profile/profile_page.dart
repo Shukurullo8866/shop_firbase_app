@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_firbase_app/view_model/profile_view_model.dart';
-
 import '../../../data/servise/file_uploder.dart';
 import '../../../utils/app_image.dart';
 import '../../admin/admin_screen.dart';
@@ -64,18 +63,13 @@ class _ProfilePageState extends State<ProfilePage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                          decoration:
-                              const BoxDecoration(shape: BoxShape.circle),
+                          decoration: const BoxDecoration(
+                              shape: BoxShape.circle, color: Colors.grey),
                           width: 100,
                           height: 100,
-                          child: profileViewModel.user != null
-                              ? Image.network(
-                                  profileViewModel.user!.photoURL.toString(),
-                                  fit: BoxFit.cover)
-                              : Image.asset(
-                                  AppImage.fon_3,
-                                  fit: BoxFit.cover,
-                                )),
+                          child: Image.network(
+                              profileViewModel.user!.photoURL.toString(),
+                              fit: BoxFit.fill)),
                       TextButton(
                         onPressed: () {
                           FirebaseAuth.instance.signOut();
