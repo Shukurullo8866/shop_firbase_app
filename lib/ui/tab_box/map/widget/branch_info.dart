@@ -75,7 +75,7 @@ class BranchInfoTile extends StatelessWidget {
           PrimaryButton(
             label: "Marshurutni davom ettring",
             onPressed: () {
-              Navigator.pop(context);
+              // Navigator.pop(context);
               AppBottomSheets bottomSheets = AppBottomSheets(context);
               bottomSheets.launchBranch();
               Navigator.pop(context);
