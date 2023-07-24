@@ -30,7 +30,6 @@ class _InfoPageState extends State<InfoPage> {
   @override
   @override
   Widget build(BuildContext context) {
-    //var userId = context.read<UserModel>().userId;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white70,
@@ -45,7 +44,11 @@ class _InfoPageState extends State<InfoPage> {
               setState(() {
                 if (isOn == 0) {
                   isOn += 1;
+                  setState(() {});
+                  print("ididididididididididididididididididid");
+                  context.read<OrdersViewModel>().userOrders.map((e) =>  print(e..productId.toString()));
                   print("ssssssssssssssssssssssssssssssssssssssssssssS");
+                  print(isOn.toString());
                   print(widget.getData.productId.toString());
                   OrderModel orderModel = OrderModel(
                     orderId: widget.getData.productId,
@@ -58,7 +61,6 @@ class _InfoPageState extends State<InfoPage> {
                     productName: widget.getData.productName,
                     productImages: widget.getData.productImages,
                   );
-
                   ProductModel productModel = ProductModel(
                     count: widget.getData.count,
                     price: widget.getData.price,
@@ -71,29 +73,19 @@ class _InfoPageState extends State<InfoPage> {
                     currency: widget.getData.currency,
                     light: true,
                   );
-                  context.read<OrdersViewModel>().userOrders.map(
-                        (e) => e.productId != widget.getData.productId
-                            ? context
-                                    .read<OrdersViewModel>()
-                                    .addOrder(orderModel) &&
-                                context
-                                    .read<ProductViewModel>()
-                                    .updateProduct(productModel)
-                            : MyUtils.getMyToast(
-                                message: "Sida Allaqachon saqlangan"),
-                      );
-
+                  
                   print(isOn);
-                } else if (isOn < 0) {
+                } else if (isOn != 0) {
+                  isOn = 0;
+                  setState(() {});
                   print(
                       "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDelet");
                   print(widget.getData.productId.toString());
-                  context
-                      .read<OrdersViewModel>()
+                  print(isOn.toString());
+
+                  Provider.of<OrdersViewModel>(context, listen: false)
                       .deleteOrder(docId: widget.getData.productId);
-                  // Provider.of<OrdersViewModel>(context, listen: false)
-                  //     .deleteOrder(docId: widget.getData.productId);
-                  isOn == 0;
+
                   ProductModel productModel = ProductModel(
                     count: widget.getData.count,
                     price: widget.getData.price,
@@ -155,22 +147,19 @@ class _InfoPageState extends State<InfoPage> {
                             height: 280,
                             color: Colors.transparent,
                             child: AnimatedSize(
-                              curve: Curves.bounceIn,
-                              duration: const Duration(seconds: 1),
-                              child: Image.network(
-                                widget.getData.productImages[0],
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                              ),
-                            ),
-                          )),
+                                curve: Curves.bounceIn,
+                                duration: const Duration(seconds: 1),
+                                child: Image.network(
+                                  widget.getData.productImages[0],
+                                  fit: BoxFit.cover,
+                                  width: double.infinity,
+                                )))),
                 const Divider(
-                  height: 3.0,
-                  thickness: 0.5,
-                  color: Color.fromARGB(231, 228, 157, 76),
-                  indent: 0.1,
-                  endIndent: 0.1,
-                ),
+                    height: 3.0,
+                    thickness: 0.5,
+                    color: Color.fromARGB(231, 228, 157, 76),
+                    indent: 0.1,
+                    endIndent: 0.1),
                 const SizedBox(height: 15),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -200,27 +189,22 @@ class _InfoPageState extends State<InfoPage> {
                     endIndent: 1.0),
                 Padding(
                     padding: const EdgeInsets.all(10),
-                    child: Text(
-                      "Omborda mavjud: ${widget.getData.count} - kub",
-                      style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.w500),
-                    )),
+                    child: Text("Omborda mavjud: ${widget.getData.count} - kub",
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w500))),
                 Padding(
                     padding: const EdgeInsets.all(10),
                     child: Text(
-                      "Mahsulot haqida: \n${widget.getData.description}",
-                      style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.w500),
-                    )),
+                        "Mahsulot haqida: \n${widget.getData.description}",
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w500))),
                 const SizedBox(height: 8),
                 Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Text(
-                    "Ishlab chiqilgan sanasi: \n${widget.getData.createdAt.toString()}",
-                    style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.w500),
-                  ),
-                ),
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                        "Ishlab chiqilgan sanasi: \n${widget.getData.createdAt.toString()}",
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w500))),
                 const SizedBox(height: 41),
                 SizedBox(
                   height: 220,
@@ -246,10 +230,9 @@ class _InfoPageState extends State<InfoPage> {
                                         ));
                                   },
                                   child: SizedBox(
-                                    height: 150,
-                                    width: 180,
-                                    child: ProductsScreen(data: product),
-                                  ));
+                                      height: 150,
+                                      width: 180,
+                                      child: ProductsScreen(data: product)));
                             } else {
                               return const SizedBox();
                             }
