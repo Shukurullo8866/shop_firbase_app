@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_firbase_app/data/model/category_model.dart';
 import 'package:shop_firbase_app/ui/tab_box/home_page/product_by_category/productByCategory.dart';
+import 'package:shop_firbase_app/ui/tab_box/home_page/search_page/sear_page.dart';
 import 'package:shop_firbase_app/ui/tab_box/home_page/widgets/category_title.dart';
 import 'package:shop_firbase_app/ui/tab_box/home_page/widgets/cotegory_item.dart';
 import 'package:shop_firbase_app/ui/tab_box/home_page/widgets/products_grid_widget.dart';
@@ -21,6 +22,8 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+final GlobalKey<ScaffoldState> _key = GlobalKey();
+
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
@@ -31,17 +34,26 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white70,
-        centerTitle: true,
-        title: Padding(
-          padding: const EdgeInsets.only(top: 14),
-          child: Image.asset(AppImage.d_r, height: 100, width: 190),
-        ),
-        actions: const [
-          Icon(Icons.search_rounded, color: Colors.orange),
-        ],
-        leading: const Icon(Icons.menu, color: Colors.orange),
-      ),
+          backgroundColor: Colors.white70,
+          centerTitle: true,
+          title: Padding(
+            padding: const EdgeInsets.only(top: 14),
+            child: Image.asset(AppImage.d_r, height: 100, width: 190),
+          ),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => const SearchPage()));
+                },
+                icon: const Icon(Icons.search_rounded, color: Colors.orange))
+          ],
+          leading: IconButton(
+            onPressed: () {
+              _key.currentState!.openDrawer();
+            },
+            icon: const Icon(Icons.menu, color: Colors.orange),
+          )),
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(child: SizedBox(height: 15.h)),
@@ -96,7 +108,9 @@ class _HomePageState extends State<HomePage> {
                       );
                     } else {
                       return Center(
-                        child: Text(snapshot.error.toString()),
+                        child: Text(
+                          snapshot.error.toString(),
+                        ),
                       );
                     }
                   },
