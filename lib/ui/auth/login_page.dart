@@ -13,7 +13,6 @@ class LoginPage extends StatefulWidget {
   const LoginPage({Key? key, required this.onClickSignUp}) : super(key: key);
 
   final VoidCallback onClickSignUp;
-
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -33,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
           color: MyColors.C_4C5661,
         ),
         flexibleSpace: Container(color: MyColors.white),
-        elevation: 0, 
+        elevation: 0,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -55,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
                 style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 23,
-                    color: Color.fromARGB(255, 240, 147, 33))),
+                    color: Color.fromARGB(255, 191, 137, 57))),
             const SizedBox(height: 40),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
@@ -92,8 +91,8 @@ class _LoginPageState extends State<LoginPage> {
               text: TextSpan(
                 style: MyTextStyle.sfProRegular.copyWith(
                   fontWeight: FontWeight.w600,
-                  fontSize: 23,
-                color:Color.fromARGB(255, 175, 112, 2),
+                  fontSize: 20,
+                  color: const Color.fromARGB(255, 191, 137, 57),
                 ),
                 text: "Don't have an account?  ",
                 children: [
@@ -115,9 +114,8 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  //" Hello World  "
-
   Future<void> signIn() async {
+    MyUtils.getMyToast(message: "Progress");
     Provider.of<AuthViewModel>(context, listen: false).signIn(
       email: emailController.text.trim(),
       password: passwordController.text.trim(),
