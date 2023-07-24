@@ -4,6 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../data/hive/hive_box.dart';
 import '../../../data/model/branch/branch_model.dart';
 import '../../../utils/app_dialog.dart';
+import '../../../utils/app_image.dart';
 
 class GoogleMapScreen extends StatefulWidget {
   const GoogleMapScreen({Key? key}) : super(key: key);
@@ -19,17 +20,19 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+appBar: AppBar(
+        backgroundColor: Colors.white70,
+        centerTitle: true,
+        title: Padding(
+          padding: const EdgeInsets.only(top: 14),
+          child: Image.asset(AppImage.d_r, height: 100, width: 190),
+        ),
+        leading: const SizedBox(),
+      ),
       body: ValueListenableBuilder(
         valueListenable: HiveBoxes.branchBox.listenable(),
         builder: (context, Box<BranchModel> box, child) {
           _setUpMarkers(branchModel);
-          print("eeeeeeeeeeeeeeeeeeeeeeeeeee");
-          print(_markers.length);
-          print("name name name name name name");
-          print(box.values.isEmpty);
-          print("name name name name name name ");
-          print(branchModel.name.toString());
-          print(branchModel.location);
           return GoogleMap(
             mapType: MapType.normal,
             zoomControlsEnabled: false,
