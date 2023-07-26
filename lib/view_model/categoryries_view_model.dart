@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:shop_firbase_app/data/model/category_model.dart';
-import 'package:shop_firbase_app/ui/auth/widgets/repositories/categories_repository.dart';
+import 'package:shop_firbase_app/screens/auth/widgets/repositories/categories_repository.dart';
 
 class CategoriesViewModel extends ChangeNotifier {
   final CategoryRepository categoryRepository;
