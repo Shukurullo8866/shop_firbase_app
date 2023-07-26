@@ -4,9 +4,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:shop_firbase_app/ui/auth/widgets/repositories/product_repocitory.dart';
-import 'package:shop_firbase_app/ui/on_boarding/on_boarding_screen.dart';
-import 'package:shop_firbase_app/ui/splash/splashPage.dart';
+import 'package:shop_firbase_app/screens/auth/widgets/repositories/product_repocitory.dart';
+import 'package:shop_firbase_app/screens/on_boarding/on_boarding_screen.dart';
+import 'package:shop_firbase_app/screens/splash/splashPage.dart';
 import 'package:shop_firbase_app/view_model/auth_view_model.dart';
 import 'package:shop_firbase_app/view_model/categoryries_view_model.dart';
 import 'package:shop_firbase_app/view_model/order_view_model.dart';
@@ -17,7 +17,7 @@ import 'data/hive/hive_servise.dart';
 import 'data/repositories/auth_repository.dart';
 import 'data/repositories/orders_repository.dart';
 import 'data/repositories/profile_repository.dart';
-import 'ui/auth/widgets/repositories/categories_repository.dart';
+import 'screens/auth/widgets/repositories/categories_repository.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() async {
