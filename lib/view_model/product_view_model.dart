@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_firbase_app/data/model/product_model.dart';
-import 'package:shop_firbase_app/ui/auth/widgets/repositories/product_repocitory.dart';
+import 'package:shop_firbase_app/screens/auth/widgets/repositories/product_repocitory.dart';
 
 class ProductViewModel extends ChangeNotifier {
   final ProductRepository productRepository;
