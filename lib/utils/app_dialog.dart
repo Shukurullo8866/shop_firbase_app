@@ -18,7 +18,7 @@ import 'package:shop_firbase_app/utils/style.dart';
 
 
 import '../data/model/branch/branch_model.dart';
-import '../ui/tab_box/map/widget/branch_info.dart';
+import '../screens/tab_box/map/widget/branch_info.dart';
 
 
 class AppDialog {
