@@ -1,10 +1,7 @@
-// ignore_for_file: unused_import
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_firbase_app/data/model/category_model.dart';
-import 'package:shop_firbase_app/utils/my_utils.dart';
 import '../../../data/servise/file_uploder.dart';
 import '../../../view_model/categoryries_view_model.dart';
 
@@ -52,7 +49,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                 ),
               ),
             ),
-           Container(
+            Container(
               width: imageUrl.isEmpty ? 0 : 50,
               height: imageUrl.isEmpty ? 0 : 50,
               decoration: BoxDecoration(
@@ -62,7 +59,8 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
             ),
             ElevatedButton(
               onPressed: () {
-                print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasssssssssss");
+                print(
+                    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasssssssssss");
                 print(imageUrl);
                 _showPicker(context);
               },
@@ -90,16 +88,17 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
             ),
           ],
         ),
-         floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        backgroundColor: Colors.lightBlue,
-        child: const Icon(Icons.navigation),
-      ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          backgroundColor: Colors.lightBlue,
+          child: const Icon(Icons.navigation),
+        ),
       ),
     );
   }
+
   void _showPicker(context) {
     showModalBottomSheet(
       context: context,
@@ -128,6 +127,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
       },
     );
   }
+
   _getFromGallery() async {
     XFile? pickedFile = await _picker.pickImage(
       maxWidth: 1000,
@@ -153,6 +153,4 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
       setState(() {});
     }
   }
-
-
 }
