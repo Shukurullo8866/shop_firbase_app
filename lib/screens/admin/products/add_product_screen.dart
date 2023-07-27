@@ -148,14 +148,19 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     currency: selectedCurrency,
                     light: false,
                   );
-                  imageUrl.isNotEmpty
-                      ? categoryId.isNotEmpty
-                          ? Provider.of<ProductViewModel>(context,
-                                  listen: false)
-                              .addProduct(productModel)
-                          : MyUtils.getMyToast(message: "Category not selected")
-                      : MyUtils.getMyToast(
-                          message: "image not added yet please wait");
+                  if (imageUrl.isNotEmpty) {
+                    if (categoryId.isNotEmpty) {
+                      Provider.of<ProductViewModel>(context, listen: false)
+                          .addProduct(productModel);
+                      Future.delayed(const Duration(seconds: 4));
+                      Navigator.pop(context);
+                    } else {
+                      MyUtils.getMyToast(message: "Category not selected");
+                    }
+                  } else {
+                    MyUtils.getMyToast(
+                        message: "image not added yet please wait");
+                  }
                 },
                 child: Text(
                   "Add Product to Fire Store",
@@ -243,29 +248,30 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   void _showPicker(context) {
     showModalBottomSheet(
-        context: context,
-        builder: (BuildContext bc) {
-          return SafeArea(
-            child: Wrap(
-              children: <Widget>[
-                ListTile(
-                    leading: const Icon(Icons.photo_library),
-                    title: const Text("Gallery"),
-                    onTap: () {
-                      _getFromGallery();
-                      Navigator.of(context).pop();
-                    }),
-                ListTile(
-                  leading: const Icon(Icons.photo_camera),
-                  title: const Text('Camera'),
+      context: context,
+      builder: (BuildContext bc) {
+        return SafeArea(
+          child: Wrap(
+            children: <Widget>[
+              ListTile(
+                  leading: const Icon(Icons.photo_library),
+                  title: const Text("Gallery"),
                   onTap: () {
-                    _getFromCamera();
+                    _getFromGallery();
                     Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ),
-          );
-        });
+                  }),
+              ListTile(
+                leading: const Icon(Icons.photo_camera),
+                title: const Text('Camera'),
+                onTap: () {
+                  _getFromCamera();
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }
