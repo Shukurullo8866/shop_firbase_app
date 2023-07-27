@@ -58,27 +58,34 @@ class _ProfilePageState extends State<ProfilePage> {
       body: SingleChildScrollView(
         child: Consumer<ProfileViewModel>(
           builder: (context, profileViewModel, child) {
+            var user = profileViewModel.user!;
             return profileViewModel.user != null
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(height: 20,),
+                      SizedBox(height: 20.h),
                       Container(
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.circle, color: Colors.grey),
-                          width: 100,
-                          height: 100,
-                          child: Image.network(
-                              profileViewModel.user!.photoURL.toString(),
-                              fit: BoxFit.fill)),
+                        decoration: const BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.grey),
+                        width: 100,
+                        height: 100,
+                        child: Center(
+                          child: CircleAvatar(
+                            radius: 100,
+                            backgroundImage: NetworkImage(
+                              user.photoURL.toString(),
+                            ),
+                          ),
+                        ),
+                      ),
                       TextButton(
                         onPressed: () {
                           FirebaseAuth.instance.signOut();
                         },
                         child: const Text("Log Out"),
                       ),
-                        Container(
+                      Container(
                         padding: const EdgeInsets.all(5),
                         height: 50,
                         width: 350,
@@ -89,14 +96,16 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("User Name : "),
-                            Text(profileViewModel.user!.displayName.toString()),
+                            const Text("User Name : "),
+                            Text(user.displayName!.isEmpty
+                                ? "not name"
+                                : user.displayName.toString()),
                           ],
                         ),
                       ),
                       SizedBox(height: 20.h),
                       Container(
-                        padding: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
                         height: 50,
                         width: 350,
                         decoration: BoxDecoration(
@@ -106,8 +115,10 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Email : "),
-                            Text(profileViewModel.user!.email.toString()),
+                            const Text("Email : "),
+                            Text(user.email!.isEmpty
+                                ? "not email"
+                                : user.email.toString()),
                           ],
                         ),
                       ),
@@ -117,21 +128,21 @@ class _ProfilePageState extends State<ProfilePage> {
                         width: 350,
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          // color: Color.fromARGB(255, 204, 210, 247),
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Phone Number : "),
-                            Text(profileViewModel.user!.phoneNumber.toString()),
+                            const Text("Phone Number : "),
+                            Text(user.phoneNumber!.isEmpty
+                                ? "not number"
+                                : user.phoneNumber.toString()),
                           ],
                         ),
                       ),
                       Text(profileViewModel.user!.phoneNumber.toString()),
                       Text(profileViewModel.user!.phoneNumber.toString()),
                       Text(profileViewModel.user!.metadata.toString()),
-                   
                       isLoading
                           ? Container(
                               color: Colors.red, height: 100, width: 100)
