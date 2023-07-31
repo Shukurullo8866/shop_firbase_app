@@ -64,11 +64,13 @@ class _HomePageState extends State<HomePage> {
           SliverToBoxAdapter(child: SizedBox(height: 15.h)),
           SliverPersistentHeader(
               delegate: DiscountWidget(screenHeight: height(context))),
+          SliverToBoxAdapter(child: SizedBox(height: 15.h)),
+
           SliverPersistentHeader(
               delegate: CategoryTitleWidget(
                   screenHeight: height(context),
                   screenWidth: width(context),
-                  title: """\nCategories\n""".tr())),
+                  title: """Categories""".tr())),
           SliverToBoxAdapter(
             child: Container(
               color: Colors.transparent,

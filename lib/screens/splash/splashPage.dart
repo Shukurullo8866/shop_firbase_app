@@ -20,10 +20,13 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   onNextPage() {
-    Future.delayed(const Duration(seconds: 3), () async {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (_) => const TabBox()));
-    });
+    Future.delayed(
+      const Duration(seconds: 3),
+      () async {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => const TabBox()));
+      },
+    );
   }
 
   @override

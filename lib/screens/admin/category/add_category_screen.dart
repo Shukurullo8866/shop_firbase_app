@@ -79,7 +79,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                   createdAt: DateTime.now().toString(),
                 );
                 print(
-                    "111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111");
+                    "1111111111111111111111111111111111111111111111111111111111");
                 print(imageUrl);
                 Provider.of<CategoriesViewModel>(context, listen: false)
                     .addCategory(categoryModel);
