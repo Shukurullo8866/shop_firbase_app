@@ -7,11 +7,10 @@ import 'package:shop_firbase_app/utils/style.dart';
 
 import '../../../data/model/order_model.dart';
 
-
 // ignore: must_be_immutable
 class OrderItemsScreen extends StatelessWidget {
-   OrderItemsScreen({super.key, required this.data});
-   OrderModel data;
+  OrderItemsScreen({super.key, required this.data});
+  OrderModel data;
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +26,13 @@ class OrderItemsScreen extends StatelessWidget {
         //);
       },
       child: Container(
-        height: 150,
-        width: 100,
-        margin: const EdgeInsets.only(left: 8, right: 8),
-        // padding: EdgeInsets.all(10),
+        height: 150.h,
+        width: 100.w,
+        margin: EdgeInsets.only(left: 8.r, right: 8.r),
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border.all(
-              width: 0.8, color: const Color.fromARGB(231, 228, 157, 76)),
+              width: 0.8.w, color: const Color.fromARGB(231, 228, 157, 76)),
           borderRadius: const BorderRadius.all(
             Radius.circular(10),
           ),
@@ -43,9 +41,7 @@ class OrderItemsScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(
-              height: 5
-            ),
+            SizedBox(height: 5.h),
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: CachedNetworkImage(
@@ -59,8 +55,8 @@ class OrderItemsScreen extends StatelessWidget {
                     baseColor: Colors.grey.shade300,
                     highlightColor: Colors.grey.shade100,
                     child: Container(
-                      width: 120,
-                      height: 100,
+                      width: 120.w,
+                      height: 100.h,
                       color: Colors.white,
                     ),
                   );
@@ -69,16 +65,13 @@ class OrderItemsScreen extends StatelessWidget {
                     Icons.signal_cellular_connected_no_internet_0_bar_outlined),
               ),
             ),
-            const SizedBox(
-              height: 10,
-              width: 30,
+            SizedBox(
+              height: 10.h,
+              width: 30.w,
             ),
-            Text(
-              data.productName,
-              style: MyTextStyle.sfProMedium,
-            ),
-            const Divider(
-              height: 8.0,
+            Text(data.productName, style: MyTextStyle.sfProMedium),
+            Divider(
+              height: 8.0.h,
               thickness: 0.8,
               color: Color.fromARGB(231, 228, 157, 76),
               indent: 21.0,

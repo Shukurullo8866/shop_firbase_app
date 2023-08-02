@@ -1,10 +1,9 @@
 // ignore_for_file: non_constant_identifier_names
-
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_firbase_app/screens/tab_box/card/card_info.dart';
 import 'package:shop_firbase_app/view_model/order_view_model.dart';
-
 import '../../../utils/app_image.dart';
 
 class CardPage extends StatefulWidget {
@@ -22,8 +21,8 @@ class _CardPageState extends State<CardPage> {
         backgroundColor: Colors.white70,
         centerTitle: true,
         title: Padding(
-          padding: const EdgeInsets.only(top: 14),
-          child: Image.asset(AppImage.d_r, height: 100, width: 190),
+          padding: EdgeInsets.only(top: 14.r),
+          child: Image.asset(AppImage.d_r, height: 100.h, width: 190.w),
         ),
         leading: const Icon(
           Icons.arrow_back_ios,
@@ -31,7 +30,7 @@ class _CardPageState extends State<CardPage> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(top: 8.0),
+        padding: EdgeInsets.only(top: 8.0.r),
         child: Consumer<OrdersViewModel>(
           builder: (context, orderViewModel, child) {
             return GridView.builder(
@@ -39,7 +38,8 @@ class _CardPageState extends State<CardPage> {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, // Number of columns in the grid
                 mainAxisSpacing: 10.0, // Spacing between grid items vertically
-                crossAxisSpacing: 10.0, // Spacing between grid items horizontally
+                crossAxisSpacing:
+                    10.0, // Spacing between grid items horizontally
                 childAspectRatio: 1.0, // Aspect ratio of each grid item
               ),
               scrollDirection: Axis.vertical,
