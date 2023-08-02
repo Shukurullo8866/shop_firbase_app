@@ -130,7 +130,6 @@ class DiscountWidget extends SliverPersistentHeaderDelegate {
                     ),
                   ],
                 ),
-                
                 Container(
                   height: 200.h,
                   width: 140.w,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../data/model/category_model.dart';
@@ -28,12 +29,11 @@ class Cotegorys extends SliverPersistentHeaderDelegate {
               Padding(
                 padding: const EdgeInsets.all(15),
                 child: SizedBox(
-                  height: 110,
+                  height: 110.h,
                   width: double.infinity,
                   child: ListView.separated(
                     physics: const BouncingScrollPhysics(),
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(width: 26),
+                    separatorBuilder: (context, index) => SizedBox(width: 26.w),
                     itemCount: categories.length,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
