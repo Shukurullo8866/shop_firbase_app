@@ -38,8 +38,8 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.white70,
           centerTitle: true,
           title: Padding(
-            padding: const EdgeInsets.only(top: 14),
-            child: Image.asset(AppImage.d_r, height: 100, width: 190),
+            padding: const EdgeInsets.only(top: 14).r,
+            child: Image.asset(AppImage.d_r, height: 100.h, width: 190.w),
           ),
           actions: [
             IconButton(
@@ -50,11 +50,10 @@ class _HomePageState extends State<HomePage> {
                 icon: const Icon(Icons.search_rounded, color: Colors.orange))
           ],
           leading: IconButton(
-            onPressed: () {
-              _key.currentState!.openDrawer();
-            },
-            icon: const Icon(Icons.menu, color: Colors.orange),
-          )),
+              onPressed: () {
+                _key.currentState!.openDrawer();
+              },
+              icon: const Icon(Icons.menu, color: Colors.orange))),
       drawer: MyDrawer(
         IsNightMode: true,
         onChanged: (value) {},
@@ -65,7 +64,6 @@ class _HomePageState extends State<HomePage> {
           SliverPersistentHeader(
               delegate: DiscountWidget(screenHeight: height(context))),
           SliverToBoxAdapter(child: SizedBox(height: 15.h)),
-
           SliverPersistentHeader(
               delegate: CategoryTitleWidget(
                   screenHeight: height(context),
@@ -74,7 +72,7 @@ class _HomePageState extends State<HomePage> {
           SliverToBoxAdapter(
             child: Container(
               color: Colors.transparent,
-              height: 120.0,
+              height: 120.0.h,
               child: Center(
                 child: StreamBuilder<List<CategoryModel>>(
                   stream:
@@ -89,14 +87,14 @@ class _HomePageState extends State<HomePage> {
                     if (snapshot.hasData) {
                       List<CategoryModel> categories = snapshot.data!;
                       return Container(
-                        margin: const EdgeInsets.only(left: 10, right: 10),
+                        margin: const EdgeInsets.only(left: 10, right: 10).r,
                         color: Colors.transparent,
-                        height: 95,
+                        height: 95.h,
                         width: double.infinity,
                         child: ListView.separated(
                           physics: const BouncingScrollPhysics(),
                           separatorBuilder: (context, index) =>
-                              const SizedBox(width: 20),
+                              SizedBox(width: 20.w),
                           itemCount: categories.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {

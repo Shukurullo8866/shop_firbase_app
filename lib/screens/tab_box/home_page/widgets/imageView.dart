@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:shop_firbase_app/utils/app_image.dart';
 
@@ -15,8 +15,8 @@ class ImageView extends StatelessWidget {
       appBar: AppBar(
          centerTitle: true,
         title: Padding(
-          padding: const EdgeInsets.only(top: 14),
-          child: Image.asset(AppImage.d_r, height: 100, width: 190),
+          padding: const EdgeInsets.only(top: 14).r,
+          child: Image.asset(AppImage.d_r, height: 100.h, width: 190.w),
           
         ),
         shadowColor: Colors.white70,
