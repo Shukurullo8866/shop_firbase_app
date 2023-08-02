@@ -28,6 +28,7 @@ class MyTextStyle {
     fontSize: 14,
     color: MyColors.textColor,
   );
+  
 
   // ignore: prefer_const_constructors
   static final TextStyle sfProSemibold = TextStyle(
@@ -61,20 +62,6 @@ class MyTextStyle {
     color: MyColors.textColor,
   );
 }
-/*
-
-    CREATED BY: BAKHROMJON POLAT
-    CREATED AT: Sep 27 2022 11:12
-
-    Github: https://github.com/BahromjonPolat
-    Linked In: https://linkedin.com/in/bahromjon-polat
-    Telegram: https://t.me/BahromjonPolat
-
-    Description: Decoration shapes which used in application
-
-*/
-
-
 
 class AppShape {
   static circularBorder({double radius = 8.0}) => RoundedRectangleBorder(
@@ -122,9 +109,6 @@ class AppTextStyle {
   static TextStyle regular({double size = 16.0, Color? color}) {
     return _getTextStyle(size, FontWeight.w400, color);
   }
-
-
-
 // bold text style
   static TextStyle bold({double size = 22.0, Color? color}) {
     return _getTextStyle(size, FontWeight.bold, color);
