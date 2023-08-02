@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -28,83 +30,80 @@ int isOn = 0;
 class _InfoPageState extends State<InfoPage> {
   @override
   Widget build(BuildContext context) {
+    context.read<OrdersViewModel>().userOrders.map(
+        (e) => e.productId == widget.getData.productId ? isOn = 1 : isOn = 0);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white70,
         centerTitle: true,
         title: Padding(
-          padding: const EdgeInsets.only(top: 14),
-          child: Image.asset(AppImage.d_r, height: 100, width: 190),
+          padding: const EdgeInsets.only(top: 14).r,
+          child: Image.asset(AppImage.d_r, height: 100.h, width: 190.w),
         ),
         actions: [
           IconButton(
             onPressed: () {
-              setState(() {
-                if (isOn == 0) {
-                  isOn += 1;
-                  setState(() {});
-                  print("ididididididididididididididididididid");
-                  context
-                      .read<OrdersViewModel>()
-                      .userOrders
-                      .map((e) => print(e..productId.toString()));
-                  print("ssssssssssssssssssssssssssssssssssssssssssssS");
-                  print(isOn.toString());
-                  print(widget.getData.productId.toString());
-                  OrderModel orderModel = OrderModel(
-                    orderId: widget.getData.productId,
-                    productId: widget.getData.productId,
-                    count: 1,
-                    totalPrice: widget.getData.price,
-                    createdAt: DateTime.now().toString(),
-                    userId: context.read<ProfileViewModel>().user!.uid,
-                    orderStatus: widget.getData.price.toString(),
-                    productName: widget.getData.productName,
-                    productImages: widget.getData.productImages,
-                  );
-                  ProductModel productModel = ProductModel(
-                    count: widget.getData.count,
-                    price: widget.getData.price,
-                    productImages: widget.getData.productImages,
-                    categoryId: widget.getData.categoryId,
-                    productId: widget.getData.productId,
-                    productName: widget.getData.productName,
-                    description: widget.getData.description,
-                    createdAt: widget.getData.createdAt,
-                    currency: widget.getData.currency,
-                    light: true,
-                  );
-
-                  print(isOn);
-                } else if (isOn != 0) {
-                  isOn = 0;
-                  setState(() {});
-                  print(
-                      "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDelet");
-                  print(widget.getData.productId.toString());
-                  print(isOn.toString());
-
-                  Provider.of<OrdersViewModel>(context, listen: false)
-                      .deleteOrder(docId: widget.getData.productId);
-
-                  ProductModel productModel = ProductModel(
-                    count: widget.getData.count,
-                    price: widget.getData.price,
-                    productImages: widget.getData.productImages,
-                    categoryId: widget.getData.categoryId,
-                    productId: widget.getData.productId,
-                    productName: widget.getData.productName,
-                    description: widget.getData.description,
-                    createdAt: widget.getData.createdAt,
-                    currency: widget.getData.currency,
-                    light: false,
-                  );
-                  context.read<ProductViewModel>().updateProduct(productModel);
-                }
-              });
+              setState(
+                () {
+                  context.read<OrdersViewModel>().userOrders.map((e) =>
+                      e.productId == widget.getData.productId
+                          ? isOn = 1
+                          : isOn = 0);
+                  if (isOn == 0) {
+                    isOn = 1;
+                    setState(() {});
+                    OrderModel orderModel = OrderModel(
+                      orderId: widget.getData.productId,
+                      productId: widget.getData.productId,
+                      count: 1,
+                      totalPrice: widget.getData.price,
+                      createdAt: DateTime.now().toString(),
+                      userId: context.read<ProfileViewModel>().user!.uid,
+                      orderStatus: widget.getData.price.toString(),
+                      productName: widget.getData.productName,
+                      productImages: widget.getData.productImages,
+                    );
+                    ProductModel productModel = ProductModel(
+                      count: widget.getData.count,
+                      price: widget.getData.price,
+                      productImages: widget.getData.productImages,
+                      categoryId: widget.getData.categoryId,
+                      productId: widget.getData.productId,
+                      productName: widget.getData.productName,
+                      description: widget.getData.description,
+                      createdAt: widget.getData.createdAt,
+                      currency: widget.getData.currency,
+                      light: true,
+                    );
+                    Provider.of<OrdersViewModel>(context, listen: false)
+                        .addOrder(orderModel);
+                    print(isOn);
+                  } else if (isOn != 0) {
+                    isOn = 0;
+                    setState(() {});
+                    Provider.of<OrdersViewModel>(context, listen: false)
+                        .deleteOrder(docId: widget.getData.productId);
+                    ProductModel productModel = ProductModel(
+                      count: widget.getData.count,
+                      price: widget.getData.price,
+                      productImages: widget.getData.productImages,
+                      categoryId: widget.getData.categoryId,
+                      productId: widget.getData.productId,
+                      productName: widget.getData.productName,
+                      description: widget.getData.description,
+                      createdAt: widget.getData.createdAt,
+                      currency: widget.getData.currency,
+                      light: false,
+                    );
+                    context
+                        .read<ProductViewModel>()
+                        .updateProduct(productModel);
+                  }
+                },
+              );
             },
             icon: Icon(
-              widget.getData.light ? Icons.favorite : Icons.favorite_border,
+              isOn == 0 ? Icons.favorite_border : Icons.favorite,
               color: Colors.orange,
             ),
           )
@@ -156,32 +155,29 @@ class _InfoPageState extends State<InfoPage> {
                           ),
                         ),
                 ),
-                const Divider(
-                    height: 3.0,
+                Divider(
+                    height: 3.0.h,
                     thickness: 0.5,
-                    color: Color.fromARGB(231, 228, 157, 76),
+                    color: const Color.fromARGB(231, 228, 157, 76),
                     indent: 0.1,
                     endIndent: 0.1),
-                const SizedBox(height: 15),
+                SizedBox(height: 15.h),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "  ${widget.getData.productName}:",
-                      style: const TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w700,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "  ${widget.getData.productName}:",
+                        style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
-                    ),
-                    Text(
-                      " ${widget.getData.price.toString()} ${widget.getData.currency} ",
-                      style: const TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ],
-                ),
+                      Text(
+                          " ${widget.getData.price.toString()} ${widget.getData.currency} ",
+                          style: const TextStyle(
+                            fontSize: 22,
+                          ))
+                    ]),
                 SizedBox(height: 14.h),
                 const Divider(
                     height: 8.0,
@@ -189,22 +185,24 @@ class _InfoPageState extends State<InfoPage> {
                     color: Color.fromARGB(231, 228, 157, 76),
                     indent: 1.0,
                     endIndent: 1.0),
-                    MyUtils.MyTextRow("Omborda mavjud:","${widget.getData.count} - kub"),
-                    MyUtils.MyTextRow(
+                MyUtils.MyTextRow(
+                    "Omborda mavjud:", "${widget.getData.count} - kub"),
+                MyUtils.MyTextRow(
                     "Kelgan sanasi:",
                     AppFormatter.orderTime(
                         DateTime.parse(widget.getData.createdAt.toString()))),
                 const SizedBox(height: 8),
-                MyUtils.MyTextColumn("Mahsulot haqida:", widget.getData.description),
+                MyUtils.MyTextColumn(
+                    "Mahsulot haqida:", widget.getData.description),
                 const Divider(
                     height: 1.0,
                     thickness: 0.8,
                     color: Color.fromARGB(231, 228, 157, 76),
                     indent: 1.0,
                     endIndent: 1.0),
-                const SizedBox(height: 41),
+                SizedBox(height: 41.h),
                 SizedBox(
-                  height: 220,
+                  height: 220.h,
                   child: Consumer<ProductViewModel>(
                     builder: (context, productViewModel, child) {
                       if (productViewModel.products.isNotEmpty) {
@@ -220,15 +218,16 @@ class _InfoPageState extends State<InfoPage> {
                               return ZoomTapAnimation(
                                 onTap: () {
                                   Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (_) =>
-                                            InfoPage(getData: product),
-                                      ));
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) =>
+                                          InfoPage(getData: product),
+                                    ),
+                                  );
                                 },
                                 child: SizedBox(
-                                  height: 150,
-                                  width: 180,
+                                  height: 150.h,
+                                  width: 180.w,
                                   child: ProductsScreen(data: product),
                                 ),
                               );
@@ -249,11 +248,11 @@ class _InfoPageState extends State<InfoPage> {
               ],
             ),
             Positioned(
-              bottom: 0.1,
-              left: 0.1,
-              right: 0.1,
+              bottom: 0.1.r,
+              left: 0.1.r,
+              right: 0.1.r,
               child: Container(
-                padding: const EdgeInsets.only(right: 5, left: 5),
+                padding: const EdgeInsets.only(right: 5, left: 5).r,
                 width: MediaQuery.of(context).size.width,
                 height: 70,
                 color: Colors.transparent,
