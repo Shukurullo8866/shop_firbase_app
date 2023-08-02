@@ -138,9 +138,7 @@ class _InfoPageState extends State<InfoPage> {
                     ),
                   ),
                   child: widget.getData.productImages.isEmpty
-                      ? SizedBox(
-                          height: 280.h,
-                        )
+                      ? SizedBox(height: 280.h)
                       : Container(
                           height: 280,
                           color: Colors.transparent,
@@ -175,8 +173,7 @@ class _InfoPageState extends State<InfoPage> {
                       Text(
                           " ${widget.getData.price.toString()} ${widget.getData.currency} ",
                           style: const TextStyle(
-                            fontSize: 22,
-                          ))
+                              fontSize: 22, fontWeight: FontWeight.bold))
                     ]),
                 SizedBox(height: 14.h),
                 const Divider(

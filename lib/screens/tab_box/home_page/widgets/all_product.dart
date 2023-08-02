@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:shop_firbase_app/data/model/product_model.dart';
 import 'package:shop_firbase_app/utils/my_utils.dart';
+import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 import '../info_page.dart';
 
 class ProductsScreen extends StatelessWidget {
@@ -12,7 +13,7 @@ class ProductsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return ZoomTapAnimation(
       onTap: () {
         Navigator.push(
           context,
@@ -27,11 +28,19 @@ class ProductsScreen extends StatelessWidget {
         height: 150.h,
         width: 100.w,
         margin: EdgeInsets.only(left: 8.r, right: 8.r),
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white,
-          border: Border.all(
-              width: 0.8.w, color: const Color.fromARGB(231, 228, 157, 76)),
-          borderRadius: const BorderRadius.all(
+          boxShadow: [
+            BoxShadow(
+                color: Color.fromARGB(231, 228, 157, 76),
+                spreadRadius: 1,
+                blurRadius: 1.5,
+                offset: Offset(1, 1),
+                blurStyle: BlurStyle
+                    .solid // Specifies the shadow position (right and below)
+                ),
+          ],
+          borderRadius: BorderRadius.all(
             Radius.circular(10),
           ),
         ),
@@ -74,9 +83,8 @@ class ProductsScreen extends StatelessWidget {
             //
             MyUtils.PriseTextAtHome(context, Colors.green, "${data.count} kub",
                 "Mavjud: ", Colors.black),
-
             SizedBox(height: 5.h),
-            //
+
             MyUtils.PriseTextAtHome(
               context,
               Colors.black,

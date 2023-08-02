@@ -18,25 +18,25 @@ class CategoryItem extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Container(
-          width: 70.w,
-          height: 70.h,
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 1.5,
-              color: const Color.fromARGB(231, 228, 157, 76),
+        InkWell(
+          onTap: onCategoryTap,
+          child: Container(
+            width: 70.w,
+            height: 70.h,
+            decoration: BoxDecoration(
+              border: Border.all(
+                width: 2.8,
+                color: const Color.fromARGB(231, 236, 156, 64),
+              ),
+              borderRadius: BorderRadius.circular(10),
             ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: InkWell(
-            onTap: onCategoryTap,
             child: ClipRRect(
               borderRadius: const BorderRadius.all(
-                Radius.circular(9.6),
+                Radius.circular(6.5),
               ),
               child: Image.network(
                 data.imageUrl,
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               ),
             ),
           ),
