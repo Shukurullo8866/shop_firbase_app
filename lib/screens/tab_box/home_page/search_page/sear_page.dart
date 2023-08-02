@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../utils/app_image.dart';
 
 class SearchPage extends StatefulWidget {
@@ -21,7 +20,7 @@ class _SearchPageState extends State<SearchPage> {
         centerTitle: true,
         title: Padding(
           padding: const EdgeInsets.only(top: 14),
-          child: Image.asset(AppImage.d_r, height: 100, width: 190),
+          child: Image.asset(AppImage.d_r, height: 100.h, width: 190.w),
         ),
         leading: IconButton(
           onPressed: () {
@@ -38,7 +37,7 @@ class _SearchPageState extends State<SearchPage> {
           children: [
             SizedBox(height: 25.h),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0).r,
               child: TextField(
                 cursorColor: Colors.black,
                 onChanged: (text) {
@@ -55,10 +54,16 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
             SizedBox(height: 20.h),
-            Text(
-              'You typed: $_inputText',
-              style: const TextStyle(fontSize: 18),
-            ),
+            if (_inputText.isEmpty)
+              const SizedBox()
+            else
+              const Text(
+                 "<Qidiruv qismi tez kunda ishga tushadi!> ",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.red,
+                ),
+              ),
           ],
         ),
       ),
