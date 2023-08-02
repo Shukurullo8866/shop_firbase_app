@@ -127,22 +127,22 @@ class _ProfilePageState extends State<ProfilePage> {
                         height: 50,
                         width: 350,
                         decoration: BoxDecoration(
-                           color: Colors.white,
-                           borderRadius: BorderRadius.circular(16),
-                         ),
-                         child: Row(
-                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                           children: [
-                             const Text("Phone Number : "),
-                             Text(user.phoneNumber!.isEmpty
-                                 ? "not number"
-                                 : user.phoneNumber.toString()),
-                           ],
-                         ),
-                       ),
-                       Text(profileViewModel.user!.phoneNumber.toString()),
-                       Text(profileViewModel.user!.phoneNumber.toString()),
-                       Text(profileViewModel.user!.metadata.toString()),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text("Phone Number : "),
+                            Text(user.phoneNumber!.isEmpty
+                                ? "not number"
+                                : user.phoneNumber.toString()),
+                          ],
+                        ),
+                      ),
+                      Text(profileViewModel.user!.phoneNumber.toString()),
+                      Text(profileViewModel.user!.phoneNumber.toString()),
+                      Text(profileViewModel.user!.metadata.toString()),
                       isLoading
                           ? Container(
                               color: Colors.red, height: 100, width: 100)

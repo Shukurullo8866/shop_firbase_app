@@ -23,7 +23,7 @@ class ProductsGridWidget extends StatelessWidget {
             ),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-               childAspectRatio: 0.88,
+              childAspectRatio: 0.88,
               mainAxisSpacing: 8.5,
               crossAxisSpacing: 5,
             ),
@@ -31,7 +31,6 @@ class ProductsGridWidget extends StatelessWidget {
         } else {
           return const SliverToBoxAdapter(child: Center(child: Text("error")));
         }
-        
       },
     );
   }
