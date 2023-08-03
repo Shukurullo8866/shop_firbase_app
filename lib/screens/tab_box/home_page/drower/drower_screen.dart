@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:shop_firbase_app/utils/app_image.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -14,10 +16,7 @@ class MyDrawer extends StatefulWidget {
 }
 
 class _MyDrawerState extends State<MyDrawer> {
-
-
   Future<void> _getMode() async {
-    
     setState(() {});
   }
 
@@ -36,18 +35,19 @@ class _MyDrawerState extends State<MyDrawer> {
           DrawerHeader(
             padding: const EdgeInsets.all(25).r,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  width: 162.5.w,
-                  height: 88.64.h,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
                   child: Image.asset(
-                    AppImage.d_r
+                    AppImage.d_r,
+                    fit: BoxFit.cover,
+                    width: 110.5,
+                    height: 110.5,
                   ),
                 ),
-                // SizedBox(
-                //   child: Text('Ishonch 571',
-                //       style: Theme.of(context).textTheme.bodyLarge),
-                // ),
               ],
             ),
           ),
@@ -91,7 +91,7 @@ class _MyDrawerState extends State<MyDrawer> {
                   child: ListTile(
                     leading: const Icon(Icons.info_outline),
                     title: Text(
-                      "Haqimizda".tr(),
+                      "Biz Haqimizda".tr(),
                       style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           fontSize: 16.sp, fontWeight: FontWeight.w700),
                     ),

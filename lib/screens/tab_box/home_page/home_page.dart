@@ -10,7 +10,6 @@ import 'package:shop_firbase_app/screens/tab_box/home_page/widgets/category_titl
 import 'package:shop_firbase_app/screens/tab_box/home_page/widgets/cotegory_item.dart';
 import 'package:shop_firbase_app/screens/tab_box/home_page/widgets/products_grid_widget.dart';
 import 'package:shop_firbase_app/view_model/categoryries_view_model.dart';
-import 'package:shop_firbase_app/view_model/product_view_model.dart';
 
 import '../../../utils/app_image.dart';
 import '../../../utils/const.dart';
@@ -28,11 +27,12 @@ final GlobalKey<ScaffoldState> _key = GlobalKey();
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    var counts = context.read<ProductViewModel>().products.length;
-    print(
-        "***************************************---------------------***********************");
-    print(counts);
     return Scaffold(
+      key: _key, // Assign the key to Scaffold.
+      drawer: MyDrawer(
+        IsNightMode: true,
+        onChanged: (value) {},
+      ),
       backgroundColor: Colors.white,
       appBar: AppBar(
           backgroundColor: Colors.white70,
@@ -54,10 +54,7 @@ class _HomePageState extends State<HomePage> {
                 _key.currentState!.openDrawer();
               },
               icon: const Icon(Icons.menu, color: Colors.orange))),
-      drawer: MyDrawer(
-        IsNightMode: true,
-        onChanged: (value) {},
-      ),
+
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(child: SizedBox(height: 15.h)),
