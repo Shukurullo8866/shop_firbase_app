@@ -23,33 +23,32 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white70,
-        centerTitle: true,
-        title: Padding(
-          padding: const EdgeInsets.only(top: 14),
-          child: Image.asset(AppImage.d_r, height: 100, width: 190),
-        ),
-        actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => const AdminScreen(),
-                  ),
-                );
-              },
-              icon: const Icon(
-                Icons.system_security_update,
-                color: Colors.orange,
+          backgroundColor: Colors.white70,
+          centerTitle: true,
+          title: Padding(
+            padding: const EdgeInsets.only(top: 14),
+            child: Image.asset(AppImage.d_r, height: 100, width: 190),
+          ),
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const AdminScreen(),
+                    ),
+                  );
+                },
+                icon: const Icon(
+                  Icons.system_security_update,
+                  color: Colors.orange,
+                ),
               ),
             ),
-          ),
-        ],
-        leading: const SizedBox()
-      ),
+          ],
+          leading: const SizedBox()),
       body: SingleChildScrollView(
         child: Consumer<ProfileViewModel>(
           builder: (context, profileViewModel, child) {
@@ -81,11 +80,11 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: const Text("Log Out"),
                       ),
                       Container(
-                        padding: const EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(10),
                         height: 50,
                         width: 350,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: const Color.fromARGB(255, 248, 225, 205),
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Row(
@@ -100,11 +99,11 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       SizedBox(height: 20.h),
                       Container(
-                        padding: const EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(10),
                         height: 50,
                         width: 350,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: const Color.fromARGB(255, 248, 225, 205),
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Row(
@@ -119,10 +118,11 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       SizedBox(height: 20.h),
                       Container(
+                        padding: const EdgeInsets.all(10),
                         height: 50,
                         width: 350,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: const Color.fromARGB(255, 248, 225, 205),
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Row(

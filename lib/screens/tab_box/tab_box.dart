@@ -22,7 +22,7 @@ class _TabBoxState extends State<TabBox> {
 
   @override
   void initState() {
-    screens.add(HomePage());
+    screens.add(const HomePage());
     screens.add(const CardPage());
     screens.add(const GoogleMapScreen());
 
@@ -44,7 +44,6 @@ class _TabBoxState extends State<TabBox> {
     branchModel.isActive = true;
     branchModel.sId = "1";
     branchModel.location = Location(latitude: 41.334122, longitude: 69.144771);
-
     super.initState();
   }
 
@@ -62,8 +61,11 @@ class _TabBoxState extends State<TabBox> {
         items: const <Widget>[
           Icon(CupertinoIcons.home, size: 28),
           Icon(Icons.favorite_border_outlined, size: 28),
-          Icon(CupertinoIcons.map_pin_ellipse,
-              size: 28, color: Color.fromARGB(255, 202, 5, 5)),
+          Icon(
+            CupertinoIcons.map_pin_ellipse,
+            size: 28,
+            color: Color.fromARGB(255, 202, 5, 5),
+          ),
           Icon(CupertinoIcons.person, size: 28),
         ],
         color: const Color.fromARGB(255, 252, 173, 93),

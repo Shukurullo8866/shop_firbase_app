@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _key, // Assign the key to Scaffold.
+      key: _key, 
       drawer: MyDrawer(
         IsNightMode: true,
         onChanged: (value) {},
