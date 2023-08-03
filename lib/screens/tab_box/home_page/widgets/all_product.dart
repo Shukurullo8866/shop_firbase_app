@@ -33,11 +33,11 @@ class ProductsScreen extends StatelessWidget {
           boxShadow: [
             BoxShadow(
                 color: Color.fromARGB(231, 228, 157, 76),
-                spreadRadius: 1,
-                blurRadius: 1.5,
-                offset: Offset(1, 1),
+                spreadRadius: 1.1,
+                blurRadius: 1.3,
+                offset: Offset(1.5, 2),
                 blurStyle: BlurStyle
-                    .solid // Specifies the shadow position (right and below)
+                    .normal // Specifies the shadow position (right and below
                 ),
           ],
           borderRadius: BorderRadius.all(
@@ -73,10 +73,7 @@ class ProductsScreen extends StatelessWidget {
                     Icons.signal_cellular_connected_no_internet_0_bar_outlined),
               ),
             ),
-            SizedBox(
-              height: 10.h,
-              width: 30.w,
-            ),
+            SizedBox(height: 7.h),
             MyUtils.MyTextSort(30, data.productName, 26),
             MyUtils.AppDvider(),
             SizedBox(height: 2.h),

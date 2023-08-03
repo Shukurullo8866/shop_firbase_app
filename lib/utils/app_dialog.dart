@@ -1,55 +1,41 @@
-/*
-    CREATED BY: BAKHROMJON POLAT
-    CREATED AT: Sep 28 2022 11:30
-
-    Github: https://github.com/BahromjonPolat
-    Linked In: https://linkedin.com/in/bahromjon-polat
-    Telegram: https://t.me/BahromjonPolat
-
-    Description: App dialogs
-
-*/
-
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shop_firbase_app/utils/color.dart';
 import 'package:shop_firbase_app/utils/style.dart';
 
-
 import '../data/model/branch/branch_model.dart';
 import '../screens/tab_box/map/widget/branch_info.dart';
-
 
 class AppDialog {
   final BuildContext context;
   const AppDialog(this.context);
 
-  // ===== GENDER DIALOG ===================================================//
-  // Future genderDialog(TextEditingController controller) async {
-  //   showDialog(
-  //     context: context,
-  //     builder: (_) => Dialog(
-  //       insetPadding: EdgeInsets.zero,
-  //       shape: AppShape.circularBorder(radius: 20.0),
-  //       elevation: 0,
-  //       backgroundColor: Colors.white,
-  //       child: SizedBox(
-  //         width: ScreenUtil().scaleWidth * .9,
-  //         height: 120.h,
-  //         child: Column(
-  //           mainAxisAlignment: MainAxisAlignment.center,
-  //           crossAxisAlignment: CrossAxisAlignment.start,
-  //           children: [
-  //             _setGender(LocaleKeys.man.tr(), controller),
-  //             SizedBox(height: ScreenUtil.defaultSize.height * .02),
-  //             _setGender(LocaleKeys.woman.tr(), controller),
-  //           ],
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
+  //===== GENDER DIALOG ===================================================//
+  Future genderDialog(TextEditingController controller) async {
+    showDialog(
+      context: context,
+      builder: (_) => Dialog(
+        insetPadding: EdgeInsets.zero,
+        shape: AppShape.circularBorder(radius: 20.0),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        child: SizedBox(
+          width: ScreenUtil().scaleWidth * .9,
+          height: 120.h,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _setGender("nmadur".tr(), controller),
+              SizedBox(height: ScreenUtil.defaultSize.height * .02),
+              _setGender("women".tr(), controller),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
   GestureDetector _setGender(
     String gender,
@@ -63,7 +49,9 @@ class AppDialog {
         child: Container(
           width: double.infinity,
           padding: EdgeInsets.only(left: 16.w),
-          child: Text(gender, ),
+          child: Text(
+            gender,
+          ),
         ),
       );
 
