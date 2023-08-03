@@ -1,5 +1,4 @@
 // ignore_for_file: unused_local_variable
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +10,6 @@ import 'package:shop_firbase_app/screens/tab_box/home_page/widgets/imageView.dar
 import 'package:shop_firbase_app/utils/my_utils.dart';
 import 'package:shop_firbase_app/view_model/order_view_model.dart';
 import 'package:shop_firbase_app/view_model/profile_view_model.dart';
-import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 import '../../../utils/app_formatter.dart';
 import '../../../utils/app_image.dart';
 import '../../../view_model/product_view_model.dart';
@@ -20,7 +18,6 @@ import '../tab_box.dart';
 class InfoPage extends StatefulWidget {
   const InfoPage({super.key, required this.getData});
   final ProductModel getData;
-
   @override
   State<InfoPage> createState() => _InfoPageState();
 }
@@ -77,7 +74,6 @@ class _InfoPageState extends State<InfoPage> {
                     );
                     Provider.of<OrdersViewModel>(context, listen: false)
                         .addOrder(orderModel);
-                    print(isOn);
                   } else if (isOn != 0) {
                     isOn = 0;
                     setState(() {});
@@ -112,12 +108,7 @@ class _InfoPageState extends State<InfoPage> {
           icon: const Icon(Icons.arrow_back_ios),
           color: const Color.fromARGB(255, 221, 133, 2),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => const TabBox(),
-              ),
-            );
+            Navigator.pop(context);
           },
         ),
       ),
@@ -198,8 +189,9 @@ class _InfoPageState extends State<InfoPage> {
                     indent: 1.0,
                     endIndent: 1.0),
                 SizedBox(height: 41.h),
-                SizedBox(
-                  height: 220.h,
+                Container(
+                  color: Colors.white,
+                  height: 250.h,
                   child: Consumer<ProductViewModel>(
                     builder: (context, productViewModel, child) {
                       if (productViewModel.products.isNotEmpty) {
@@ -212,7 +204,7 @@ class _InfoPageState extends State<InfoPage> {
                             if (product.categoryId ==
                                     widget.getData.categoryId &&
                                 widget.getData.productId != product.productId) {
-                              return ZoomTapAnimation(
+                              return InkWell(
                                 onTap: () {
                                   Navigator.push(
                                     context,
@@ -222,9 +214,11 @@ class _InfoPageState extends State<InfoPage> {
                                     ),
                                   );
                                 },
-                                child: SizedBox(
-                                  height: 150.h,
+                                child: Container(
+                                  height: 120.h,
                                   width: 180.w,
+                                  padding: const EdgeInsets.only(
+                                      top: 10, bottom: 20, right: 6, left: 6),
                                   child: ProductsScreen(data: product),
                                 ),
                               );

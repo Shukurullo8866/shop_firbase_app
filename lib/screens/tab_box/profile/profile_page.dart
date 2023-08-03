@@ -42,18 +42,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 );
               },
               icon: const Icon(
-                Icons.add_box_outlined,
+                Icons.system_security_update,
                 color: Colors.orange,
               ),
             ),
           ),
         ],
-        leading: IconButton(
-          icon: const Icon(Icons.menu, color: Colors.orange),
-          onPressed: () {
-            context.read<ProfileViewModel>().fetchUser();
-          },
-        ),
+        leading: const SizedBox()
       ),
       body: SingleChildScrollView(
         child: Consumer<ProfileViewModel>(
