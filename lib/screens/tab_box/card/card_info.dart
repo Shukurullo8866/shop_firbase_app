@@ -27,20 +27,21 @@ class OrderItemsScreen extends StatelessWidget {
         //);
       },
       child: Container(
-        height: 150.h,
+        height: 190.h,
         width: 100.w,
         margin: EdgeInsets.only(left: 8.r, right: 8.r),
         decoration: const BoxDecoration(
           color: Colors.white,
-           boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(231, 228, 157, 76),
-                  spreadRadius: 1,
-                  blurRadius: 1.5,
-                  offset: Offset(1, 1),
-                  blurStyle: BlurStyle.solid // Specifies the shadow position (right and below)
+          boxShadow: [
+            BoxShadow(
+                color: Color.fromARGB(231, 228, 157, 76),
+                spreadRadius: 1.1,
+                blurRadius: 1.3,
+                offset: Offset(1.5, 2),
+                blurStyle: BlurStyle
+                    .normal // Specifies the shadow position (right and below
                 ),
-              ],
+          ],
           // border: Border.all(
           //     width: 0.8.w, color: const Color.fromARGB(231, 228, 157, 76)),
           borderRadius: BorderRadius.all(
@@ -67,7 +68,7 @@ class OrderItemsScreen extends StatelessWidget {
                     child: Container(
                       width: 120.w,
                       height: 100.h,
-                      color: Colors.white,
+                      color: Colors.red,
                     ),
                   );
                 },
@@ -79,13 +80,13 @@ class OrderItemsScreen extends StatelessWidget {
               height: 10.h,
               width: 30.w,
             ),
-              MyUtils.MyTextSort(30, data.productName, 26),
+            MyUtils.MyTextSort(30, data.productName, 26),
             MyUtils.AppDvider(),
             SizedBox(height: 2.h),
             //
             MyUtils.PriseTextAtHome(context, Colors.green, "${data.count} kub",
                 "Mavjud: ", Colors.black),
-                SizedBox(height: 5.h),
+            SizedBox(height: 5.h),
             //
             MyUtils.PriseTextAtHome(
               context,
@@ -94,56 +95,6 @@ class OrderItemsScreen extends StatelessWidget {
               "Price: ",
               Colors.amber,
             ),
-            // Text(data.productName, style: MyTextStyle.sfProMedium),
-            // Divider(
-            //   height: 8.0.h,
-            //   thickness: 0.8,
-            //   color: Color.fromARGB(231, 228, 157, 76),
-            //   indent: 21.0,
-            //   endIndent: 21.0,
-            // ),
-            // SizedBox(height: 2.h),
-            // RichText(
-            //   text: TextSpan(
-            //     children: [
-            //       TextSpan(
-            //         text: "Mavjud: ".tr(),
-            //         style: Theme.of(context).textTheme.titleLarge!.copyWith(
-            //             color: Colors.green,
-            //             fontSize: 14.sp,
-            //             fontWeight: FontWeight.w600),
-            //       ),
-            //       TextSpan(
-            //         text: "${data.count.toString()} kub",
-            //         style: Theme.of(context).textTheme.titleLarge!.copyWith(
-            //             color: Colors.black,
-            //             fontSize: 14.sp,
-            //             fontWeight: FontWeight.w600),
-            //       )
-            //     ],
-            //   ),
-            // ),
-            // SizedBox(height: 5.h),
-            // RichText(
-            //   text: TextSpan(
-            //     children: [
-            //       TextSpan(
-            //         text: "Price: ".tr(),
-            //         style: Theme.of(context)
-            //             .textTheme
-            //             .titleLarge!
-            //             .copyWith(fontSize: 14.sp, fontWeight: FontWeight.w600),
-            //       ),
-            //       TextSpan(
-            //         text: '${data.totalPrice} ${data.orderStatus}',
-            //         style: Theme.of(context).textTheme.titleLarge!.copyWith(
-            //             color: Colors.amber,
-            //             fontSize: 14.sp,
-            //             fontWeight: FontWeight.w600),
-            //       )
-            //     ],
-            //   ),
-            // ),
           ],
         ),
       ),

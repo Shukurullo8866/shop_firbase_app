@@ -36,11 +36,10 @@ class _CardPageState extends State<CardPage> {
             return GridView.builder(
               shrinkWrap: true,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, // Number of columns in the grid
-                mainAxisSpacing: 10.0, // Spacing between grid items vertically
-                crossAxisSpacing:
-                    10.0, // Spacing between grid items horizontally
-                childAspectRatio: 1.0, // Aspect ratio of each grid item
+                crossAxisCount: 2,
+              childAspectRatio: 0.92,
+              mainAxisSpacing: 8.5,
+              crossAxisSpacing: 5,
               ),
               scrollDirection: Axis.vertical,
               itemCount: orderViewModel.userOrders.length,
