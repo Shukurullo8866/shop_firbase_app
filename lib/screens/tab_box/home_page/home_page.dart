@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _key, 
+      key: _key,
       drawer: MyDrawer(
         IsNightMode: true,
         onChanged: (value) {},
@@ -54,7 +54,6 @@ class _HomePageState extends State<HomePage> {
                 _key.currentState!.openDrawer();
               },
               icon: const Icon(Icons.menu, color: Colors.orange))),
-
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(child: SizedBox(height: 15.h)),

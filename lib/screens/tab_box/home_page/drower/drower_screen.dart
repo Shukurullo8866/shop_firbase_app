@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:shop_firbase_app/utils/app_image.dart';
 
+import 'language/language_screen.dart';
+
 class MyDrawer extends StatefulWidget {
   bool IsNightMode;
   ValueChanged onChanged;
@@ -58,7 +60,10 @@ class _MyDrawerState extends State<MyDrawer> {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, "/languageChange");
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const LanguageScreen()));
                   },
                   child: ListTile(
                     leading: const Icon(Icons.language),

@@ -1,4 +1,5 @@
 // ignore_for_file: unused_local_variable
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -174,14 +175,14 @@ class _InfoPageState extends State<InfoPage> {
                     indent: 1.0,
                     endIndent: 1.0),
                 MyUtils.MyTextRow(
-                    "Omborda mavjud:", "${widget.getData.count} - kub"),
+                    "Omborda mavjud:".tr(), "${widget.getData.count} - kub".tr()),
                 MyUtils.MyTextRow(
-                    "Kelgan sanasi:",
+                    "Kelgan sanasi:".tr(),
                     AppFormatter.orderTime(
                         DateTime.parse(widget.getData.createdAt.toString()))),
                 const SizedBox(height: 8),
                 MyUtils.MyTextColumn(
-                    "Mahsulot haqida:", widget.getData.description),
+                    "Mahsulot haqida:".tr(), widget.getData.description),
                 const Divider(
                     height: 1.0,
                     thickness: 0.8,
