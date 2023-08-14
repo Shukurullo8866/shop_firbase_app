@@ -11,20 +11,21 @@ import 'package:shop_firbase_app/screens/tab_box/home_page/widgets/button.dart';
 import 'package:shop_firbase_app/utils/my_utils.dart';
 import 'package:shop_firbase_app/view_model/order_view_model.dart';
 import 'package:shop_firbase_app/view_model/profile_view_model.dart';
-import '../../../utils/app_formatter.dart';
-import '../../../utils/app_image.dart';
-import '../../../view_model/product_view_model.dart';
 
-class InfoPage extends StatefulWidget {
-  const InfoPage({super.key, required this.getData});
-  final ProductModel getData;
+import '../../../../utils/app_formatter.dart';
+import '../../../../utils/app_image.dart';
+import '../../../../view_model/product_view_model.dart';
+
+class FavoriteInfoPage extends StatefulWidget {
+  const FavoriteInfoPage({super.key, required this.getData});
+  final OrderModel getData;
   @override
-  State<InfoPage> createState() => _InfoPageState();
+  State<FavoriteInfoPage> createState() => _FavoriteInfoPageState();
 }
 
 int isOn = 0;
 
-class _InfoPageState extends State<InfoPage> {
+class _FavoriteInfoPageState extends State<FavoriteInfoPage> {
   @override
   Widget build(BuildContext context) {
     context.read<OrdersViewModel>().userOrders.map(
@@ -53,23 +54,23 @@ class _InfoPageState extends State<InfoPage> {
                       orderId: widget.getData.productId,
                       productId: widget.getData.productId,
                       count: 1,
-                      totalPrice: widget.getData.price,
+                      totalPrice: widget.getData.totalPrice,
                       createdAt: DateTime.now().toString(),
                       userId: context.read<ProfileViewModel>().user!.uid,
-                      orderStatus: widget.getData.price.toString(),
+                      orderStatus: widget.getData.totalPrice.toString(),
                       productName: widget.getData.productName,
                       productImages: widget.getData.productImages,
                     );
                     ProductModel productModel = ProductModel(
                       count: widget.getData.count,
-                      price: widget.getData.price,
+                      price: widget.getData.totalPrice,
                       productImages: widget.getData.productImages,
-                      categoryId: widget.getData.categoryId,
+                      categoryId: widget.getData.orderId,
                       productId: widget.getData.productId,
                       productName: widget.getData.productName,
-                      description: widget.getData.description,
+                      description: widget.getData.orderStatus,
                       createdAt: widget.getData.createdAt,
-                      currency: widget.getData.currency,
+                      currency: widget.getData.productName,
                       light: true,
                     );
                     Provider.of<OrdersViewModel>(context, listen: false)
@@ -79,21 +80,6 @@ class _InfoPageState extends State<InfoPage> {
                     setState(() {});
                     Provider.of<OrdersViewModel>(context, listen: false)
                         .deleteOrder(docId: widget.getData.productId);
-                    ProductModel productModel = ProductModel(
-                      count: widget.getData.count,
-                      price: widget.getData.price,
-                      productImages: widget.getData.productImages,
-                      categoryId: widget.getData.categoryId,
-                      productId: widget.getData.productId,
-                      productName: widget.getData.productName,
-                      description: widget.getData.description,
-                      createdAt: widget.getData.createdAt,
-                      currency: widget.getData.currency,
-                      light: false,
-                    );
-                    context
-                        .read<ProductViewModel>()
-                        .updateProduct(productModel);
                   }
                 },
               );
@@ -119,38 +105,49 @@ class _InfoPageState extends State<InfoPage> {
           children: [
             ListView(
               children: [
-                SizedBox(
-                  height: 300,
-                  child: widget.getData.productImages.isEmpty
-                      ? SizedBox(height: 280.h)
-                      : FullScreenWidget(
-                          disposeLevel: DisposeLevel.Medium,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.network(
-                              widget.getData.productImages[0],
-                              fit: BoxFit.cover,
+                Container(
+                    height: 300,
+                    child: widget.getData.productImages.isEmpty
+                        ? SizedBox(height: 280.h)
+                        : FullScreenWidget(
+                            disposeLevel: DisposeLevel.Medium,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.network(
+                                widget.getData.productImages[0],
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          ),
-                        ),
-                ),
-                MyUtils.hameDvider(),
+                          )),
+                Divider(
+                    height: 3.0.h,
+                    thickness: 0.5,
+                    color: const Color.fromARGB(231, 228, 157, 76),
+                    indent: 0.1,
+                    endIndent: 0.1),
                 SizedBox(height: 15.h),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: MyUtils.TextInfoName(
-                            19, widget.getData.productName, 19),
+                      Text(
+                        "  ${widget.getData.productName}:",
+                        style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                       Text(
-                          " ${widget.getData.price.toString()} ${widget.getData.currency} ",
+                          " ${widget.getData.orderStatus.toString()} ${widget.getData.orderStatus} ",
                           style: const TextStyle(
                               fontSize: 22, fontWeight: FontWeight.bold))
                     ]),
                 SizedBox(height: 14.h),
-                MyUtils.hameDvider(),
+                const Divider(
+                    height: 8.0,
+                    thickness: 0.8,
+                    color: Color.fromARGB(231, 228, 157, 76),
+                    indent: 1.0,
+                    endIndent: 1.0),
                 MyUtils.MyTextRow("Omborda mavjud:".tr(),
                     "${widget.getData.count} - kub".tr()),
                 MyUtils.MyTextRow(
@@ -159,8 +156,13 @@ class _InfoPageState extends State<InfoPage> {
                         DateTime.parse(widget.getData.createdAt.toString()))),
                 const SizedBox(height: 8),
                 MyUtils.MyTextColumn(
-                    "Mahsulot haqida:".tr(), widget.getData.description),
-                MyUtils.hameDvider(),
+                    "Mahsulot haqida:".tr(), widget.getData.orderStatus),
+                const Divider(
+                    height: 1.0,
+                    thickness: 0.8,
+                    color: Color.fromARGB(231, 228, 157, 76),
+                    indent: 1.0,
+                    endIndent: 1.0),
                 SizedBox(height: 41.h),
                 Container(
                   color: Colors.white,
@@ -174,18 +176,17 @@ class _InfoPageState extends State<InfoPage> {
                           itemCount: productViewModel.products.length,
                           itemBuilder: (BuildContext context, int index) {
                             var product = productViewModel.products[index];
-                            if (product.categoryId ==
-                                    widget.getData.categoryId &&
+                            if (product.categoryId == widget.getData.orderId &&
                                 widget.getData.productId != product.productId) {
                               return InkWell(
                                 onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) =>
-                                          InfoPage(getData: product),
-                                    ),
-                                  );
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (_) =>
+                                  //       //  FavoriteInfoPage(getData: product),
+                                  //   ),
+                                  // );
                                 },
                                 child: Container(
                                   height: 120.h,

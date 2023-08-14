@@ -75,7 +75,7 @@ class ProductsScreen extends StatelessWidget {
             ),
             SizedBox(height: 7.h),
             MyUtils.MyTextSort(30, data.productName, 26),
-            MyUtils.AppDvider(),
+            MyUtils.hameDvider(),
             SizedBox(height: 2.h),
             //
             MyUtils.PriseTextAtHome(context, Colors.green, "${data.count} kub",

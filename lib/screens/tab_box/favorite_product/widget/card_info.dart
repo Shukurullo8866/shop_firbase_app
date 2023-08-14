@@ -52,6 +52,7 @@ class _CardInfoPageState extends State<CardInfoPage> {
                     print("ssssssssssssssssssssssssssssssssssssssssssssS");
                     print(isOn.toString());
                     print(widget.getData.productId.toString());
+                    // ignore: unused_local_variable
                     OrderModel orderModel = OrderModel(
                       orderId: widget.getData.productId,
                       productId: widget.getData.productId,
@@ -63,6 +64,7 @@ class _CardInfoPageState extends State<CardInfoPage> {
                       productName: widget.getData.productName,
                       productImages: widget.getData.productImages,
                     );
+                    // ignore: unused_local_variable
                     ProductModel productModel = ProductModel(
                       count: widget.getData.count,
                       price: widget.getData.totalPrice,

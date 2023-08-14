@@ -59,18 +59,19 @@ class _TabBoxState extends State<TabBox> {
         index: 0,
         height: 60.0,
         items: const <Widget>[
-          Icon(CupertinoIcons.home, size: 28),
-          Icon(Icons.favorite_border_outlined, size: 28),
+          
+          Icon(CupertinoIcons.home, size: 28,color: MyColors.appColor1,),
+          Icon(Icons.favorite_border_outlined, size: 28,color: MyColors.appColor1,),
           Icon(
             CupertinoIcons.map_pin_ellipse,
             size: 28,
             color: Color.fromARGB(255, 202, 5, 5),
           ),
-          Icon(CupertinoIcons.person, size: 28),
+          Icon(CupertinoIcons.person, size: 28,color: MyColors.appColor1,),
         ],
-        color: const Color.fromARGB(255, 252, 173, 93),
-        buttonBackgroundColor: const Color.fromARGB(255, 239, 173, 73),
-        backgroundColor: MyColors.white,
+        color: Colors.white,
+        buttonBackgroundColor: Colors.white,
+        backgroundColor: MyColors.appColor1,
         animationCurve: Curves.easeInOut,
         animationDuration: const Duration(milliseconds: 600),
         onTap: (value) => Provider.of<TabViewModel>(context, listen: false)

@@ -11,26 +11,15 @@ Widget onBoardingWidget(
 }) {
   return Stack(
     children: [
-      Container(
-        padding: const EdgeInsets.all(10),
-        height: 550.h,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            fit: BoxFit.fill,
-            filterQuality: FilterQuality.low,
-            repeat: ImageRepeat.repeatX,
-            image: AssetImage(
-              image,
-            ),
-          ),
-        ),
-      ),
+       Image.asset(
+         image, // Replace with your image path
+         fit: BoxFit.fill,height: 530,isAntiAlias: false,alignment: Alignment.center,
+       ),
       Positioned(
         bottom: 0.1,
         child: Container(
           width: width(context),
-          height: height(context) * 0.352,
+          height: height(context) * 0.371,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
@@ -73,6 +62,5 @@ Widget onBoardingWidget(
           ),
         ),
       ),
-    ],
-  );
+  ]);
 }

@@ -90,17 +90,19 @@ class _HomePageState extends State<HomePage> {
                         child: ListView.separated(
                           physics: const BouncingScrollPhysics(),
                           separatorBuilder: (context, index) =>
-                              SizedBox(width: 20.w),
+                              SizedBox(width: 15.w),
                           itemCount: categories.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
                             return CategoryItem(
                               onCategoryTap: () {
                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => ProductByCategory(
-                                            data: categories[index])));
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => ProductByCategory(
+                                        data: categories[index   ]),
+                                  ),
+                                );
                               },
                               data: categories[index],
                             );

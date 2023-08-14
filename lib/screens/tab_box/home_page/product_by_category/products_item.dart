@@ -19,7 +19,7 @@ class ProductItem extends StatelessWidget {
           crossAxisCount: 2, // Number of columns in the grid
           mainAxisSpacing: 10.0, // Spacing between grid items vertically
           crossAxisSpacing: 10.0, // Spacing between grid items horizontally
-          childAspectRatio: 1.0, // Aspect ratio of each grid item
+          childAspectRatio: 0.88, // Aspect ratio of each grid item
         ),
         scrollDirection: Axis.vertical,
         itemCount: productList.length,

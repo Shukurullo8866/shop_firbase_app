@@ -4,7 +4,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_firbase_app/data/model/category_model.dart';
 import 'package:shop_firbase_app/data/model/product_model.dart';
-import 'package:shop_firbase_app/screens/admin/products/all_prodacts_screen.dart';
 import '../../../data/servise/file_uploder.dart';
 import '../../../utils/my_utils.dart';
 import '../../../view_model/categoryries_view_model.dart';

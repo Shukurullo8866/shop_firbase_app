@@ -25,7 +25,7 @@ class CategoryItem extends StatelessWidget {
             height: 70.h,
             decoration: BoxDecoration(
               border: Border.all(
-                width: 2.8,
+                width: 2.0,
                 color: const Color.fromARGB(231, 236, 156, 64),
               ),
               borderRadius: BorderRadius.circular(10),
@@ -41,7 +41,7 @@ class CategoryItem extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 7),
         Text(
           data.categoryName,
           maxLines: 2,
