@@ -1,112 +1,25 @@
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-import 'package:shop_firbase_app/screens/auth/widgets/repositories/product_repocitory.dart';
-import 'package:shop_firbase_app/screens/on_boarding/on_boarding_screen.dart';
-import 'package:shop_firbase_app/screens/splash/splashPage.dart';
-import 'package:shop_firbase_app/view_model/auth_view_model.dart';
-import 'package:shop_firbase_app/view_model/categoryries_view_model.dart';
-import 'package:shop_firbase_app/view_model/order_view_model.dart';
-import 'package:shop_firbase_app/view_model/product_view_model.dart';
-import 'package:shop_firbase_app/view_model/profile_view_model.dart';
-import 'package:shop_firbase_app/view_model/tab_view_model.dart';
+import 'package:flutter/services.dart';
+import 'app/app.dart';
 import 'data/hive/hive_servise.dart';
-import 'data/repositories/auth_repository.dart';
-import 'data/repositories/orders_repository.dart';
-import 'data/repositories/profile_repository.dart';
-import 'screens/auth/widgets/repositories/categories_repository.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 void main() async {
-    WidgetsFlutterBinding.ensureInitialized();
-// ignore: avoid_single_cascade_in_expression_statements
-  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+   SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarIconBrightness: Brightness.dark,
+      statusBarColor: Colors.transparent,
+    ),
+  );
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 
+    WidgetsFlutterBinding.ensureInitialized();
   await HiveService.init();
   
   await Firebase.initializeApp();
-  var fireStore = FirebaseFirestore.instance;
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => TabViewModel()),
-        ChangeNotifierProvider(
-          create: (context) => CategoriesViewModel(
-            categoryRepository: CategoryRepository(
-              firebaseFirestore: fireStore,
-            ),
-          ),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => ProfileViewModel(
-            firebaseAuth: FirebaseAuth.instance,
-            profileRepository: ProfileRepository(firebaseFirestore: fireStore),
-          ),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => OrdersViewModel(
-            ordersRepository: OrdersRepository(
-              firebaseFirestore: fireStore,
-            ),
-          ),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => ProductViewModel(
-            productRepository: ProductRepository(
-              firebaseFirestore: fireStore,
-            ),
-          ),
-        ),
-        Provider(
-          create: (context) => AuthViewModel(
-            authRepository: AuthRepository(firebaseAuth: FirebaseAuth.instance),
-          ),
-        )
-      ],
-      child: const MyApp(),
-    ),
-  );
+  runApp(const App());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(360, 800),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (BuildContext context, Widget? child) {
-        return MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
-          home: const MainPage(),
-        );
-      },
-    );
-  }
-}
 
-class MainPage extends StatelessWidget {
-  const MainPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<User?>(
-      stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, AsyncSnapshot<User?> snapshot) {
-        if (snapshot.hasData) {
-          return const SplashPage();
-        } else {
-          return const OnBoardingScreen();
-        }
-      },
-    );
-  }
-}

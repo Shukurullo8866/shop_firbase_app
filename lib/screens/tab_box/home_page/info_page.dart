@@ -2,19 +2,18 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:full_screen_image/full_screen_image.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_firbase_app/data/model/order_model.dart';
 import 'package:shop_firbase_app/data/model/product_model.dart';
 import 'package:shop_firbase_app/screens/tab_box/home_page/widgets/all_product.dart';
 import 'package:shop_firbase_app/screens/tab_box/home_page/widgets/button.dart';
-import 'package:shop_firbase_app/screens/tab_box/home_page/widgets/imageView.dart';
 import 'package:shop_firbase_app/utils/my_utils.dart';
 import 'package:shop_firbase_app/view_model/order_view_model.dart';
 import 'package:shop_firbase_app/view_model/profile_view_model.dart';
 import '../../../utils/app_formatter.dart';
 import '../../../utils/app_image.dart';
 import '../../../view_model/product_view_model.dart';
-import '../tab_box.dart';
 
 class InfoPage extends StatefulWidget {
   const InfoPage({super.key, required this.getData});
@@ -120,47 +119,30 @@ class _InfoPageState extends State<InfoPage> {
           children: [
             ListView(
               children: [
-                InkWell(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (c) => ImageView(
-                        imageUrl: widget.getData.productImages[0].toString(),
-                      ),
-                    ),
-                  ),
+                SizedBox(
+                  height: 300,
                   child: widget.getData.productImages.isEmpty
                       ? SizedBox(height: 280.h)
-                      : Container(
-                          height: 280,
-                          color: Colors.transparent,
-                          child: AnimatedSize(
-                            curve: Curves.bounceIn,
-                            duration: const Duration(seconds: 1),
+                      : FullScreenWidget(
+                          disposeLevel: DisposeLevel.Medium,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
                             child: Image.network(
                               widget.getData.productImages[0],
                               fit: BoxFit.cover,
-                              width: double.infinity,
                             ),
                           ),
                         ),
                 ),
-                Divider(
-                    height: 3.0.h,
-                    thickness: 0.5,
-                    color: const Color.fromARGB(231, 228, 157, 76),
-                    indent: 0.1,
-                    endIndent: 0.1),
+                MyUtils.hameDvider(),
                 SizedBox(height: 15.h),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        "  ${widget.getData.productName}:",
-                        style: const TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w700,
-                        ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: MyUtils.TextInfoName(
+                            19, widget.getData.productName, 19),
                       ),
                       Text(
                           " ${widget.getData.price.toString()} ${widget.getData.currency} ",
@@ -168,14 +150,9 @@ class _InfoPageState extends State<InfoPage> {
                               fontSize: 22, fontWeight: FontWeight.bold))
                     ]),
                 SizedBox(height: 14.h),
-                const Divider(
-                    height: 8.0,
-                    thickness: 0.8,
-                    color: Color.fromARGB(231, 228, 157, 76),
-                    indent: 1.0,
-                    endIndent: 1.0),
-                MyUtils.MyTextRow(
-                    "Omborda mavjud:".tr(), "${widget.getData.count} - kub".tr()),
+                MyUtils.hameDvider(),
+                MyUtils.MyTextRow("Omborda mavjud:".tr(),
+                    "${widget.getData.count} - kub".tr()),
                 MyUtils.MyTextRow(
                     "Kelgan sanasi:".tr(),
                     AppFormatter.orderTime(
@@ -183,12 +160,7 @@ class _InfoPageState extends State<InfoPage> {
                 const SizedBox(height: 8),
                 MyUtils.MyTextColumn(
                     "Mahsulot haqida:".tr(), widget.getData.description),
-                const Divider(
-                    height: 1.0,
-                    thickness: 0.8,
-                    color: Color.fromARGB(231, 228, 157, 76),
-                    indent: 1.0,
-                    endIndent: 1.0),
+                MyUtils.hameDvider(),
                 SizedBox(height: 41.h),
                 Container(
                   color: Colors.white,

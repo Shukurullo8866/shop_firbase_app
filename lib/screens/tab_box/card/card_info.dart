@@ -1,9 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:shop_firbase_app/utils/style.dart';
+import 'package:shop_firbase_app/screens/tab_box/card/widget/fovorite_info_page.dart';
 
 import '../../../data/model/order_model.dart';
 import '../../../utils/my_utils.dart';
@@ -17,14 +16,14 @@ class OrderItemsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (_) => InfoPage(
-        //       getData: data,
-        //     ),
-        //   ),
-        //);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => FavoriteInfoPage(
+              getData: data,
+            ),
+          ),
+        );
       },
       child: Container(
         height: 190.h,
@@ -81,7 +80,7 @@ class OrderItemsScreen extends StatelessWidget {
               width: 30.w,
             ),
             MyUtils.MyTextSort(30, data.productName, 26),
-            MyUtils.AppDvider(),
+            MyUtils.hameDvider(),
             SizedBox(height: 2.h),
             //
             MyUtils.PriseTextAtHome(context, Colors.green, "${data.count} kub",

@@ -1,12 +1,14 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shimmer/shimmer.dart';
+import 'package:shop_firbase_app/screens/tab_box/home_page/drower/app_abaut/app_abaut.dart';
 import 'package:shop_firbase_app/utils/app_image.dart';
+import 'package:shop_firbase_app/utils/color.dart';
+import 'package:shop_firbase_app/utils/my_utils.dart';
 
 import 'language/language_screen.dart';
 
+// ignore: must_be_immutable
 class MyDrawer extends StatefulWidget {
   bool IsNightMode;
   ValueChanged onChanged;
@@ -32,6 +34,10 @@ class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: Colors.white,
+      shadowColor: MyColors.appColor1,
+      elevation: 15.5,
+      clipBehavior: Clip.antiAlias,
       child: Column(
         children: [
           DrawerHeader(
@@ -58,6 +64,7 @@ class _MyDrawerState extends State<MyDrawer> {
             child: ListView(
               physics: const NeverScrollableScrollPhysics(),
               children: [
+                MyUtils.infoPagedrover(),
                 InkWell(
                   onTap: () {
                     Navigator.push(
@@ -76,6 +83,7 @@ class _MyDrawerState extends State<MyDrawer> {
                     ),
                   ),
                 ),
+                MyUtils.infoPagedrover(),
                 ListTile(
                   leading: const Icon(Icons.nights_stay_outlined),
                   title: Text(
@@ -91,8 +99,10 @@ class _MyDrawerState extends State<MyDrawer> {
                       value: widget.IsNightMode,
                       onChanged: widget.onChanged),
                 ),
+                MyUtils.infoPagedrover(),
                 InkWell(
-                  onTap: () => Navigator.pushNamed(context, "/about"),
+                  onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => const AbautScreen())),
                   child: ListTile(
                     leading: const Icon(Icons.info_outline),
                     title: Text(
@@ -101,7 +111,8 @@ class _MyDrawerState extends State<MyDrawer> {
                           fontSize: 16.sp, fontWeight: FontWeight.w700),
                     ),
                   ),
-                )
+                ),
+                MyUtils.infoPagedrover(),
               ],
             ),
           )

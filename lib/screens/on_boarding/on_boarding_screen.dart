@@ -54,6 +54,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       ),
     ];
     return Scaffold(
+      backgroundColor: Colors.white,
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
@@ -80,10 +81,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.only(
-              left: 40,
-              top: 15,
-            ).r,
+            padding: const EdgeInsets.only(left: 40, top: 15).r,
             child: SizedBox(
               height: 5.h,
               child: ListView.separated(
@@ -130,18 +128,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       fontSize: 18.sp),
                 )),
           ),
-          SizedBox(
-            height: 16.h,
-          ),
+          SizedBox(height: 16.h),
           Padding(
             padding: const EdgeInsets.only(left: 64, right: 24).r,
             child: InkWell(
               onTap: () {
                 if (_curr == 2 && isSelected) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => const AuthPage()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => const AuthPage()));
                 }
                 _pageController.nextPage(
                     duration: const Duration(seconds: 1), curve: Curves.ease);
@@ -170,7 +164,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           ),
         ],
       ),
-
     );
   }
 

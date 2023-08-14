@@ -13,7 +13,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  intl: ^0.18.0
   cupertino_icons: ^1.0.2
   provider: ^6.0.4
   hive_flutter: ^1.1.0
@@ -27,7 +27,6 @@ dependencies:
   modal_bottom_sheet: ^2.0.1
   easy_localization: ^3.0.1
   flutter_linkify: ^5.0.2
-  intl: ^0.17.0
   zoom_tap_animation: ^1.1.0
   google_fonts: ^4.0.3
   flutter_screenutil: ^5.5.4
@@ -37,6 +36,7 @@ dependencies:
   telephony: ^0.2.0
   url_launcher: ^6.1.11
   curved_navigation_bar: ^1.0.3
+  full_screen_image: ^2.0.0
   # Map
   location: ^4.4.0
   geolocator: ^9.0.2

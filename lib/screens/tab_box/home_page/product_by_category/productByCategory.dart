@@ -28,14 +28,25 @@ class _ProductByCategoryState extends State<ProductByCategory> {
           padding: const EdgeInsets.only(top: 14),
           child: Image.asset(AppImage.d_r, height: 100.h, width: 190.w),
         ),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            color: const Color.fromARGB(255, 221, 133, 2),
+            icon: const Icon(Icons.arrow_back_ios_new)),
       ),
       body: Consumer<ProductViewModel>(
         builder: (context, productViewModel, child) {
-          if(productViewModel.products == null){
-            return const Center(child: Text("Data is empty "),);
+          // ignore: unnecessary_null_comparison
+          if (productViewModel.products == null) {
+            return const Center(
+              child: Text("Data is empty "),
+            );
           }
-          if(productViewModel.products.isEmpty){
-            return const Center(child: Text("Data is empty "),);
+          if (productViewModel.products.isEmpty) {
+            return const Center(
+              child: Text("Data is empty "),
+            );
           }
           if (productViewModel.products.isNotEmpty) {
             List productList = [];
@@ -49,7 +60,10 @@ class _ProductByCategoryState extends State<ProductByCategory> {
                 productList.add(product);
               },
             );
-            return ProductItem(data: productc, productList: productList,);
+            return ProductItem(
+              data: productc,
+              productList: productList,
+            );
           }
           return const SizedBox();
         },

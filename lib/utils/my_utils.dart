@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
@@ -17,36 +15,44 @@ class MyUtils {
       ),
     );
   }
-  static PriseTextAtHome( context,Color myColor1,String data , String text,Color myColor2){
-    return   RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text: text.tr(),
-                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        color: myColor1,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  TextSpan(
-                    text: "${data.toString()} ",
-                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        color: myColor2,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w600),
-                  )
-                ],
-              ),
-            );
+
+  static PriseTextAtHome(
+      context, Color myColor1, String data, String text, Color myColor2) {
+    return RichText(
+      text: TextSpan(
+        children: [
+          TextSpan(
+            text: text.tr(),
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                color: myColor1, fontSize: 14.sp, fontWeight: FontWeight.w600),
+          ),
+          TextSpan(
+            text: "${data.toString()} ",
+            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                color: myColor2, fontSize: 14.sp, fontWeight: FontWeight.w600),
+          )
+        ],
+      ),
+    );
   }
-  static AppDvider (){
+
+  static infoPagedrover() {
+    return const Divider(
+        height: 1.0,
+        thickness: 0.8,
+        color: Color.fromARGB(231, 228, 157, 76),
+        indent: 1.0,
+        endIndent: 1.0);
+  }
+
+  static hameDvider() {
     return Divider(
-              height: 9.0.h,
-              thickness: 0.9,
-              color: const Color.fromARGB(231, 228, 157, 76),
-              indent: 21.0,
-              endIndent: 21.0,
-            );
+      height: 9.0.h,
+      thickness: 0.9,
+      color: const Color.fromARGB(231, 228, 157, 76),
+      indent: 21.0,
+      endIndent: 21.0,
+    );
   }
 
   static MyTextRow(String key, String value) {
@@ -64,19 +70,27 @@ class MyUtils {
                   color: Color.fromARGB(231, 252, 159, 51)))
         ]));
   }
-  static MyTextSort(int size, String productName,int viewSize){
-    return  Container(
-                height: 30,
-                width: 140,
-                color: Colors.transparent,
-                child: Center(
-                    child: productName.length < size
-                        ? Text(productName,
-                            style: MyTextStyle.sfProBold,
-                            textAlign: TextAlign.center)
-                        : Text("${productName.substring(0, viewSize)}...",
-                            style: MyTextStyle.sfProBold,
-                            textAlign: TextAlign.center)));
+
+  static TextInfoName(int size, String productName, int viewSize) {
+    return productName.length < size
+        ? Text(productName,
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500))
+        : Text("${productName.substring(0, viewSize)}...",
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500));
+  }
+
+  static MyTextSort(int size, String productName, int viewSize) {
+    return Container(
+        height: 30,
+        width: 140,
+        color: Colors.transparent,
+        child: Center(
+            child: productName.length < size
+                ? Text(productName,
+                    style: MyTextStyle.sfProBold, textAlign: TextAlign.center)
+                : Text("${productName.substring(0, viewSize)}...",
+                    style: MyTextStyle.sfProBold,
+                    textAlign: TextAlign.center)));
   }
 
   // ignore: non_constant_identifier_names
